@@ -109,6 +109,8 @@ Json 返回:
 
 ## 韩小韩 API (Bing, 风景, 二次元)
 
+id: `hanxiaohan`
+
 - Bing:
   - 接口: https://api.vvhan.com/api/bing
   - 文档: https://api.vvhan.com/article/bing.html
@@ -144,3 +146,24 @@ Json 返回:
     "url": "https://api-storage.4ce.cn/v1/a1cd42b2bd007599ae70bc580061a2d8.webp" // 图片地址
 }
 ```
+
+## Unsplash
+
+一个国外的高质量开放照片集 *(三次元)* 平台，有丰富的 API，支持搜索
+
+官网: https://unsplash.com/developers
+
+> 需要注册才可使用
+
+## 零七生活 API
+
+id: `lingqi`
+
+文档: https://api.oick.cn/doc/random
+
+接口地址: https://api.oick.cn/api/random (GET)
+
+参数:
+
+- `?type=pc`: 电脑壁纸 (横向)
+- `?type=pe`: 手机壁纸 (竖向)

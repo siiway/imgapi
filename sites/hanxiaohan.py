@@ -1,7 +1,11 @@
 # coding:utf-8
 
 '''
-
+韩小韩 API
+docs:
+ - Bing: https://api.vvhan.com/article/bing.html
+ - 风景: https://api.vvhan.com/article/views.html
+ - 二次元: https://api.vvhan.com/article/acg.html
 '''
 
 from flask import Blueprint, redirect
