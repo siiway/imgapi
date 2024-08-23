@@ -2,21 +2,31 @@
 
 '''
 98情缘API
-主站 https://www.98qy.com/
-图片 https://www.98qy.com/sjbz/
+主站 https://www.98qy.com/sjbz/
 
 '''
 
-import requests
 from flask import Blueprint, redirect
 
-allow_image = True
-allow_json = False
+allow_a = True
+allow_h = True
+allow_v = True
 
 
 site = Blueprint('98qy', __name__)
 
 
 @site.route('/image')
-def image():
-    return redirect('https://www.98qy.com/sjbz/api.php')
+@site.route('/image/a')
+def image_a():
+    return redirect('https://www.98qy.com/sjbz/api.php?method=zsy')
+
+
+@site.route('/image/h')
+def image_h():
+    return redirect('https://www.98qy.com/sjbz/api.php?method=pc')
+
+
+@site.route('/image/v')
+def image_v():
+    return redirect('https://www.98qy.com/sjbz/api.php?method=mobile')
