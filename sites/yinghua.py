@@ -1,7 +1,8 @@
 # coding:utf-8
 
 '''
-
+樱花随机二次元图片 API
+doc: https://www.dmoe.cc/
 '''
 
 from flask import Blueprint, redirect

@@ -26,13 +26,13 @@ Siiway 图片集合 API
 
 ### 部署
 
-0. Clone 本仓库
+1. Clone 本仓库
 
 ```shell
 git clone https://github.com/wyf01239/imgapi.git
 ```
 
-1. 安装依赖
+2. 安装依赖
 
 ```shell
 ./install.sh
@@ -40,7 +40,7 @@ git clone https://github.com/wyf01239/imgapi.git
 install.bat
 ```
 
-2. 配置应用
+3. 配置应用
 
 编辑 `config.py`:
 
@@ -50,7 +50,7 @@ port = 9333 # 监听端口
 debug = False # (二次开发建议启用) 控制 Flask 的 debug 选项，打开后可以提供脚本热重载 (ps: 没写好就保存容易使其因语法问题崩溃)
 ```
 
-3. 启动程序
+4. 启动程序
 
 ```shell
 python3 server.py
@@ -58,3 +58,13 @@ python3 server.py
 ```
 
 > 建议 Python 版本: `3.10+`
+
+## 声明
+
+本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无关.
+
+如对此项目有建议/问题，可 [Issue](https://github.com/wyf01239/imgapi/issue/new) 或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
+
+### API 来源
+
+https://blog.jixiaob.cn/?post=93
