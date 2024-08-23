@@ -4,7 +4,7 @@
 
 '''
 
-from ..utils import format_dict
+from utils import format_dict
 import requests
 from flask import Blueprint, redirect
 

@@ -35,13 +35,13 @@ def index():
 @app.route('/image')
 def image():
     ch = choice(image_sites_list)
-    return redirect(f'/sites/{choice}/image')
+    return redirect(f'/sites/{ch}/image')
 
 
 @app.route('/json')
 def json():
     ch = choice(json_sites_list)
-    return redirect(f'/sites/{choice}/json')
+    return redirect(f'/sites/{ch}/json')
 
 @app.route('/test')
 def test():
