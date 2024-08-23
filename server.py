@@ -19,9 +19,9 @@ for n in os.listdir('sites/'):
     if ext == '.py' and name != '_example':
         obj = importlib.import_module(f'sites.{name}')
         app.register_blueprint(obj.site, url_prefix=f'/sites/{name}')
-        if obj.image:
+        if obj.allow_image:
             image_sites_list += [name]
-        if obj.json:
+        if obj.allow_json:
             json_sites_list += [name]
         u.info(f'Registered: {name}')
 

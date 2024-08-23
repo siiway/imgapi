@@ -15,7 +15,7 @@ def get_basepath(self):
     return os.path.dirname(main_py)
 
 
-def get_datapath(self, path):
+def get_datapath(path):
     '''
     将相对路径的数据目录改为绝对路径
     @param path: 相对路径
@@ -38,28 +38,28 @@ debug 调试 -> Only show when `env_debug == True`
 '''
 
 
-def info(self, msg, noret=False):
+def info(msg, noret=False):
     if noret:
         print(f'{Fore.GREEN}[I]{Style.RESET_ALL} {msg}', end='')
     else:
         print(f'{Fore.GREEN}[I]{Style.RESET_ALL} {msg}')
 
 
-def warning(self, msg, noret=False):
+def warning(msg, noret=False):
     if noret:
         print(f'{Fore.YELLOW}[W]{Style.RESET_ALL} {msg}', end='')
     else:
         print(f'{Fore.YELLOW}[W]{Style.RESET_ALL} {msg}')
 
 
-def error(self, msg, noret=False):
+def error(msg, noret=False):
     if noret:
         print(f'{Fore.RED}[E]{Style.RESET_ALL} {msg}', end='')
     else:
         print(f'{Fore.RED}[E]{Style.RESET_ALL} {msg}')
 
 
-def debug(self, msg, noret=False):
+def debug(msg, noret=False):
     if noret:
         print(f'{Fore.BLUE}[D]{Style.RESET_ALL} {msg}', end='')
     else:
@@ -68,7 +68,7 @@ def debug(self, msg, noret=False):
     # ↑单行 / ↓多行
 
 
-def infos(self, *msgs, noret=False):
+def infos(*msgs, noret=False):
     for n in msgs:
         if n == msgs[-1]:
             if noret:
@@ -79,7 +79,7 @@ def infos(self, *msgs, noret=False):
             print(f'{Fore.GREEN}[I]{Style.RESET_ALL} {n}')
 
 
-def warnings(self, *msgs, noret=False):
+def warnings(*msgs, noret=False):
     for n in msgs:
         if n == msgs[-1]:
             if noret:
@@ -90,7 +90,7 @@ def warnings(self, *msgs, noret=False):
             print(f'{Fore.YELLOW}[W]{Style.RESET_ALL} {n}')
 
 
-def errors(self, *msgs, noret=False):
+def errors(*msgs, noret=False):
     for n in msgs:
         if n == msgs[-1]:
             if noret:
@@ -101,7 +101,7 @@ def errors(self, *msgs, noret=False):
             print(f'{Fore.RED}[E]{Style.RESET_ALL} {n}')
 
 
-def debugs(self, *msgs, noret=False):
+def debugs(*msgs, noret=False):
     for n in msgs:
         if n == msgs[-1]:
             if noret:
@@ -115,7 +115,7 @@ def debugs(self, *msgs, noret=False):
 # Format
 
 
-def format_dict(self, dic):
+def format_dict(dic):
     '''
     列表 -> 格式化 json
     @param dic: 列表
@@ -123,7 +123,7 @@ def format_dict(self, dic):
     return json.dumps(dic, indent=4, ensure_ascii=False, sort_keys=False, separators=(', ', ': '))
 
 
-def remove_json(self, lst):
+def remove_json(lst):
     '''
     移除列表中每项末尾的 `.json`
     @param lst: 列表
@@ -137,7 +137,7 @@ def remove_json(self, lst):
 # Load / File (dir) option
 
 
-def load_json(self, json_name):
+def load_json(json_name):
     '''
     加载 json 文件
     '''
@@ -150,7 +150,7 @@ def load_json(self, json_name):
         raise
 
 
-def read_dir(self, dirpath):
+def read_dir(dirpath):
     '''
     遍历文件夹
     @param dirpath: 文件夹路径
@@ -169,7 +169,7 @@ def read_dir(self, dirpath):
 backlinestr = '\033[F\033[K'  # 退行
 
 
-def backline(self, num=1):
+def backline(num=1):
     '''
     退行
     @param num: 行数
@@ -179,7 +179,7 @@ def backline(self, num=1):
     # print()
 
 
-def prints(self, *args):
+def prints(*args):
     '''
     方便输出多行文本
     '''
