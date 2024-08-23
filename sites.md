@@ -68,3 +68,79 @@ v2: https://api.lolicon.app/setu/v2 (GET / POST)
 返回格式仅有 **Json** *(包含图片链接)*，但有大量自定义选项
 
 详见文档: https://api.lolicon.app/#/setu
+
+## 岁月小筑动漫壁纸
+
+id: `xiaozhu`
+
+地址: https://cloud.qqshabi.cn/api/images/api.php
+
+不需要参数，直接返回图片 *(横向?)*
+
+文档: https://cloud.qqshabi.cn/apidetail/33.html
+
+> 原版 API: https://img.xjh.me/random_img.php , 注意: 返回的是带百度统计的网页，不是图片
+
+## 樱花随机二次元图片 API
+
+id: `yinghua`
+
+接口地址: https://www.dmoe.cc/random.php
+
+文档: https://www.dmoe.cc/
+
+有两种调用方式:
+
+- 图片: https://www.dmoe.cc/random.php *(ps: 直接访问会下载)*
+- Json: https://www.dmoe.cc/random.php?return=json
+
+Json 返回:
+
+```jsonc
+{
+    "code": "200", // http status code
+    "imgurl": "https:\/\/ws1.sinaimg.cn\/large\/0072Vf1pgy1foxkfy08umj31kw0w0nng.jpg", // 图片 url
+    "width": "2048", // 宽
+    "height": "1152" // 高
+}
+```
+
+> *仅横图?*
+
+## 韩小韩 API (Bing, 风景, 二次元)
+
+- Bing:
+  - 接口: https://api.vvhan.com/api/bing
+  - 文档: https://api.vvhan.com/article/bing.html
+- 风景:
+  - 接口: https://api.vvhan.com/api/wallpaper/views
+  - 文档: https://api.vvhan.com/article/views.html
+- 二次元:
+  - 接口: https://api.vvhan.com/api/wallpaper/acg
+  - 文档: https://api.vvhan.com/article/acg.html
+
+支持两种格式 (图片 / json)，默认为返回图片，在接口后加参 `?type=json` 返回 json
+
+1. Bing json 返回:
+
+```jsonc
+{
+    "success": true, // 是否成功
+    "data": {
+        "id": 1644,
+        "date": 20240823,
+        "title": "帕侬蓝寺，武里南府，泰国 (© Banjongseal324/Getty Images)", // 标题
+        "url": "https://cn.bing.com/th?id=OHR.PrasatPhanom_ZH-CN0445884858_UHD.jpg&w=4096" // 图片地址
+    }
+}
+```
+
+2. 风景 / 二次元 json 返回:
+
+```jsonc
+{
+    "success": true, // 是否成功
+    "type": "风景", // 类型
+    "url": "https://api-storage.4ce.cn/v1/a1cd42b2bd007599ae70bc580061a2d8.webp" // 图片地址
+}
+```
