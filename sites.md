@@ -22,7 +22,6 @@ API 发布页: https://t.mwm.moe/
 
 有两种调用方法: **图片**，**json**
 
-> [!NOTE]
 > 类别请见 [主站](https://t.alcy.cc/)
 
 ### 图片调用
@@ -56,3 +55,16 @@ id: `98qy`
 
 Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图片** 或 **Json**
 
+> 请求参数详见 [文档](https://www.98qy.com/sjbz/)
+
+## Lolicon API
+
+- Maybe **R18**
+
+随机涩图 *(pixiv)* API
+
+v2: https://api.lolicon.app/setu/v2 (GET / POST)
+
+返回格式仅有 **Json** *(包含图片链接)*，但有大量自定义选项
+
+详见文档: https://api.lolicon.app/#/setu
