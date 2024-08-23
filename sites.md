@@ -39,7 +39,7 @@ https://t.alcy.cc/<类别>?json
 
 返回示例:
 
-```json
+```jsonc
 {
     "code": 200, // http status code
     "url": "https:\/\/tc.alcy.cc\/i\/2024\/04\/21\/662416447bef8.webp", // 图片 url
@@ -49,4 +49,10 @@ https://t.alcy.cc/<类别>?json
 ```
 
 ## 98情缘 API
+
+id: `98qy`
+
+文档: https://www.98qy.com/sjbz/
+
+Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图片** 或 **Json**
 
