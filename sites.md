@@ -1,6 +1,6 @@
 # Sites
 
-本页收集了网络上的图片 API 站点，以及调用方法等
+本页收集各种图片 API 站点
 
 
 > `id` 是什么? 简单来说就是 `sites/` 目录下相应的文件名
@@ -8,7 +8,7 @@
 > 本项目收集的每个 API 都在 `sites/` 目录下作为一个独立的文件，由主程序遍历导入，并创建路由 *(文件名去 `.py`)*
 
 > [!TIP]
-> 如果没有 `id` 呢? 代表未收入我们随机 API 的列表中
+> 如果没有 `id` 呢? 代表未收入项目随机 API 的列表中
 
 ## 栗次元 API
 
@@ -167,3 +167,28 @@ id: `lingqi`
 
 - `?type=pc`: 电脑壁纸 (横向)
 - `?type=pe`: 手机壁纸 (竖向)
+
+## 赫萝随机图片 API
+
+id: `horosama`
+
+文档: https://api.horosama.com/
+
+接口: https://api.horosama.com/random.php
+
+常用有两个参数 *(粗体为默认)*:
+
+- `type`: 图片类型 (**`pc`-横**, `mobile`-竖, `profile`-头像)
+- `format`: 返回格式 (**`image`**, `json`)
+
+json 返回示例:
+
+```json
+{
+    "code": "200", // 状态码
+    "url": "https:\/\/www.horosama.com\/api\/image_all\/anime\/1080p\/pc\/efA6f53Bc7A635089D125a90f4d2081F.jpg",
+    // 图片地址
+    "width": "1920", // 图片宽度
+    "height": "1080" // 图片高度
+}
+```

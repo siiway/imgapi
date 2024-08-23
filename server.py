@@ -18,22 +18,40 @@ from random import choice
 
 app = Flask(__name__)
 
+
 h_sites_list = []
 v_sites_list = []
 a_sites_list = []
 
-for n in os.listdir('sites/'):
+sites_count = 0
+h_sites_count = 0
+v_sites_count = 0
+a_sites_count = 0
+
+u.info('Loading: ', noret=True)
+dirlst = os.listdir('sites/')
+for n in dirlst:
     name, ext = os.path.splitext(n)
     if ext == '.py' and name != '_example':
         obj = importlib.import_module(f'sites.{name}')
         app.register_blueprint(obj.site, url_prefix=f'/sites/{name}')
         if obj.allow_h:
             h_sites_list += [name]
+            h_sites_count += 1
         if obj.allow_v:
             v_sites_list += [name]
+            v_sites_count += 1
         if obj.allow_a:
             a_sites_list += [name]
-        u.info(f'Registered: {name}')
+            a_sites_count += 1
+        sites_count += 1
+        print(name, end='')
+        if n == dirlst[-1]:
+            print()
+        else:
+            print(', ', end='')
+
+u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {a_sites_count} auto.')
 
 u.debug(f'Allow_horizontal: {h_sites_list}')
 u.debug(f'Allow_vertical: {v_sites_list}')
