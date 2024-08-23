@@ -19,9 +19,10 @@ allow_image = True
 site = Blueprint('liciyuan', __name__)
 
 catgs = ['ycy', 'moez', 'ai', 'ysz', 'pc', 'moe', 'fj',
-         'bd', 'ys', 'mp', 'moemp', 'ysmp', 'aimp', 'lai', 'xhl']
+         'bd', 'ys', 'lai', 'xhl']
 
 # `acg` 为动图 / `tx` 为头像方图，故不添加
+# 'mp', 'moemp', 'ysmp', 'aimp', 竖屏不加
 
 
 @site.route('/image')
