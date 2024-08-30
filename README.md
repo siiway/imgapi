@@ -18,15 +18,16 @@ Siiway 图片集合 API
 
 地址: https://imgapi.siiway.top
 
-> 内网: http://192.168.192.9:9333
-
 | 接口       | 信息                 |
 | ---------- | -------------------- |
 | `/`        | 跳转到本 repo        |
 | `/image`   | 跳转到随机自适应图片 |
 | `/image/a` | 自适应图片           |
+| `/img/a`   | -                    |
 | `/image/h` | 横向图片             |
+| `/img/h`   | -                    |
 | `/image/v` | 竖向图片             |
+| `/img/v`   | -                    |
 
 <!-- 会在我们的 API 库里随机选择返回
 
@@ -50,7 +51,7 @@ git clone https://github.com/wyf01239/imgapi.git
 install.bat
 ```
 
-3. 配置应用
+3. 配置服务
 
 编辑 `config.py`:
 
@@ -73,7 +74,7 @@ python3 server.py
 
 本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无关.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/wyf01239/imgapi/issue/new) 或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
+如对此项目有建议/问题，可 [Issue](https://github.com/wyf01239/imgapi/issue/new)，或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
 
 ### API 来源
 

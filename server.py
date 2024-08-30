@@ -51,7 +51,8 @@ for n in dirlst:
         else:
             print(', ', end='')
 
-u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {a_sites_count} auto.')
+u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {
+       v_sites_count} vertical, {a_sites_count} auto.')
 
 u.debug(f'Allow_horizontal: {h_sites_list}')
 u.debug(f'Allow_vertical: {v_sites_list}')
@@ -64,18 +65,21 @@ def index():
 
 
 @app.route('/image')
+@app.route('/img/a')
 @app.route('/image/a')
 def image_a():
     ch = choice(a_sites_list)
     return redirect(f'/sites/{ch}/image/a')
 
 
+@app.route('/img/h')
 @app.route('/image/h')
 def image_h():
     ch = choice(h_sites_list)
     return redirect(f'/sites/{ch}/image/h')
 
 
+@app.route('/img/v')
 @app.route('/image/v')
 def image_v():
     ch = choice(v_sites_list)
