@@ -51,8 +51,7 @@ for n in dirlst:
         else:
             print(', ', end='')
 
-u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {
-       v_sites_count} vertical, {a_sites_count} auto.')
+u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {a_sites_count} auto.')
 
 u.debug(f'Allow_horizontal: {h_sites_list}')
 u.debug(f'Allow_vertical: {v_sites_list}')
