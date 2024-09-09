@@ -16,7 +16,11 @@ Siiway 图片集合 API
 
 ## API
 
-地址: https://imgapi.siiway.top
+公共地址: https://imgapi.siiway.top
+
+> 使用 `Serv00 免费服务` + `Cloudflare Tunnel` 部署，不作用量限制 (为账号安全请节省使用)
+
+> 建议自行部署，只需有 Python3 环境即可
 
 | 接口       | 信息                 |
 | ---------- | -------------------- |
