@@ -20,7 +20,7 @@ def get_datapath(path):
     将相对路径的数据目录改为绝对路径
     @param path: 相对路径
     '''
-    return os.path.join(self.get_basepath(), path)
+    return os.path.join(get_basepath(), path)
 
 # ---
 # Logging
@@ -145,7 +145,7 @@ def load_json(json_name):
         with open(json_name, 'r', encoding='utf-8') as file:
             return json.load(file)
     except json.decoder.JSONDecodeError as err:
-        self.error(f'Load json file "{json_name}" Failed! Please check the json format!')
+        error(f'Load json file "{json_name}" Failed! Please check the json format!')
         raise
 
 
@@ -174,7 +174,7 @@ def backline(num=1):
     @param num: 行数
     '''
     for i in range(num + 1):
-        print(self.backlinestr, end='')
+        print(backlinestr, end='')
     # print()
 
 
