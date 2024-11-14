@@ -60,7 +60,7 @@ u.debug(f'Allow_auto: {a_sites_list}')
 
 @app.route('/')
 def index():
-    return redirect('https://github.com/wyf01239/imgapi')
+    return redirect('https://github.com/siiway/imgapi')
 
 
 @app.route('/image')

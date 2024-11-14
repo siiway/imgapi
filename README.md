@@ -44,7 +44,7 @@ Siiway 图片集合 API
 1. Clone 本仓库
 
 ```shell
-git clone https://github.com/wyf01239/imgapi.git
+git clone https://github.com/siiway/imgapi.git
 ```
 
 2. 安装依赖
@@ -78,7 +78,7 @@ python3 server.py
 
 本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无关.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/wyf01239/imgapi/issue/new)，或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
+如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new)，或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
 
 ### API 来源
 

@@ -59,7 +59,7 @@ Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图�
 
 ## Lolicon API
 
-- Maybe **R18**
+- ~~Maybe~~ **R18**
 
 随机涩图 *(pixiv)* API
 
