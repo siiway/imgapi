@@ -1,8 +1,6 @@
 # imgapi
 
-Siiway 图片集合 API
-
-> 正在开发中
+一个可以集合全网图片 api 的 api
 
 按原则来说，本站 API:
 - **不提供 R18 类图片**
@@ -16,9 +14,9 @@ Siiway 图片集合 API
 
 ## API
 
-公共地址: https://imgapi.siiway.top
+公共服务: https://imgapi.siiway.top
 
-> 使用 `Serv00 免费服务` + `Cloudflare Tunnel` 部署，不作用量限制 (为账号安全请节省使用)
+> 使用 `Serv00 免费服务` + `Cloudflare Tunnel` 部署，不作访问限制（为账号安全请节省使用)
 
 > 建议自行部署，只需有 Python3 环境即可
 
@@ -34,9 +32,7 @@ Siiway 图片集合 API
 | `/img/v`   | -                    |
 
 <!-- 会在我们的 API 库里随机选择返回
-
 ~~有 `Json` 和 `图片` 两种调用方式~~
-
 只有图片返回，因为 json 字段名各站不同 -->
 
 ### 部署
@@ -80,6 +76,19 @@ python3 server.py
 
 如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new)，或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
 
-### API 来源
+部分 API 来源：https://blog.jixiaob.cn/?post=93
 
-https://blog.jixiaob.cn/?post=93
+## TODO
+
+```md
+> 从哪里的 alist 配置示例中扒的
+- [x] (重复) 樱花：https://www.dmoe.cc/
+- [√] 夏沫：https://cdn.seovx.com/
+- [ ] (undone) 搏天：https://api.btstu.cn/doc/sjbz.php
+- [ ] 姬长信：https://github.com/insoxin/API
+- [ ] 小歪：https://api.ixiaowai.cn/
+- [ ] 保罗：https://api.paugram.com/
+- [ ] 墨天逸：https://api.mtyqx.cn/
+- [ ] 岁月小筑：https://img.xjh.me/
+- [ ] 东方Project：https://img.paulzzh.com/
+```

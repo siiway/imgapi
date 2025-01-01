@@ -192,3 +192,17 @@ json 返回示例:
     "height": "1080" // 图片高度
 }
 ```
+
+## 夏沫博客 API
+
+id: `seovx`
+
+文档: https://cdn.seovx.com/
+
+有三个 302 接口 (all GET)：
+
+- 美图: https://cdn.seovx.com/?mom=302
+- 二次元： https://cdn.seovx.com/d/?mom=302
+- 古风： https://cdn.seovx.com/ha/?mom=302
+
+#
