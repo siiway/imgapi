@@ -183,7 +183,7 @@ id: `horosama`
 
 json 返回示例:
 
-```json
+```jsonc
 {
     "code": "200", // 状态码
     "url": "https:\/\/www.horosama.com\/api\/image_all\/anime\/1080p\/pc\/efA6f53Bc7A635089D125a90f4d2081F.jpg",
@@ -202,7 +202,31 @@ id: `seovx`
 有三个 302 接口 (all GET)：
 
 - 美图: https://cdn.seovx.com/?mom=302
-- 二次元： https://cdn.seovx.com/d/?mom=302
+- 二次元： https://cdn.seovx.com/d/?mom=302 √
 - 古风： https://cdn.seovx.com/ha/?mom=302
 
-#
+## 搏天 API
+
+id: `btstu`
+
+文档: https://api.btstu.cn/doc/sjbz.php
+
+API: https://api.btstu.cn/sjbz/api.php
+
+请求参数:
+
+- `method`: 图片长宽比 (`mobile`, `pc`, **`zsy`**)
+- `lx`: 分类 (`meizi`, `dongman`, `fengjing`. **`suiji`**)
+- `format`: 格式 (`json`, **`images`**)
+
+json 返回示例:
+
+```jsonc
+{
+    "code": "200", // 状态码
+    "imgurl": "https:\/\/tva4.sinaimg.cn\/large\/9bd9b167gy1g2qkr95hylj21hc0u01kx.jpg", // 图片地址
+    "width": "1920", // 图片宽度
+    "height": "1080" // 图片高度
+}
+```
+

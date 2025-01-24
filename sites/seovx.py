@@ -12,7 +12,7 @@ allow_h = True
 allow_v = False
 
 
-site = Blueprint('', __name__)
+site = Blueprint('seovx', __name__)
 
 
 @site.route('/image')

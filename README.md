@@ -16,7 +16,7 @@
 
 公共服务: https://imgapi.siiway.top
 
-> 使用 `Serv00 免费服务` + `Cloudflare Tunnel` 部署，不作访问限制（为账号安全请节省使用)
+> 使用 `Serv00` + `Cloudflare Tunnel` 部署，不作访问限制（为账号安全请节省使用)
 
 > 建议自行部署，只需有 Python3 环境即可
 
@@ -81,12 +81,12 @@ python3 server.py
 ## TODO
 
 ```md
-> 从哪里的 alist 配置示例中扒的
+> 不知从哪里的 alist 配置示例中扒的
 - [x] (重复) 樱花：https://www.dmoe.cc/
-- [√] 夏沫：https://cdn.seovx.com/
-- [ ] (undone) 搏天：https://api.btstu.cn/doc/sjbz.php
-- [ ] 姬长信：https://github.com/insoxin/API
-- [ ] 小歪：https://api.ixiaowai.cn/
+- [v] 夏沫：https://cdn.seovx.com/
+- [v] 搏天：https://api.btstu.cn/doc/sjbz.php
+- [x] 姬长信：https://github.com/insoxin/API
+- [x] (失效) 小歪：https://api.ixiaowai.cn/
 - [ ] 保罗：https://api.paugram.com/
 - [ ] 墨天逸：https://api.mtyqx.cn/
 - [ ] 岁月小筑：https://img.xjh.me/

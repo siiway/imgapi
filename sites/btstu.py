@@ -13,7 +13,7 @@ allow_h = True
 allow_v = True
 
 
-site = Blueprint('', __name__)
+site = Blueprint('btstu', __name__)
 
 lx = random.choice([
     'dongman',

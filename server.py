@@ -45,12 +45,9 @@ for n in dirlst:
             a_sites_list += [name]
             a_sites_count += 1
         sites_count += 1
-        print(name, end='')
-        if n == dirlst[-1]:
-            print()
-        else:
-            print(', ', end='')
+        print(name, end=', ')
 
+print()
 u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {a_sites_count} auto.')
 
 u.debug(f'Allow_horizontal: {h_sites_list}')
