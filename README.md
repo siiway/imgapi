@@ -16,6 +16,8 @@
 
 公共服务: https://imgapi.siiway.top
 
+![status](https://kuma.siiway.top/api/badge/4/status) ![uptime](https://kuma.siiway.top/api/badge/4/uptime)
+
 > 使用 `Serv00` + `Cloudflare Tunnel` 部署，不作访问限制（为账号安全请节省使用)
 
 > 建议自行部署，只需有 Python3 环境即可
