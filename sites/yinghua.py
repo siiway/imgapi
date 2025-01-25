@@ -3,7 +3,6 @@
 '''
 樱花随机二次元图片 API
 doc: https://www.dmoe.cc/
-因无法预览禁用
 '''
 
 from flask import Blueprint, redirect
