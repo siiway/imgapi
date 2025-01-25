@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 3. 配置服务
 
-编辑 `config.py`:
+将 `config.example.py` 重命名为 `config.py`:
 
 ```py
 host = '0.0.0.0' # 监听地址，`0.0.0.0` 代表所有
