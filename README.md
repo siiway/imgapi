@@ -83,17 +83,4 @@ python3 server.py
 
 部分 API 来源：https://blog.jixiaob.cn/?post=93
 
-## TODO
-
-```md
-> 不知从哪里的 alist 配置示例中扒的
-- [x] (重复) 樱花：https://www.dmoe.cc/
-- [v] 夏沫：https://cdn.seovx.com/
-- [v] 搏天：https://api.btstu.cn/doc/sjbz.php
-- [x] 姬长信：https://github.com/insoxin/API
-- [x] (失效) 小歪：https://api.ixiaowai.cn/
-- [v] 保罗：https://api.paugram.com/
-- [v] 墨天逸：https://api.mtyqx.cn/
-- [x] (重复) 岁月小筑：https://img.xjh.me/
-- [v] 东方Project：https://img.paulzzh.com/
-```
+(c) 2025 SiiWay Team. Under MIT License.

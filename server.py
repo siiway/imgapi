@@ -121,7 +121,7 @@ def about():
     return f'''
 Hello World! <br/>
 SiiWay ImgAPI v2024-01-25 - https://github.com/siiway/imgapi <br/>
-Copyright (c) 2025 SiiWay Team. <br/>
+Copyright (c) 2025 SiiWay Team. Under MIT License. <br/>
 <br/>
 --- UA Test --- <br/>
 UA String: {ua_str} <br/>
