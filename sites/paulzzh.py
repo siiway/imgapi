@@ -17,16 +17,15 @@ site = Blueprint('paulzzh', __name__)
 
 
 @site.route('/image')
-@site.route('/image/s')
-def image_a():
-    return redirect('')
+def image_all():
+    return redirect('https://img.paulzzh.com/touhou/random?site=all&size=all')
 
 
 @site.route('/image/h')
 def image_h():
-    return redirect('')
+    return redirect('https://img.paulzzh.com/touhou/random?site=all&size=pc')
 
 
 @site.route('/image/v')
 def image_v():
-    return redirect('')
+    return redirect('https://img.paulzzh.com/touhou/random?site=all&size=wap')
