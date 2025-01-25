@@ -7,7 +7,7 @@ Home: https://cdn.seovx.com/
 
 from flask import Blueprint, redirect
 
-allow_a = False
+allow_s = False
 allow_h = True
 allow_v = False
 

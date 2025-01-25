@@ -1,19 +1,19 @@
 # coding:utf-8
 
 '''
-Template
-Doc: 
-API: 
+Paulzzh API
+Home: https://img.paulzzh.com/
+API: https://img.paulzzh.com/touhou/random
 '''
 
 from flask import Blueprint, redirect
 
-allow_s = True
+allow_s = False
 allow_h = True
 allow_v = True
 
 
-site = Blueprint('', __name__)
+site = Blueprint('paulzzh', __name__)
 
 
 @site.route('/image')

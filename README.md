@@ -22,20 +22,24 @@
 
 > 建议自行部署，只需有 Python3 环境即可
 
-| 接口       | 信息                 |
-| ---------- | -------------------- |
-| `/`        | 跳转到本 repo        |
-| `/image`   | 跳转到随机自适应图片 |
-| `/image/a` | 自适应图片           |
-| `/img/a`   | -                    |
-| `/image/h` | 横向图片             |
-| `/img/h`   | -                    |
-| `/image/v` | 竖向图片             |
-| `/img/v`   | -                    |
+| 接口       | 信息          |
+| ---------- | ------------- |
+| `/`        | 跳转到本 repo |
+| `/image`   | 自动          |
+| `/img`     | -             |
+| `/image/s` | 自适应图片    |
+| `/img/s`   | -             |
+| `/image/h` | 横向图片      |
+| `/img/h`   | -             |
+| `/image/v` | 竖向图片      |
+| `/img/v`   | -             |
 
-<!-- 会在我们的 API 库里随机选择返回
-~~有 `Json` 和 `图片` 两种调用方式~~
-只有图片返回，因为 json 字段名各站不同 -->
+> [!TIP]
+> 几种图片类型的解释: <br/>
+> 1. `a`: 自动 *(Auto)*, 由本项目服务器使用 User-Agent 判断设备类型，如无法判断则降级至 `s` - **推荐使用** <br/>
+> 2. `s`: 自适应 *(Self)*, 由第三方服务自行判断设备类型 **(需要服务支持)** <br/>
+> 3. `h`: 横向 *(水平, Horizontal)*, 适用于电脑/平板 <br/>
+> 4. `v`: 竖向 *(垂直, Vertical)*, 适用于手机
 
 ### 部署
 
@@ -48,9 +52,8 @@ git clone https://github.com/siiway/imgapi.git
 2. 安装依赖
 
 ```shell
-./install.sh
-# Windows:
-install.bat
+cd imgapi
+pip install -r requirements.txt
 ```
 
 3. 配置服务
@@ -70,13 +73,13 @@ python3 server.py
 # `python3` 自行替换为你的 Python 程序
 ```
 
-> 建议 Python 版本: `3.10+`
+> 建议 Python 版本: **3.10+**
 
 ## 声明
 
 本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无关.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new)，或 [点此](https://wyf9.top/#/contact) 跳转联系方式.
+如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new)，或 [点此](https://siiway.top/about/contact.html) 跳转联系方式.
 
 部分 API 来源：https://blog.jixiaob.cn/?post=93
 
@@ -89,8 +92,8 @@ python3 server.py
 - [v] 搏天：https://api.btstu.cn/doc/sjbz.php
 - [x] 姬长信：https://github.com/insoxin/API
 - [x] (失效) 小歪：https://api.ixiaowai.cn/
-- [ ] 保罗：https://api.paugram.com/
-- [ ] 墨天逸：https://api.mtyqx.cn/
-- [ ] 岁月小筑：https://img.xjh.me/
-- [ ] 东方Project：https://img.paulzzh.com/
+- [v] 保罗：https://api.paugram.com/
+- [v] 墨天逸：https://api.mtyqx.cn/
+- [x] (重复) 岁月小筑：https://img.xjh.me/
+- [v] 东方Project：https://img.paulzzh.com/
 ```

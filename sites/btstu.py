@@ -8,7 +8,7 @@ Home: https://api.btstu.cn/doc/sjbz.php
 from flask import Blueprint, redirect
 import random
 
-allow_a = True
+allow_s = True
 allow_h = True
 allow_v = True
 
@@ -22,7 +22,7 @@ lx = random.choice([
 
 
 @site.route('/image')
-@site.route('/image/a')
+@site.route('/image/s')
 def image_a():
     return redirect(f'https://api.btstu.cn/sjbz/api.php?lx={lx}&method=zsy&format=images')
 

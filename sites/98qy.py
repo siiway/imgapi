@@ -8,7 +8,7 @@
 
 from flask import Blueprint, redirect
 
-allow_a = True
+allow_s = True
 allow_h = True
 allow_v = True
 
@@ -17,7 +17,7 @@ site = Blueprint('98qy', __name__)
 
 
 @site.route('/image')
-@site.route('/image/a')
+@site.route('/image/s')
 def image_a():
     return redirect('https://www.98qy.com/sjbz/api.php?method=zsy')
 

@@ -3,30 +3,30 @@
 
 '''
 重要的提示
-a -> auto 自适应
+s -> self 自适应
 h -> horizontal 水平 (横向)
 v -> vertical 垂直 (竖向)
 '''
 
 import importlib
 import os
-from flask import Flask, redirect
+from flask import Flask, redirect, request
+from random import choice
+from user_agents import parse as parse_ua
+
 import config as cfg
 import utils as u
-from random import choice
-
 
 app = Flask(__name__)
 
-
 h_sites_list = []
 v_sites_list = []
-a_sites_list = []
+s_sites_list = []
 
 sites_count = 0
 h_sites_count = 0
 v_sites_count = 0
-a_sites_count = 0
+s_sites_count = 0
 
 u.info('Loading: ', noret=True)
 dirlst = os.listdir('sites/')
@@ -41,18 +41,18 @@ for n in dirlst:
         if obj.allow_v:
             v_sites_list += [name]
             v_sites_count += 1
-        if obj.allow_a:
-            a_sites_list += [name]
-            a_sites_count += 1
+        if obj.allow_s:
+            s_sites_list += [name]
+            s_sites_count += 1
         sites_count += 1
         print(name, end=', ')
 
 print()
-u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {a_sites_count} auto.')
+u.info(f'Loaded {sites_count} api(s): {h_sites_count} horizontal, {v_sites_count} vertical, {s_sites_count} self.')
 
 u.debug(f'Allow_horizontal: {h_sites_list}')
 u.debug(f'Allow_vertical: {v_sites_list}')
-u.debug(f'Allow_auto: {a_sites_list}')
+u.debug(f'Allow_self: {s_sites_list}')
 
 
 @app.route('/')
@@ -60,12 +60,30 @@ def index():
     return redirect('https://github.com/siiway/imgapi')
 
 
+@app.route('/img')
 @app.route('/image')
-@app.route('/img/a')
-@app.route('/image/a')
-def image_a():
-    ch = choice(a_sites_list)
-    return redirect(f'/sites/{ch}/image/a')
+def image_auto():
+    ua_str: str = request.headers.get('User-Agent', None)
+    if ua_str:
+        ua = parse_ua(ua_str)
+        if ua.is_mobile:
+            # Mobile -> V
+            return image_v()
+        elif ua.is_pc or ua.is_tablet:
+            # PC / Tablet -> H
+            return image_h()
+        else:
+            # Unknown -> S
+            return image_s()
+    else:
+        return image_s()
+
+
+@app.route('/img/s')
+@app.route('/image/s')
+def image_s():
+    ch = choice(s_sites_list)
+    return redirect(f'/sites/{ch}/image/s')
 
 
 @app.route('/img/h')
@@ -82,9 +100,34 @@ def image_v():
     return redirect(f'/sites/{ch}/image/v')
 
 
-@app.route('/test')
-def test():
-    return 'Hello World!'
+@app.route('/about')
+def about():
+    ua_str = request.headers.get('User-Agent', None)
+    if ua_str:
+        ua_obj = parse_ua(ua_str)
+        ua = f'is_mobile: {ua_obj.is_mobile}, is_pc: {ua_obj.is_pc}, is_tablet: {ua_obj.is_tablet}'
+        if ua_obj.is_mobile:
+            # Mobile -> V
+            result = 'Vertical'
+        elif ua_obj.is_pc or ua_obj.is_tablet:
+            # PC / Tablet -> H
+            result = 'Horizontal'
+        else:
+            # Unknown -> S
+            result = 'Self'
+    else:
+        ua_obj = 'No User-Agent Header'
+        result = 'Self'
+    return f'''
+Hello World! <br/>
+SiiWay ImgAPI v2024-01-25 - https://github.com/siiway/imgapi <br/>
+Copyright (c) 2025 SiiWay Team. <br/>
+<br/>
+--- UA Test --- <br/>
+UA String: {ua_str} <br/>
+Parsed UA: {ua_obj} - {ua} <br/>
+Result -> {result} <br/>
+'''
 
 
 if __name__ == '__main__':

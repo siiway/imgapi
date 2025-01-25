@@ -11,7 +11,7 @@ from utils import format_dict
 from flask import Blueprint, redirect
 from random import choice
 
-allow_a = True
+allow_s = True
 allow_h = True
 allow_v = True
 
@@ -25,7 +25,7 @@ catgs_v = ['mp', 'moemp', 'ysmp', 'aimp']
 
 
 @site.route('/image')
-@site.route('/image/a')
+@site.route('/image/s')
 def image_a():
     catg = choice(catgs_a)
     return redirect(f'https://t.alcy.cc/{catg}')

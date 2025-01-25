@@ -244,3 +244,29 @@ API: https://api.paugram.com/wallpaper/
 - `category`: **[施工中]** 分类 (`us`, `jp`, `cn`, `1`, `2`, `3`) ***存疑***
 
 示例: `https://api.paugram.com/wallpaper/?source=sm`
+
+## 墨天逸 API
+
+id: `mtyqx`
+
+文档: https://api.mtyqx.cn/
+
+API: https://api.mtyqx.cn/api/random.php
+
+## Paulzzh API
+
+id: `paulzzh`
+
+东方 Project 随机图片 API
+
+文档: https://img.paulzzh.com/
+
+API: https://img.paulzzh.com/touhou/random
+
+请求参数:
+
+- `type`: 返回类型 (**`302`**, `json`)
+- `site`: 源站点 (**`konachan`**, `yandere`, `all`)
+- `size`: 图片尺寸 (**`pc`**, `wap`, `all`)
+- `tag`: 标签 *(beta)* - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
+

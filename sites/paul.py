@@ -9,7 +9,7 @@ API: https://api.paugram.com/wallpaper/
 from flask import Blueprint, redirect
 from random import choice
 
-allow_a = False
+allow_s = False
 allow_h = True
 allow_v = False
 
