@@ -21,7 +21,7 @@ site = Blueprint('hanxiaohan', __name__)
 apis = [
     'https://api.vvhan.com/api/bing',
     'https://api.vvhan.com/api/wallpaper/views',
-    'https://api.vvhan.com/api/wallpaper/acg'
+    # 'https://api.vvhan.com/api/wallpaper/acg' # Disabled because R18 images
 ]
 
 
