@@ -2,13 +2,8 @@
 
 本页收集各种图片 API 站点
 
-
-> `id` 是什么? 简单来说就是 `sites/` 目录下相应的文件名
-
-> 本项目收集的每个 API 都在 `sites/` 目录下作为一个独立的文件，由主程序遍历导入，并创建路由 *(文件名去 `.py`)*
-
 > [!TIP]
-> 如果没有 `id` 呢? 代表未收入项目随机 API 的列表中
+> 本项目收集的每个 API 都在 `sites/` 目录下作为一个独立的文件 (文件名即为下面 `id`)，由主程序遍历导入，并创建路由 *(文件名去 `.py`)*
 
 ## 栗次元 API
 
@@ -269,4 +264,3 @@ API: https://img.paulzzh.com/touhou/random
 - `site`: 源站点 (**`konachan`**, `yandere`, `all`)
 - `size`: 图片尺寸 (**`pc`**, `wap`, `all`)
 - `tag`: 标签 *(beta)* - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
-
