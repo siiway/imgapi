@@ -7,7 +7,6 @@ Home: https://t.alcy.cc/
 Blog: https://www.alcy.cc/archives/sui-ji-er-ci-yuan-tu-pian-api
 '''
 
-from utils import format_dict
 from flask import Blueprint, redirect
 from random import choice
 

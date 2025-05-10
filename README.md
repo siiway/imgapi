@@ -52,21 +52,22 @@ cd imgapi
 pip install -r requirements.txt
 ```
 
-3. 配置服务
+3. (可选) 配置服务
 
-将 `config.example.py` 重命名为 `config.py`:
+创建 `config.json`，内容如下
 
-```py
-host = '0.0.0.0' # 监听地址，`0.0.0.0` 代表所有
-port = 9333 # 监听端口
-debug = False # (二次开发建议启用) 启用 Flask 热重载
+```jsonc
+{
+    "host": "0.0.0.0", // 监听地址，`0.0.0.0` 代表所有 (如需监听 ipv6 则改为 `::`)
+    "port": 9333, // 监听端口
+    "debug": false // (二次开发建议启用) 启用 Flask 热重载
+}
 ```
 
 4. 启动程序
 
 ```shell
 python3 server.py
-# `python3` 自行替换为你的 Python 程序
 ```
 
 > 建议 Python 版本: **3.10+**
