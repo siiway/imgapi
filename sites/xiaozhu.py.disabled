@@ -3,6 +3,7 @@
 '''
 岁月小筑 (二开) 动漫 api
 doc: https://cloud.qqshabi.cn/apidetail/33.html
+禁用 (证书过期)
 '''
 
 from flask import Blueprint, redirect
