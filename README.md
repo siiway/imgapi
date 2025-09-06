@@ -52,6 +52,13 @@ cd imgapi
 pip install -r requirements.txt
 ```
 
+> **推荐使用 uv 管理依赖:**
+
+```shell
+cd imgapi
+uv sync
+```
+
 3. (可选) 配置服务
 
 创建 `config.json`，内容如下
@@ -67,16 +74,17 @@ pip install -r requirements.txt
 4. 启动程序
 
 ```shell
-python3 server.py
+python3 main.py
+# 或者 uv run main.py (不需要激活 venv)
 ```
 
-> 建议 Python 版本: **3.10+**
+> 建议 Python 版本: **3.11+**
 
 ## 声明
 
 本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无**任何**关联.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new)
+如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new) / [Contact](https://wyf9.top/t/c)
 
 *部分 API 来源：https://blog.jixiaob.cn/?post=93*
 
