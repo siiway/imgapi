@@ -267,8 +267,8 @@ API: https://img.paulzzh.com/touhou/random
 
 ## xiaoyuan的牛肉随机图API
 
-id 'xiaoyuan'
+id: `xiaoyuan`
 
-文档: '{Null}'
+文档: `{Null}`
 
 API: https://img.xiaoyuan151.com/neuro
