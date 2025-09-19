@@ -264,3 +264,11 @@ API: https://img.paulzzh.com/touhou/random
 - `site`: 源站点 (**`konachan`**, `yandere`, `all`)
 - `size`: 图片尺寸 (**`pc`**, `wap`, `all`)
 - `tag`: 标签 *(beta)* - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
+
+## xiaoyuan的牛肉随机图API
+
+id 'xiaoyuan'
+
+文档: '{Null}'
+
+API: https://img.xiaoyuan151.com/neuro
