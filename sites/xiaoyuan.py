@@ -17,6 +17,6 @@ site = Blueprint('xiaoyuan', __name__)
 
 @site.route('/image')
 @site.route('/image/h')
+@site.route('/image/s')
 def image_h():
-
     return redirect('https://img.xiaoyuan151.com/neuro')
