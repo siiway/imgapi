@@ -1,10 +1,7 @@
 [project]
 name = "imgapi"
 version = "0.1.0"
-description = "A simple random image API written in Flask"
+description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "flask",
-    "user-agents"
-]
+requires-python = ">=3.13"
+dependencies = []
