@@ -1,7 +1,11 @@
 [project]
 name = "imgapi"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
+version = "0.2.0"
+description = "A simple random background image API based on FastAPI and redirect"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "fastapi[standard]>=0.118.0",
+    "pydantic>=2.11.9",
+    "pyyaml>=6.0.3",
+    "uvicorn>=0.37.0",
+]

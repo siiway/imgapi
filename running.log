@@ -1,0 +1,49 @@
+[2025-10-01 10:21:35] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:21:35] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:22:07] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:22:07] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:22:07] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/config.py:321 | Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+[2025-10-01 10:22:07] [ERROR] | .venv/lib/python3.13/site-packages/uvicorn/config.py:535 | [Errno 98] Address already in use
+[2025-10-01 10:22:24] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:22:24] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:22:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/config.py:321 | Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+[2025-10-01 10:22:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/config.py:542 | Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+[2025-10-01 10:22:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:80 | Started reloader process [12418] using WatchFiles
+[2025-10-01 10:22:28] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:22:28] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:22:28] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [12439]
+[2025-10-01 10:22:28] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-01 10:22:28] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-01 10:22:30] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-01 10:22:30] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-01 10:22:30] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-01 10:22:30] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [12439]
+[2025-10-01 10:22:30] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:116 | Stopping reloader process [12418]
+[2025-10-01 10:22:37] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:22:37] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:22:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [12504]
+[2025-10-01 10:22:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-01 10:22:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-01 10:22:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:216 | Uvicorn running on http://0.0.0.0:9333 (Press CTRL+C to quit)
+[2025-10-01 10:22:43] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-01 10:22:43] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-01 10:22:43] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-01 10:22:43] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [12504]
+[2025-10-01 10:22:53] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:22:53] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-01 10:32:07] [INFO]  | main.py:37 | =============== Application Startup ===============
+[2025-10-01 10:32:07] [INFO]  | main.py:39 | ImgAPI v2025.10.01 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
