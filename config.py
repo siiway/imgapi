@@ -1,7 +1,8 @@
 import typing as t
+from json import loads as load_json
 
 from yaml import safe_load
-from pydantic import BaseModel, PositiveInt
+from pydantic import BaseModel
 
 from utils import get_path
 
@@ -42,30 +43,24 @@ class _LoggingConfigModel(BaseModel):
     日志轮转数量
     '''
 
+
 class ConfigModel(BaseModel):
     log: _LoggingConfigModel = _LoggingConfigModel()
 
-    host: str = '0.0.0.0'
+    enable_docs: bool = True
     '''
-    服务监听地址 (只在直接启动 main.py 时有效)
-    '''
-
-    port: PositiveInt = 9333
-    '''
-    服务端口 (只在直接启动 main.py 时有效)
+    是否启用 /docs (自带文档页面)
     '''
 
-    debug: bool = False
+    root_redirect: str = '/docs'
     '''
-    是否开启调试模式 (只在直接启动 main.py 时有效)
+    控制根目录将重定向到的 url
     '''
-
-    
 
 
 try:
     with open(get_path('config.yaml'), 'r', encoding='utf-8') as f:
-        file = safe_load(f)
+        file = load_json(safe_load(f))
 except:
     file = {}
 
