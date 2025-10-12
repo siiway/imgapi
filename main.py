@@ -1,12 +1,15 @@
 import logging
 from logging.handlers import RotatingFileHandler
+from random import choice
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html, get_swagger_ui_oauth2_redirect_html
+from pydantic import BaseModel
 
 from config import config as c
 import utils as u
+from imgapi import ImgAPIInit
 
 VERSION = '2025.10.12'
 
@@ -20,7 +23,7 @@ l.level = loglvl  # set logger level
 root_logger = logging.getLogger()  # get root logger
 root_logger.handlers.clear()  # clear default handlers
 stream_handler = logging.StreamHandler()  # get stream handler
-stream_handler.setFormatter(u.CustomFormatter())  # set stream formatter
+# stream_handler.setFormatter(u.CustomFormatter())  # set stream formatter
 # set file handler
 if c.log.file:
     log_file_path = u.get_path(c.log.file)
@@ -30,7 +33,7 @@ if c.log.file:
         )
     else:
         file_handler = logging.FileHandler(log_file_path, encoding='utf-8', errors='ignore')
-    file_handler.setFormatter(u.CustomFormatter())
+    # file_handler.setFormatter(u.CustomFormatter())
     root_logger.addHandler(file_handler)
 logging.getLogger('watchfiles').level = logging.WARNING  # set watchfiles logger level
 
@@ -38,7 +41,7 @@ logging.getLogger('watchfiles').level = logging.WARNING  # set watchfiles logger
 
 # region app
 
-l.info(f'{"="*20} Application Startup {"="*20}')
+l.info(f'{"="*25} Application Startup {"="*25}')
 
 l.info(f'''ImgAPI v{VERSION} by SiiWay Team
 Under MIT License
@@ -57,7 +60,6 @@ app = FastAPI(
 # region custom-docs
 
 if c.enable_docs:
-
     @app.get("/docs", include_in_schema=False)
     async def custom_swagger_ui_html():
         return get_swagger_ui_html(
@@ -82,7 +84,63 @@ if c.enable_docs:
 
 # endregion custom-docs
 
+# region api
 
-@app.get('/')
-def root():
-    return RedirectResponse(c.root_redirect, 301)
+sites = ImgAPIInit()
+
+
+@app.get('/image', response_class=RedirectResponse, responses={502: {
+    'content': None,
+    'headers': {}
+}})
+def image_auto(req: Request):
+    retries = c.max_retries
+    failed: list[str] = []
+    while retries > 0:
+        retries -= 1
+        site = choice(sites.allow_a)
+        url = site.auto(req)
+        if url:
+            return RedirectResponse(url, status_code=302, headers={
+                'X-ImgAPI-Version': VERSION,
+                'X-ImgAPI-Site-Id': site.id,
+                'X-ImgAPI-Tries': str(c.max_retries - retries)
+            })
+        else:
+            failed.append(site.id)
+    return Response('', status_code=502, headers={
+        'X-ImgAPI-Version': VERSION,
+        'X-ImgAPI-Failed-Site-Ids': str(failed),
+        'X-ImgAPI-Max-Tries': str(c.max_retries)
+    })
+
+# endregion api
+
+# region root
+
+
+class RootResponseModel(BaseModel):
+    hello: str = 'imgapi'
+    version: str = VERSION
+
+
+if c.root_redirect:
+    @app.get(
+        '/',
+        status_code=302,
+        description=f'重定向到 {c.root_redirect}<br/><i>Redirect to {c.root_redirect}</i>',
+        response_class=RedirectResponse
+    )
+    def root_redirect():
+        return RedirectResponse(c.root_redirect or '', status_code=302)
+else:
+    @app.get(
+        '/',
+        status_code=200,
+        description='显示 ImgAPI 版本号<br/><i>Show ImgAPI Version</i>',
+        response_model=RootResponseModel,
+    )
+    def root():
+        return RootResponseModel()
+
+# endregion root

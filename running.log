@@ -347,3 +347,325 @@ GitHub: https://github.com/siiway/imgapi
 [2025-10-12 18:24:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [20444]
 [2025-10-12 18:24:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
 [2025-10-12 18:24:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 19:58:02] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:58:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 19:58:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 19:58:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 19:58:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [20444]
+[2025-10-12 19:58:09] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:58:09] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:58:11] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:58:13] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:58:13] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:58:29] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:58:32] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:58:32] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:58:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [27324]
+[2025-10-12 19:58:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 19:58:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 19:59:09] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:59:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 19:59:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 19:59:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 19:59:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [27324]
+[2025-10-12 19:59:10] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:59:10] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:59:10] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [27492]
+[2025-10-12 19:59:10] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 19:59:10] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 19:59:25] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:59:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 19:59:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 19:59:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 19:59:25] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [27492]
+[2025-10-12 19:59:26] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:59:26] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:59:26] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [27580]
+[2025-10-12 19:59:26] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 19:59:26] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 19:59:47] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 19:59:47] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 19:59:47] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 19:59:47] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 19:59:47] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [27580]
+[2025-10-12 19:59:49] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 19:59:49] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 19:59:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [27706]
+[2025-10-12 19:59:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 19:59:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:03:58] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:03:58] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:03:58] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:03:58] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:03:58] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [27706]
+[2025-10-12 20:04:02] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:04:02] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:04:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28157]
+[2025-10-12 20:04:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:04:02] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:04:27] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:04:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:04:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:04:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:04:27] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28157]
+[2025-10-12 20:04:29] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:04:29] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:04:29] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28305]
+[2025-10-12 20:04:29] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:04:29] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:05:09] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:05:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:05:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:05:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:05:09] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28305]
+[2025-10-12 20:05:12] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:05:12] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:05:12] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28414]
+[2025-10-12 20:05:12] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:05:12] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:05:43] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:05:43] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:05:44] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:05:44] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:05:44] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28414]
+[2025-10-12 20:05:45] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:05:45] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:05:45] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28558]
+[2025-10-12 20:05:45] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:05:45] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:06:39] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:06:40] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:06:40] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:06:40] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:06:40] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28558]
+[2025-10-12 20:06:41] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:06:41] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:06:41] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28719]
+[2025-10-12 20:06:41] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:06:41] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:07:17] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:07:17] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:07:17] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:07:17] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:07:17] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28719]
+[2025-10-12 20:07:18] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:07:18] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:07:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28850]
+[2025-10-12 20:07:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:07:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 20:07:49] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 20:07:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 20:07:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 20:07:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 20:07:49] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28850]
+[2025-10-12 20:07:50] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 20:07:50] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 20:07:50] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [28957]
+[2025-10-12 20:07:50] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 20:07:50] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 21:39:37] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'main.py'. Reloading...
+[2025-10-12 21:39:37] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 21:39:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 21:39:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 21:39:38] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [28957]
+[2025-10-12 21:39:42] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 21:39:42] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 21:39:42] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [36108]
+[2025-10-12 21:39:42] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 21:39:42] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 21:46:07] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'site.py'. Reloading...
+[2025-10-12 21:46:08] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 21:46:08] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 21:46:08] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 21:46:08] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [36108]
+[2025-10-12 21:46:18] [INFO]  | main.py:41 | ==================== Application Startup ====================
+[2025-10-12 21:46:18] [INFO]  | main.py:43 | ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[2025-10-12 21:46:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:84 | Started server process [36766]
+[2025-10-12 21:46:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:48 | Waiting for application startup.
+[2025-10-12 21:46:18] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:62 | Application startup complete.
+[2025-10-12 21:48:31] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'site.py'. Reloading...
+[2025-10-12 21:48:31] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:264 | Shutting down
+[2025-10-12 21:48:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:67 | Waiting for application shutdown.
+[2025-10-12 21:48:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/lifespan/on.py:76 | Application shutdown complete.
+[2025-10-12 21:48:32] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/server.py:94 | Finished server process [36766]
+[2025-10-12 21:48:35] [WARN]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:55 | WatchFiles detected changes in 'imgapi.py'. Reloading...
+[2025-10-12 21:48:39] [INFO]  | .venv/lib/python3.13/site-packages/uvicorn/supervisors/basereload.py:116 | Stopping reloader process [11497]
+==================== Application Startup ====================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [44148] using WatchFiles
+==================== Application Startup ====================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Started server process [44161]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [44161]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Started server process [44282]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [44282]
+Stopping reloader process [44148]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[sites] Init 0 sites finished in 0.06ms.
+[sites] Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [44682] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[sites] Init 0 sites finished in 0.05ms.
+[sites] Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [44695]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [44695]
+Stopping reloader process [44682]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[sites] Init 0 sites finished in 0.04ms.
+[sites] Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [44887] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+[sites] Init 0 sites finished in 0.13ms.
+[sites] Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [44907]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'imgapi.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [44907]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.04ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [45110]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'imgapi.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [45110]
+WatchFiles detected changes in 'imgapi.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 4.87ms.
+               Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [45282]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'imgapi.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [45282]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [45319]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [45319]
+Stopping reloader process [44887]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.04ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [45407] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [45409]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [45409]
+WatchFiles detected changes in 'imgapi.py'. Reloading...
+Stopping reloader process [45407]

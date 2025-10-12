@@ -52,9 +52,21 @@ class ConfigModel(BaseModel):
     是否启用 /docs (自带文档页面)
     '''
 
-    root_redirect: str = '/docs'
+    root_redirect: str | None = '/docs'
     '''
     控制根目录将重定向到的 url
+    - 如为 None 则返回 json {"hello": "imgapi", "version": "xxx"}
+    '''
+
+    max_retries: int = 5
+    '''
+    获取重定向 url 的最大重试次数
+    '''
+
+    fallback_url: str | None = None
+    '''
+    超过最大尝试次数仍然失败时重定向到的 url
+    - 如为 None 则返回 502 Service Unavailable
     '''
 
 
