@@ -3,3 +3,6 @@ __pycache__/
 
 # Config
 config.yaml
+
+# Log
+*.log
