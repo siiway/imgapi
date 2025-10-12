@@ -1,10 +1,10 @@
 import typing as t
-from json import loads as load_json
 
 from yaml import safe_load
 from pydantic import BaseModel
 
 from utils import get_path
+from logger import l
 
 
 class _LoggingConfigModel(BaseModel):
@@ -58,22 +58,19 @@ class ConfigModel(BaseModel):
     - 如为 None 则返回 json {"hello": "imgapi", "version": "xxx"}
     '''
 
-    max_retries: int = 5
-    '''
-    获取重定向 url 的最大重试次数
-    '''
-
     fallback_url: str | None = None
     '''
-    超过最大尝试次数仍然失败时重定向到的 url
-    - 如为 None 则返回 502 Service Unavailable
+    当所有 site 都失败时重定向到的 url
+    - 如为 None 则返回 503 Service Unavailable
     '''
 
 
 try:
     with open(get_path('config.yaml'), 'r', encoding='utf-8') as f:
-        file = load_json(safe_load(f))
-except:
+        file = safe_load(f)
+except Exception as e:
+    l.warning(f'Load config.yaml failed: {e}, will use default config')
     file = {}
 
 config = ConfigModel.model_validate(file)
+l.info(f'Startup Config: {config}')

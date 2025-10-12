@@ -669,3 +669,515 @@ Application shutdown complete.
 Finished server process [45409]
 WatchFiles detected changes in 'imgapi.py'. Reloading...
 Stopping reloader process [45407]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [57644] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [57678]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [57678]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [60474]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [60474]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.04ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [61764] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.36ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [61789]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [61789]
+Stopping reloader process [61764]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.07ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [62002] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [62018]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [62018]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.71ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [62324]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'config.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [62324]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 1.37ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.09ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.27ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.12ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [63526]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [63526]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [63658]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [63658]
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [63794]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [63794]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [63915]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [63915]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.23ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [64236]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [64236]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.63ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [64344]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [64344]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.04ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [64467]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [64467]
+Stopping reloader process [62002]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [64848] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.11ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [64878]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [64878]
+Stopping reloader process [64848]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [65044] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65060]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'config.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65060]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65168]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'config.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65168]
+WatchFiles detected changes in 'config.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.09ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65320]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65320]
+Stopping reloader process [65044]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [65395] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.07ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65407]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65407]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.09ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65643]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65643]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.09ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [65843]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [65843]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [66059]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [66059]
+Stopping reloader process [65395]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.18ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [66446] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.06ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [66465]
+Waiting for application startup.
+Application startup complete.
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [66465]
+Stopping reloader process [66446]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Will watch for changes in these directories: ['/sync/dev/siiway/imgapi']
+Uvicorn running on http://127.0.0.1:9333 (Press CTRL+C to quit)
+Started reloader process [68189] using WatchFiles
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [68218]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [68218]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [68455]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [68455]
+WatchFiles detected changes in 'main.py'. Reloading...
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.11ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [68716]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [68716]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.08ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [68957]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [68957]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.07ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [69132]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [69132]
+========================= Application Startup =========================
+ImgAPI v2025.10.12 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [69274]
+Waiting for application startup.
+Application startup complete.
+WatchFiles detected changes in 'main.py'. Reloading...
+Shutting down
+Waiting for application shutdown.
+Application shutdown complete.
+Finished server process [69274]
+========================= Application Startup =========================
+ImgAPI v2025.10.13 by SiiWay Team
+Under MIT License
+GitHub: https://github.com/siiway/imgapi
+Init 0 sites finished in 0.05ms.
+Loaded: 0 Horizontal, 0 Vertical, 0 Auto.
+Started server process [69439]
+Waiting for application startup.
+Application startup complete.

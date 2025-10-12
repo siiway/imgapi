@@ -31,3 +31,7 @@ def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
         else:
             os.makedirs(os.path.dirname(full_path), exist_ok=True)
     return full_path
+
+
+def cnen(cn: str, en: str):
+    return f'{cn}<br/><i>{en}</i>'
