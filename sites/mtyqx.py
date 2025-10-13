@@ -4,14 +4,9 @@
 墨天逸 API
 Home: https://api.mtyqx.cn/
 API: https://api.mtyqx.cn/api/random.php
-禁用 (timeout)
 '''
 
 from imgapi import ImageAPI, Request
-
-allow_s = False
-allow_h = True
-allow_v = False
 
 
 def horizontal(req: Request):
