@@ -1,6 +1,4 @@
-from logging import Formatter
 from pathlib import Path
-from datetime import datetime
 import time
 import os
 

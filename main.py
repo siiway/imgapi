@@ -1,14 +1,15 @@
 import logging
-from logging.handlers import RotatingFileHandler
 from random import choice
+from sys import stderr
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html, get_swagger_ui_oauth2_redirect_html
 from pydantic import BaseModel
 from user_agents import parse as parse_ua
+from loguru import logger as l
 
-from config import config as c
+from config import config as c, load_config_failed
 import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
@@ -18,30 +19,44 @@ VERSION = '2025.10.13'
 # region init
 
 # init logger
-loglvl = getattr(logging, c.log.level.upper(), logging.INFO)
-l = logging.getLogger('uvicorn')  # get logger
-logging.basicConfig(level=loglvl)  # log level
-l.level = loglvl  # set logger level
-root_logger = logging.getLogger()  # get root logger
-root_logger.handlers.clear()  # clear default handlers
-stream_handler = logging.StreamHandler()  # get stream handler
-# stream_handler.setFormatter(u.CustomFormatter())  # set stream formatter
-# set file handler
+l.remove()
+
+l.add(
+    stderr,
+    level=c.log.level,
+    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <cyan>{name}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>"
+)
+
 if c.log.file:
     log_file_path = u.get_path(c.log.file)
-    if c.log.rotating:
-        file_handler = RotatingFileHandler(
-            log_file_path, encoding='utf-8', errors='ignore', maxBytes=int(c.log.rotating_size * 1024), backupCount=c.log.rotating_count
-        )
-    else:
-        file_handler = logging.FileHandler(log_file_path, encoding='utf-8', errors='ignore')
-    # file_handler.setFormatter(u.CustomFormatter())
-    root_logger.addHandler(file_handler)
+    l.add(
+        'logs/{time:YYYY-MM-DD}.log',
+        level=c.log.level,
+        rotation=c.log.rotation,
+        retention=c.log.retention
+    )
+
+
+class InterceptHandler(logging.Handler):
+    def emit(self, record):
+        logger_opt = l.opt(depth=6, exception=record.exc_info)
+        logger_opt.log(record.levelname, record.getMessage())
+
+
+logging.getLogger('uvicorn').handlers.clear()
+logging.getLogger().handlers = [InterceptHandler()]
+logging.getLogger().setLevel(c.log.level)
 logging.getLogger('watchfiles').level = logging.WARNING  # set watchfiles logger level
+
+if load_config_failed:
+    l.warning(f'Load config.yaml failed: {load_config_failed}, will use default config')
+
 
 # endregion init
 
 # region app
+
+l.info(f'Startup Config: {c}')
 
 l.info(f'{'='*25} Application Startup {'='*25}')
 
@@ -56,6 +71,19 @@ app = FastAPI(
     docs_url=None,
     redoc_url=None
 )
+
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    # l.info(f"Request: {request.method} {request.url}")
+    try:
+        p = u.perf_counter()
+        response: Response = await call_next(request)
+        l.info(f"New request: {request.method} {request.url} - {response.status_code} ({p()}ms)")
+        return response
+    except Exception as e:
+        l.exception(f"Request error: {request.method} {request.url} - {e} ({p()}ms)")
+        raise
 
 # endregion app
 

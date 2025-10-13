@@ -3,9 +3,9 @@ import importlib
 import os
 
 from fastapi import Request
+from loguru import logger as l
 
 import utils as u
-from logger import l
 
 
 class ImageAPI:

@@ -4,7 +4,6 @@ from yaml import safe_load
 from pydantic import BaseModel
 
 from utils import get_path
-from logger import l
 
 
 class _LoggingConfigModel(BaseModel):
@@ -28,19 +27,14 @@ class _LoggingConfigModel(BaseModel):
     如: `running.log`
     '''
 
-    rotating: bool = True
+    rotation: str = '1 days'
     '''
-    是否启用日志轮转
-    '''
-
-    rotating_size: float = 1024
-    '''
-    日志轮转大小 (单位: KB)
+    配置 Loguru 的 rotation (轮转周期) 设置 (对于 running.log)
     '''
 
-    rotating_count: int = 5
+    retention: str = '3 days'
     '''
-    日志轮转数量
+    配置 Loguru 的 retention (轮转保留) 设置 (对于 running.log)
     '''
 
 
@@ -68,9 +62,9 @@ class ConfigModel(BaseModel):
 try:
     with open(get_path('config.yaml'), 'r', encoding='utf-8') as f:
         file = safe_load(f)
+    load_config_failed = None
 except Exception as e:
-    l.warning(f'Load config.yaml failed: {e}, will use default config')
+    load_config_failed = e
     file = {}
 
 config = ConfigModel.model_validate(file)
-l.info(f'Startup Config: {config}')
