@@ -8,6 +8,7 @@ from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html, get_swagge
 from pydantic import BaseModel
 from user_agents import parse as parse_ua
 from loguru import logger as l
+from uvicorn import run
 
 from config import config as c, load_config_failed
 import utils as u
@@ -28,7 +29,6 @@ l.add(
 )
 
 if c.log.file:
-    log_file_path = u.get_path(c.log.file)
     l.add(
         'logs/{time:YYYY-MM-DD}.log',
         level=c.log.level,
@@ -60,9 +60,9 @@ l.info(f'Startup Config: {c}')
 
 l.info(f'{'='*25} Application Startup {'='*25}')
 
-l.info(f'''ImgAPI v{VERSION} by SiiWay Team
-Under MIT License
-GitHub: https://github.com/siiway/imgapi''')
+l.info(f'ImgAPI v{VERSION} by SiiWay Team')
+l.info('Under MIT License')
+l.info('GitHub: https://github.com/siiway/imgapi')
 
 app = FastAPI(
     title='ImgAPI',
@@ -344,3 +344,6 @@ else:
         return RootResponseModel()
 
 # endregion root
+
+if __name__ == '__main__':
+    run(app, host=c.host, port=c.port, workers=c.workers)

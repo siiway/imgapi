@@ -77,5 +77,5 @@ class ImgAPIInit:
                         self.allow_a.append(obj) if obj.auto else None  # type: ignore
                         l.debug(f'Init site {name} from sites/{n} took {p()}ms')
                         sites += 1
-        l.info(f'''Init {sites} sites finished in {p_all()}ms.
-Loaded: {len(self.allow_h)} Horizontal, {len(self.allow_v)} Vertical, {len(self.allow_a)} Auto.''')
+        l.info(f'Init {sites} sites finished in {p_all()}ms.')
+        l.info(f'Loaded: {len(self.allow_h)} Horizontal, {len(self.allow_v)} Vertical, {len(self.allow_a)} Auto.')

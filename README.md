@@ -8,8 +8,8 @@
 
 ## TODO
 
-- [ ] sites 迁移
-- [ ] 补全配置文档
+- [x] sites 迁移
+- [x] 补全配置文档
 - [ ] 调用统计
 
 ## 整理
@@ -62,7 +62,30 @@ uv sync
 创建 `config.yaml`:
 
 ```yaml
-
+# 服务监听地址 (仅在直接启动 main.py 时有效)
+host: '0.0.0.0'
+# 服务监听端口 (仅在直接启动 main.py 时有效)
+port: 9333
+# 服务 Worker 数 (仅在直接启动 main.py 时有效)
+workers: 3
+# 是否启用 /docs (自带文档页面)
+enable_docs: true
+# 控制根目录将重定向到的 url
+# 如为 null 则返回 json {"hello": "imgapi", "version": "xxx"}
+root_redirect: /docs
+# 当所有 site 都失败时重定向到的 url
+# 如为 null 则返回 503 Service Unavailable
+fallback_url: null
+log:
+  # 日志等级 (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  level: INFO
+  # 是否保存日志文件
+  # 存储在 logs/YYYY-MM-DD.log
+  file: true
+  # 配置 Loguru 的 rotation (轮转周期) 设置
+  rotation: 1 days
+  # 配置 Loguru 的 retention (轮转保留) 设置
+  retention: 3 days
 ```
 
 4. 启动程序

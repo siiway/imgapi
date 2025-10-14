@@ -1,7 +1,7 @@
 import typing as t
 
 from yaml import safe_load
-from pydantic import BaseModel
+from pydantic import BaseModel, PositiveInt
 
 from utils import get_path
 
@@ -21,25 +21,40 @@ class _LoggingConfigModel(BaseModel):
     - CRITICAL
     '''
 
-    file: str | None = 'running.log'
+    file: bool = True
     '''
-    保存日志文件目录 (留空禁用) \n
-    如: `running.log`
+    是否保存日志文件
+    - 存储在 logs/YYYY-MM-DD.log
     '''
 
     rotation: str = '1 days'
     '''
-    配置 Loguru 的 rotation (轮转周期) 设置 (对于 running.log)
+    配置 Loguru 的 rotation (轮转周期) 设置
     '''
 
     retention: str = '3 days'
     '''
-    配置 Loguru 的 retention (轮转保留) 设置 (对于 running.log)
+    配置 Loguru 的 retention (轮转保留) 设置
     '''
 
 
 class ConfigModel(BaseModel):
     log: _LoggingConfigModel = _LoggingConfigModel()
+
+    host: str = '0.0.0.0'
+    '''
+    服务监听地址 (仅在直接启动 main.py 时有效)
+    '''
+
+    port: PositiveInt = 9333
+    '''
+    服务监听端口 (仅在直接启动 main.py 时有效)
+    '''
+
+    workers: PositiveInt = 3
+    '''
+    服务 Worker 数 (仅在直接启动 main.py 时有效)
+    '''
 
     enable_docs: bool = True
     '''
