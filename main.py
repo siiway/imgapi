@@ -1,6 +1,6 @@
 import logging
 from random import choice
-from sys import stderr
+from sys import stderr, argv
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
@@ -18,6 +18,9 @@ from imgapi import ImgAPIInit
 VERSION = '2025.10.13'
 
 # region init
+
+# get node name
+node = argv[1] if len(argv) > 1 else c.node
 
 # init logger
 l.remove()
@@ -57,6 +60,7 @@ if load_config_failed:
 # region app
 
 l.info(f'Startup Config: {c}')
+l.info(f'Node: {node}')
 
 l.info(f'{'='*25} Application Startup {'='*25}')
 
@@ -65,7 +69,7 @@ l.info('Under MIT License')
 l.info('GitHub: https://github.com/siiway/imgapi')
 
 app = FastAPI(
-    title='ImgAPI',
+    title=f'ImgAPI - {node}',
     description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi',
     version=VERSION,
     docs_url=None,
@@ -135,6 +139,10 @@ api_responses = {
             'X-ImgAPI-Site-Id': {
                 'description': ce('图片 API 站点的 ID', 'ID of the site providing the image'),
                 'schema': {'type': 'string'}
+            },
+            'X-ImgAPI-Node': {
+                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
+                'schema': {'type': 'string'}
             }
         }
     },
@@ -144,6 +152,10 @@ api_responses = {
         'headers': {
             'X-ImgAPI-Version': {
                 'description': ce('ImgAPI 版本', 'ImgAPI version'),
+                'schema': {'type': 'string'}
+            },
+            'X-ImgAPI-Node': {
+                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
                 'schema': {'type': 'string'}
             }
         }
@@ -165,6 +177,10 @@ api_responses_self = {
             'X-ImgAPI-UA-Result': {
                 'description': ce('User-Agent 判断结果 (horizontal, vertical 或 unknown)', 'User-Agents parse results (horizontal, vertical or unknown)'),
                 'schema': {'type': 'string'}
+            },
+            'X-ImgAPI-Node': {
+                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
+                'schema': {'type': 'string'}
             }
         }
     },
@@ -174,6 +190,10 @@ api_responses_self = {
         'headers': {
             'X-ImgAPI-Version': {
                 'description': ce('ImgAPI 版本', 'ImgAPI version'),
+                'schema': {'type': 'string'}
+            },
+            'X-ImgAPI-Node': {
+                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
                 'schema': {'type': 'string'}
             }
         }
@@ -232,6 +252,7 @@ def image_auto(req: Request):
                 status_code=302,
                 headers={
                     'X-ImgAPI-Version': VERSION,
+                    'X-ImgAPI-Node': node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
@@ -241,7 +262,8 @@ def image_auto(req: Request):
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
-            'X-ImgAPI-Version': VERSION
+            'X-ImgAPI-Version': VERSION,
+            'X-ImgAPI-Node': node
         }
     )
 
@@ -266,7 +288,8 @@ def image_horizontal(req: Request):
                 status_code=302,
                 headers={
                     'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Site-Id': site.id
+                    'X-ImgAPI-Site-Id': site.id,
+                    'X-ImgAPI-Node': node
                 }
             )
         else:
@@ -275,7 +298,8 @@ def image_horizontal(req: Request):
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
-            'X-ImgAPI-Version': VERSION
+            'X-ImgAPI-Version': VERSION,
+            'X-ImgAPI-Node': node
         }
     )
 
@@ -300,6 +324,7 @@ def image_vertical(req: Request):
                 status_code=302,
                 headers={
                     'X-ImgAPI-Version': VERSION,
+                    'X-ImgAPI-Node': node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
@@ -309,7 +334,8 @@ def image_vertical(req: Request):
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
-            'X-ImgAPI-Version': VERSION
+            'X-ImgAPI-Version': VERSION,
+            'X-ImgAPI-Node': node
         }
     )
 
@@ -321,6 +347,7 @@ def image_vertical(req: Request):
 class RootResponseModel(BaseModel):
     hello: str = 'imgapi'
     version: str = VERSION
+    node: str = node
     repo: str = 'https://github.com/siiway/imgapi'
 
 
@@ -346,4 +373,4 @@ else:
 # endregion root
 
 if __name__ == '__main__':
-    run(app, host=c.host, port=c.port, workers=c.workers)
+    run('main:app', host=c.host, port=c.port, workers=c.workers)

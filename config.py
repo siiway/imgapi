@@ -41,6 +41,11 @@ class _LoggingConfigModel(BaseModel):
 class ConfigModel(BaseModel):
     log: _LoggingConfigModel = _LoggingConfigModel()
 
+    node: str = 'default'
+    '''
+    节点名称, 用于在多节点部署 (如 CF Tunnel) 的情况下区分响应请求的节点
+    '''
+
     host: str = '0.0.0.0'
     '''
     服务监听地址 (仅在直接启动 main.py 时有效)
