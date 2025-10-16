@@ -1,13 +1,14 @@
 [project]
-name = "imgapi"
-version = "0.2.0"
-description = "A simple random background image API based on FastAPI and redirect"
-requires-python = ">=3.13"
+authors = [{name = "wyf9", email = "wyf9@wyf9.top"}]
 dependencies = [
-    "fastapi[standard]>=0.118.0",
-    "loguru>=0.7.3",
-    "pydantic>=2.11.9",
-    "pyyaml>=6.0.3",
-    "user-agents>=2.2.0",
-    "uvicorn>=0.37.0",
+  "fastapi[standard]>=0.118.0",
+  "loguru>=0.7.3",
+  "pydantic>=2.11.9",
+  "pyyaml>=6.0.3",
+  "user-agents>=2.2.0",
+  "uvicorn>=0.37.0",
 ]
+description = "A simple random background image API based on FastAPI and redirect"
+name = "imgapi"
+requires-python = ">=3.13"
+version = "0.2.0"

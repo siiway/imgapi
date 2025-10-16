@@ -22,19 +22,9 @@ def auto(req: Request):
     return f'https://t.alcy.cc/{catg}'
 
 
-def horizontal(req: Request):
-    catg = choice(catgs_h)
-    return f'https://t.alcy.cc/{catg}'
-
-
-def vertical(req: Request):
-    catg = choice(catgs_v)
-    return f'https://t.alcy.cc/{catg}'
-
-
 api = ImageAPI(
     __name__,
     auto=auto,
-    horizontal=horizontal,
-    vertical=vertical
+    horizontal=auto,
+    vertical=auto
 )

@@ -56,7 +56,7 @@ class ConfigModel(BaseModel):
     服务监听端口 (仅在直接启动 main.py 时有效)
     '''
 
-    workers: PositiveInt = 3
+    workers: PositiveInt = 2
     '''
     服务 Worker 数 (仅在直接启动 main.py 时有效)
     '''

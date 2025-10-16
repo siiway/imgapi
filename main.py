@@ -15,12 +15,9 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.10.13'
+VERSION = '2025.10.17'
 
 # region init
-
-# get node name
-node = argv[1] if len(argv) > 1 else c.node
 
 # init logger
 l.remove()
@@ -60,7 +57,7 @@ if load_config_failed:
 # region app
 
 l.info(f'Startup Config: {c}')
-l.info(f'Node: {node}')
+l.info(f'Node: {c.node}')
 
 l.info(f'{'='*25} Application Startup {'='*25}')
 
@@ -69,7 +66,7 @@ l.info('Under MIT License')
 l.info('GitHub: https://github.com/siiway/imgapi')
 
 app = FastAPI(
-    title=f'ImgAPI - {node}',
+    title=f'ImgAPI - {c.node}',
     description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi',
     version=VERSION,
     docs_url=None,
@@ -97,8 +94,8 @@ if c.enable_docs:
     @app.get('/docs', include_in_schema=False)
     async def custom_swagger_ui_html():
         return get_swagger_ui_html(
-            openapi_url=app.openapi_url,  # type: ignore
-            title=app.title + ' - Swagger UI',
+            openapi_url=app.openapi_url or '/openapi.json',
+            title=app.title,
             oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
             swagger_js_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui-bundle.js',
             swagger_css_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui.css',
@@ -162,7 +159,8 @@ api_responses = {
     }
 }
 
-api_responses_self = {
+api_responses_auto = {
+    **api_responses,
     302: {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
@@ -183,20 +181,6 @@ api_responses_self = {
                 'schema': {'type': 'string'}
             }
         }
-    },
-    503: {
-        'description': ce('获取跳转 URL 失败', 'Failed to get redirect url'),
-        'model': GetUrlFailedResponseModel,
-        'headers': {
-            'X-ImgAPI-Version': {
-                'description': ce('ImgAPI 版本', 'ImgAPI version'),
-                'schema': {'type': 'string'}
-            },
-            'X-ImgAPI-Node': {
-                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
-                'schema': {'type': 'string'}
-            }
-        }
     }
 }
 
@@ -207,7 +191,7 @@ api_responses_self = {
     name='Get Image',
     description=ce('获取图片 (由 ImgAPI 决定类型)', 'Get an image (type processed by ImgAPI)'),
     status_code=302,
-    responses=api_responses_self  # type: ignore
+    responses=api_responses_auto  # type: ignore
 )
 def image(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
@@ -232,17 +216,8 @@ def image(req: Request):
     return resp
 
 
-@app.get(
-    '/image/a',
-    response_class=RedirectResponse,
-    name='Get Image Auto',
-    description=ce('获取图片 (由目标 API 决定类型)', 'Get an image (type processed by target API itself)'),
-    status_code=302,
-    responses=api_responses  # type: ignore
-)
 def image_auto(req: Request):
     site_list = sites.allow_a.copy()
-    failed: list[str] = []
     while site_list.count != 0:
         site = choice(site_list)
         url = site.auto(req)
@@ -252,18 +227,18 @@ def image_auto(req: Request):
                 status_code=302,
                 headers={
                     'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': node,
+                    'X-ImgAPI-Node': c.node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
         else:
-            failed.append(site.id)
+            site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
             'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': node
+            'X-ImgAPI-Node': c.node
         }
     )
 
@@ -278,7 +253,6 @@ def image_auto(req: Request):
 )
 def image_horizontal(req: Request):
     site_list = sites.allow_h.copy()
-    failed: list[str] = []
     while site_list.count != 0:
         site = choice(site_list)
         url = site.horizontal(req)
@@ -289,17 +263,17 @@ def image_horizontal(req: Request):
                 headers={
                     'X-ImgAPI-Version': VERSION,
                     'X-ImgAPI-Site-Id': site.id,
-                    'X-ImgAPI-Node': node
+                    'X-ImgAPI-Node': c.node
                 }
             )
         else:
-            failed.append(site.id)
+            site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
             'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': node
+            'X-ImgAPI-Node': c.node
         }
     )
 
@@ -313,8 +287,7 @@ def image_horizontal(req: Request):
     responses=api_responses  # type: ignore
 )
 def image_vertical(req: Request):
-    site_list = sites.allow_h.copy()
-    failed: list[str] = []
+    site_list = sites.allow_v.copy()
     while site_list.count != 0:
         site = choice(site_list)
         url = site.vertical(req)
@@ -324,22 +297,46 @@ def image_vertical(req: Request):
                 status_code=302,
                 headers={
                     'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': node,
+                    'X-ImgAPI-Node': c.node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
         else:
-            failed.append(site.id)
+            site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
         status_code=503,
         headers={
             'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': node
+            'X-ImgAPI-Node': c.node
         }
     )
 
 # endregion api
+
+# region fallback
+
+
+@app.get('/{path:path}', include_in_schema=False)
+async def fallback(path: str, req: Request):
+    match path:
+        case '/img' | '/img/s' | '/image/s':
+            return image(req)
+        case '/img/h':
+            return image_horizontal(req)
+        case '/img/v':
+            return image_vertical(req)
+        case _:
+            return Response(
+                'Not Found',
+                404,
+                headers={
+                    'X-ImgAPI-Version': VERSION,
+                    'X-ImgAPI-Node': c.node
+                }
+            )
+
+# endregion fallback
 
 # region root
 
@@ -347,7 +344,7 @@ def image_vertical(req: Request):
 class RootResponseModel(BaseModel):
     hello: str = 'imgapi'
     version: str = VERSION
-    node: str = node
+    node: str = c.node
     repo: str = 'https://github.com/siiway/imgapi'
 
 
