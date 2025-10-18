@@ -12,8 +12,8 @@
 - [x] 补全配置文档
 - [x] 设置节点名称
 - [x] 上个版本的 api 兼容
-- [ ] 调用统计
-- [ ] 预加载图片地址
+- [x] UA 测试页面
+- [ ] *预加载图片地址* - pr welcome
 
 ## 整理
 
@@ -33,6 +33,7 @@
 | `/image`   | 自动                               |
 | `/image/h` | 横向图片                           |
 | `/image/v` | 竖向图片                           |
+| `/ua`      | UA 测试结果                        |
 
 > [!TIP]
 > 几种图片类型的解释: <br/>
@@ -41,6 +42,9 @@
 > 3. `/image/v`: 竖向 *(垂直, Vertical)*, 适用于手机
 
 ## 部署
+
+> [!IMPORTANT]
+> 最低要求 Python 版本: **>= 3.10**
 
 1. Clone 本仓库
 
@@ -93,16 +97,18 @@ log:
 
 4. 启动程序
 
-直接启动 (使用配置中的 host & port):
+直接启动 (使用配置中的 host & port & workers, **推荐**):
 
 ```bash
 uv run main.py
+# or python3 main.py
 ```
 
 使用 cli 启动 (另外指定 host & port):
 
 ```bash
 uv run fastapi run --host 0.0.0.0 --port 9333
+# or fastapi run --host 0.0.0.0 --port 9333
 ```
 
 ## 声明

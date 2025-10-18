@@ -27,12 +27,12 @@ class _LoggingConfigModel(BaseModel):
     - 存储在 logs/YYYY-MM-DD.log
     '''
 
-    rotation: str = '1 days'
+    rotation: str | int = '1 days'
     '''
     配置 Loguru 的 rotation (轮转周期) 设置
     '''
 
-    retention: str = '3 days'
+    retention: str | int = '3 days'
     '''
     配置 Loguru 的 retention (轮转保留) 设置
     '''

@@ -218,7 +218,7 @@ requires-dist = [
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "pydantic", specifier = ">=2.11.9" },
     { name = "pyyaml", specifier = ">=6.0.3" },
-    { name = "user-agents", specifier = ">=2.2.0" },
+    { name = "user-agents", specifier = ">=2.2.0,<3" },
     { name = "uvicorn", specifier = ">=0.37.0" },
 ]
 

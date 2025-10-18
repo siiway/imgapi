@@ -72,10 +72,16 @@ class ImgAPIInit:
                     obj = getattr(module, attr)
                     if isinstance(obj, ImageAPI):
                         obj.init() if obj.init else None
-                        self.allow_h.append(obj) if obj.horizontal else None  # type: ignore
-                        self.allow_v.append(obj) if obj.vertical else None  # type: ignore
-                        self.allow_a.append(obj) if obj.auto else None  # type: ignore
+                        if obj.horizontal:
+                            self.allow_h.append(obj)  # type: ignore
+                        if obj.vertical:
+                            self.allow_v.append(obj)  # type: ignore
+                        if obj.auto:
+                            self.allow_a.append(obj)  # type: ignore
                         l.debug(f'Init site {name} from sites/{n} took {p()}ms')
                         sites += 1
         l.info(f'Init {sites} sites finished in {p_all()}ms.')
         l.info(f'Loaded: {len(self.allow_h)} Horizontal, {len(self.allow_v)} Vertical, {len(self.allow_a)} Auto.')
+        l.debug(f'allow_h sites: {[i.id for i in self.allow_h]}')
+        l.debug(f'allow_v sites: {[i.id for i in self.allow_v]}')
+        l.debug(f'allow_a sites: {[i.id for i in self.allow_a]}')

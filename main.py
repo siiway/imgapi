@@ -1,40 +1,59 @@
 import logging
 from random import choice
-from sys import stderr, argv
+from sys import stderr
+import typing as t
+from uuid import uuid4 as uuid
+from contextvars import ContextVar
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html, get_swagger_ui_oauth2_redirect_html
-from pydantic import BaseModel
-from user_agents import parse as parse_ua
+from pydantic import BaseModel, ValidationError
 from loguru import logger as l
 from uvicorn import run
-
+from fastapi.openapi.utils import get_openapi
 from config import config as c, load_config_failed
+
 import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.10.17'
+VERSION = '2025.10.19'
 
 # region init
+new_init = u.InitOnceChecker().new_init
 
-# init logger
-l.remove()
+reqid: ContextVar[str] = ContextVar('imgapi_reqid', default='not-in-request')
 
-l.add(
-    stderr,
-    level=c.log.level,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <cyan>{name}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>"
-)
+if new_init:
 
-if c.log.file:
+    # init logger
+    l.remove()
+
+    # 定义日志格式，包含 reqid
+    def log_format(record):
+        reqid = record["extra"].get("reqid", 'fallback-logid')  # type: ignore - 从 extra 或 ContextVar 获取 reqid
+        return '<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <yellow>' + reqid + '</yellow> | <cyan>{name}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>\n'
+
     l.add(
-        'logs/{time:YYYY-MM-DD}.log',
+        stderr,
         level=c.log.level,
-        rotation=c.log.rotation,
-        retention=c.log.retention
+        format=log_format,
+        backtrace=True,
+        diagnose=True
     )
+
+    if c.log.file:
+        l.add(
+            'logs/{time:YYYY-MM-DD}.log',
+            level=c.log.level,
+            format=log_format,
+            colorize=False,
+            rotation=c.log.rotation,
+            retention=c.log.retention,
+            enqueue=True
+        )
+    l.configure(extra={'reqid': 'not-in-request'})  # 默认 reqid 为 not-in-request
 
 
 class InterceptHandler(logging.Handler):
@@ -44,47 +63,107 @@ class InterceptHandler(logging.Handler):
 
 
 logging.getLogger('uvicorn').handlers.clear()
+logging.getLogger('uvicorn.access').handlers.clear()
+logging.getLogger('uvicorn.error').handlers.clear()
 logging.getLogger().handlers = [InterceptHandler()]
 logging.getLogger().setLevel(c.log.level)
-logging.getLogger('watchfiles').level = logging.WARNING  # set watchfiles logger level
+logging.getLogger('watchfiles').level = logging.WARNING
 
-if load_config_failed:
-    l.warning(f'Load config.yaml failed: {load_config_failed}, will use default config')
+if new_init:
 
+    if load_config_failed:
+        l.warning(f'Load config.yaml failed: {load_config_failed}, will use default config')
 
-# endregion init
+    # endregion init
 
-# region app
+    # region app
 
-l.info(f'Startup Config: {c}')
-l.info(f'Node: {c.node}')
+    l.info(f'Startup Config: {c}')
+    l.info(f'Node: {c.node}')
+    l.info(f'{'='*25} Application Startup {'='*25}')
+    l.info(f'ImgAPI v{VERSION} by SiiWay Team')
+    l.info('Under MIT License')
+    l.info('GitHub: https://github.com/siiway/imgapi')
 
-l.info(f'{'='*25} Application Startup {'='*25}')
-
-l.info(f'ImgAPI v{VERSION} by SiiWay Team')
-l.info('Under MIT License')
-l.info('GitHub: https://github.com/siiway/imgapi')
+    sites = ImgAPIInit()
 
 app = FastAPI(
     title=f'ImgAPI - {c.node}',
-    description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi',
+    description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi | MIT License',
     version=VERSION,
     docs_url=None,
     redoc_url=None
 )
 
 
-@app.middleware("http")
+@app.middleware('http')
 async def log_requests(request: Request, call_next):
-    # l.info(f"Request: {request.method} {request.url}")
-    try:
-        p = u.perf_counter()
-        response: Response = await call_next(request)
-        l.info(f"New request: {request.method} {request.url} - {response.status_code} ({p()}ms)")
-        return response
-    except Exception as e:
-        l.exception(f"Request error: {request.method} {request.url} - {e} ({p()}ms)")
-        raise
+    request_id = str(uuid())
+    token = reqid.set(request_id)
+    with l.contextualize(reqid=request_id):
+        l.info(f'Incoming request: {request.method} {request.url.path}')
+        try:
+            p = u.perf_counter()
+            resp: Response = await call_next(request)
+            l.info(f'Outgoing response: {resp.status_code} ({p()}ms)')
+            return resp
+        except Exception as e:
+            l.error(f'Server error: {e} ({p()}ms)')
+            resp = Response('Internal Server Error', 500)
+        finally:
+            resp.headers['X-ImgAPI-Version'] = VERSION
+            resp.headers['X-ImgAPI-Node'] = c.node
+            resp.headers['X-ImgAPI-Request-Id'] = request_id
+            reqid.reset(token)
+            return resp
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        description=app.description,
+        routes=app.routes,
+    )
+
+    for path in openapi_schema.get('paths', {}).values():
+        for operation in path.values():
+            if 'responses' not in operation:
+                operation['responses'] = {}
+
+            for status_code, response in operation['responses'].items():
+                if isinstance(response, str):
+                    operation['responses'][status_code] = {'description': response}
+
+                if 'headers' not in operation['responses'][status_code]:
+                    operation['responses'][status_code]['headers'] = {}
+
+                operation['responses'][status_code]['headers'].setdefault(
+                    'X-ImgAPI-Version', {
+                        'description': ce('ImgAPI 版本', 'ImgAPI version'),
+                        'schema': {'type': 'string'}
+                    }
+                )
+                operation['responses'][status_code]['headers'].setdefault(
+                    'X-ImgAPI-Node', {
+                        'description': ce('ImgAPI 节点 ID', 'ImgAPI Node ID'),
+                        'schema': {'type': 'string'}
+                    }
+                )
+                operation['responses'][status_code]['headers'].setdefault(
+                    'X-ImgAPI-Request-Id', {
+                        'description': ce('ImgAPI 请求 ID', 'ImgAPI Request ID'),
+                        'schema': {'type': 'string'}
+                    }
+                )
+
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 # endregion app
 
@@ -117,8 +196,6 @@ if c.enable_docs:
 
 # region api
 
-sites = ImgAPIInit()
-
 
 class GetUrlFailedResponseModel(BaseModel):
     success: bool = False
@@ -129,33 +206,15 @@ api_responses = {
     302: {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
-            'X-ImgAPI-Version': {
-                'description': ce('ImgAPI 版本', 'ImgAPI version'),
-                'schema': {'type': 'string'}
-            },
             'X-ImgAPI-Site-Id': {
                 'description': ce('图片 API 站点的 ID', 'ID of the site providing the image'),
-                'schema': {'type': 'string'}
-            },
-            'X-ImgAPI-Node': {
-                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
                 'schema': {'type': 'string'}
             }
         }
     },
     503: {
         'description': ce('获取跳转 URL 失败', 'Failed to get redirect url'),
-        'model': GetUrlFailedResponseModel,
-        'headers': {
-            'X-ImgAPI-Version': {
-                'description': ce('ImgAPI 版本', 'ImgAPI version'),
-                'schema': {'type': 'string'}
-            },
-            'X-ImgAPI-Node': {
-                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
-                'schema': {'type': 'string'}
-            }
-        }
+        'model': GetUrlFailedResponseModel
     }
 }
 
@@ -164,20 +223,12 @@ api_responses_auto = {
     302: {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
-            'X-ImgAPI-Version': {
-                'description': ce('ImgAPI 版本', 'ImgAPI version'),
-                'schema': {'type': 'string'}
-            },
             'X-ImgAPI-Site-Id': {
                 'description': ce('图片 API 站点的 ID', 'ID of the site providing the image'),
                 'schema': {'type': 'string'}
             },
             'X-ImgAPI-UA-Result': {
                 'description': ce('User-Agent 判断结果 (horizontal, vertical 或 unknown)', 'User-Agents parse results (horizontal, vertical or unknown)'),
-                'schema': {'type': 'string'}
-            },
-            'X-ImgAPI-Node': {
-                'description': ce('ImgAPI 节点 IP', 'ImgAPI Node ID'),
                 'schema': {'type': 'string'}
             }
         }
@@ -195,23 +246,14 @@ api_responses_auto = {
 )
 def image(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
-    if ua_str:
-        ua = parse_ua(ua_str)
-        if ua.is_mobile:
-            # Mobile -> Vertical
-            resp = image_vertical(req)
-            result = 'vertical'
-        elif ua.is_pc or ua.is_tablet:
-            # PC / Tablet -> Horizontal
+    result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
+    match result:
+        case 'horizontal':
             resp = image_horizontal(req)
-            result = 'horizontal'
-        else:
-            # Unknown -> Auto
+        case 'vertical':
+            resp = image_vertical(req)
+        case 'unknown' | _:
             resp = image_auto(req)
-            result = 'unknown'
-    else:
-        resp = image_auto(req)
-        result = 'unknown'
     resp.headers['X-ImgAPI-UA-Result'] = result
     return resp
 
@@ -226,8 +268,6 @@ def image_auto(req: Request):
                 url,
                 status_code=302,
                 headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': c.node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
@@ -235,11 +275,7 @@ def image_auto(req: Request):
             site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
-        status_code=503,
-        headers={
-            'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': c.node
-        }
+        status_code=503
     )
 
 
@@ -261,20 +297,14 @@ def image_horizontal(req: Request):
                 url,
                 status_code=302,
                 headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Site-Id': site.id,
-                    'X-ImgAPI-Node': c.node
+                    'X-ImgAPI-Site-Id': site.id
                 }
             )
         else:
             site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
-        status_code=503,
-        headers={
-            'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': c.node
-        }
+        status_code=503
     )
 
 
@@ -296,8 +326,6 @@ def image_vertical(req: Request):
                 url,
                 status_code=302,
                 headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': c.node,
                     'X-ImgAPI-Site-Id': site.id
                 }
             )
@@ -305,11 +333,61 @@ def image_vertical(req: Request):
             site_list.remove(site)
     return Response(
         GetUrlFailedResponseModel(),
-        status_code=503,
-        headers={
-            'X-ImgAPI-Version': VERSION,
-            'X-ImgAPI-Node': c.node
-        }
+        status_code=503
+    )
+
+
+class UATestResponse(BaseModel):
+    user_agent: str | None
+    parsed: u.UAResult | None
+    parse_error: str | None = None
+    result: t.Literal['vertical', 'horizontal', 'unknown']
+
+
+@app.get(
+    '/ua',
+    description=ce('测试 User-Agent 判断结果', 'Test User-Agent Process Result')
+)
+def ua_test(req: Request) -> UATestResponse:
+    ua_str: str | None = req.headers.get('User-Agent', None)
+    result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
+    error = None
+    if ua_str:
+        ua = u.parse_ua(ua_str)
+        try:
+            ua_parsed = u.UAResult(
+                browser=u._UAResult_Browser(
+                    family=ua.browser.family if ua.browser else None,
+                    version=ua.browser.version if ua.browser else None,
+                    version_string=ua.browser.version_string if ua.browser else None
+                ),
+                os=u._UAResult_OS(
+                    family=ua.os.family if ua.os else None,
+                    version=ua.os.version if ua.os else None,
+                    version_string=ua.os.version_string if ua.os else None
+                ),
+                device=u._UAResult_Device(
+                    family=ua.device.family if ua.device else None,
+                    brand=ua.device.brand if ua.device else None,
+                    model=ua.device.model if ua.device else None
+                ),
+                is_bot=ua.is_bot,
+                is_email_client=ua.is_email_client,
+                is_mobile=ua.is_mobile,
+                is_pc=ua.is_pc,
+                is_tablet=ua.is_tablet,
+                is_touch_capable=ua.is_touch_capable
+            )
+        except ValidationError as e:
+            ua_parsed = None
+            error = str(e)
+    else:
+        ua_parsed = None
+    return UATestResponse(
+        user_agent=ua_str,
+        parsed=ua_parsed,
+        parse_error=error,
+        result=result
     )
 
 # endregion api
@@ -320,20 +398,18 @@ def image_vertical(req: Request):
 @app.get('/{path:path}', include_in_schema=False)
 async def fallback(path: str, req: Request):
     match path:
-        case '/img' | '/img/s' | '/image/s':
+        case 'img' | 'img/s' | 'image/s':
             return image(req)
-        case '/img/h':
+        case 'img/h':
             return image_horizontal(req)
-        case '/img/v':
+        case 'img/v':
             return image_vertical(req)
+        case 'about':
+            return ua_test(req)
         case _:
             return Response(
                 'Not Found',
-                404,
-                headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': c.node
-                }
+                404
             )
 
 # endregion fallback
@@ -370,4 +446,7 @@ else:
 # endregion root
 
 if __name__ == '__main__':
+    l.info(f'Starting server: {f"[{c.host}]" if ":" in c.host else c.host}:{c.port} with {c.workers} workers')
     run('main:app', host=c.host, port=c.port, workers=c.workers)
+    print()
+    l.info('Bye.')
