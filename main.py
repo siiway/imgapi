@@ -4,9 +4,12 @@ from sys import stderr
 import typing as t
 from uuid import uuid4 as uuid
 from contextvars import ContextVar
+from mimetypes import guess_type
+from pathlib import Path
+from os.path import join as join_path
 
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html, get_swagger_ui_oauth2_redirect_html
 from pydantic import BaseModel, ValidationError
 from loguru import logger as l
@@ -32,7 +35,7 @@ if new_init:
 
     # 定义日志格式，包含 reqid
     def log_format(record):
-        reqid = record["extra"].get("reqid", 'fallback-logid')  # type: ignore - 从 extra 或 ContextVar 获取 reqid
+        reqid = record['extra'].get('reqid', 'fallback-logid')  # type: ignore - 从 extra 或 ContextVar 获取 reqid
         return '<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <yellow>' + reqid + '</yellow> | <cyan>{name}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>\n'
 
     l.add(
@@ -53,7 +56,7 @@ if new_init:
             retention=c.log.retention,
             enqueue=True
         )
-    l.configure(extra={'reqid': 'not-in-request'})  # 默认 reqid 为 not-in-request
+    l.configure(extra={'reqid': 'not-in-request'})
 
 
 class InterceptHandler(logging.Handler):
@@ -101,7 +104,13 @@ async def log_requests(request: Request, call_next):
     request_id = str(uuid())
     token = reqid.set(request_id)
     with l.contextualize(reqid=request_id):
-        l.info(f'Incoming request: {request.method} {request.url.path}')
+        if request.client:
+            ip = f'[{request.client.host}]' if ':' in request.client.host else request.client.host
+            port = request.client.port
+        else:
+            ip = 'unknown-ip'
+            port = 0
+        l.info(f'Incoming request: {ip}:{port} - {request.method} {request.url.path}')
         try:
             p = u.perf_counter()
             resp: Response = await call_next(request)
@@ -109,7 +118,7 @@ async def log_requests(request: Request, call_next):
             return resp
         except Exception as e:
             l.error(f'Server error: {e} ({p()}ms)')
-            resp = Response('Internal Server Error', 500)
+            resp = Response(f'Internal Server Error ({request_id}@{c.node})', 500)
         finally:
             resp.headers['X-ImgAPI-Version'] = VERSION
             resp.headers['X-ImgAPI-Node'] = c.node
@@ -247,6 +256,7 @@ api_responses_auto = {
 def image(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
     result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
+    l.debug(f'User-Agent: {ua_str}, result: {result}')
     match result:
         case 'horizontal':
             resp = image_horizontal(req)
@@ -263,6 +273,7 @@ def image_auto(req: Request):
     while site_list.count != 0:
         site = choice(site_list)
         url = site.auto(req)
+        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
         if url:
             return RedirectResponse(
                 url,
@@ -292,6 +303,7 @@ def image_horizontal(req: Request):
     while site_list.count != 0:
         site = choice(site_list)
         url = site.horizontal(req)
+        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
         if url:
             return RedirectResponse(
                 url,
@@ -321,6 +333,7 @@ def image_vertical(req: Request):
     while site_list.count != 0:
         site = choice(site_list)
         url = site.vertical(req)
+        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
         if url:
             return RedirectResponse(
                 url,
@@ -350,6 +363,7 @@ class UATestResponse(BaseModel):
 )
 def ua_test(req: Request) -> UATestResponse:
     ua_str: str | None = req.headers.get('User-Agent', None)
+    l.debug(f'User-Agent: {ua_str}, exists: {bool(ua_str)}')
     result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
     error = None
     if ua_str:
@@ -380,6 +394,7 @@ def ua_test(req: Request) -> UATestResponse:
             )
         except ValidationError as e:
             ua_parsed = None
+            l.warning(f'Parse error: {e}')
             error = str(e)
     else:
         ua_parsed = None
@@ -397,6 +412,24 @@ def ua_test(req: Request) -> UATestResponse:
 
 @app.get('/{path:path}', include_in_schema=False)
 async def fallback(path: str, req: Request):
+    if path:
+        file_path = u.get_path(join_path('public', path))
+        file = Path(file_path)
+        if file.is_file():
+            mime_type, _ = guess_type(file)
+            l.info(f'Serving static file: {file_path}')
+            return FileResponse(
+                path=file_path,
+                headers={
+                    'X-ImgAPI-Version': VERSION,
+                    'X-ImgAPI-Node': c.node,
+                    'X-ImgAPI-Request-Id': reqid.get()
+                },
+                media_type=mime_type or 'application/octet-stream'
+            )
+        else:
+            l.debug(f'Static file not found: {file_path}')
+
     match path:
         case 'img' | 'img/s' | 'image/s':
             return image(req)
@@ -407,9 +440,15 @@ async def fallback(path: str, req: Request):
         case 'about':
             return ua_test(req)
         case _:
+            l.debug(f'Path not found: {path}')
             return Response(
                 'Not Found',
-                404
+                status_code=404,
+                headers={
+                    'X-ImgAPI-Version': VERSION,
+                    'X-ImgAPI-Node': c.node,
+                    'X-ImgAPI-Request-Id': reqid.get()
+                }
             )
 
 # endregion fallback
@@ -425,6 +464,8 @@ class RootResponseModel(BaseModel):
 
 
 if c.root_redirect:
+    l.debug('Root redirect -> True')
+
     @app.get(
         '/',
         status_code=302,
@@ -434,6 +475,8 @@ if c.root_redirect:
     def root_redirect():
         return RedirectResponse(c.root_redirect or '', status_code=302)
 else:
+    l.debug('Root redirect -> False')
+
     @app.get(
         '/',
         status_code=200,
