@@ -204,7 +204,7 @@ if c.enable_docs:
     async def redoc_html():
         return get_redoc_html(
             openapi_url=app.openapi_url,  # type: ignore
-            title=app.title + ' - ReDoc',
+            title=f'{app.title} - ReDoc',
             redoc_js_url='https://unpkg.com/redoc@2/bundles/redoc.standalone.js',
             redoc_favicon_url='/favicon.ico'
         )
@@ -278,10 +278,10 @@ def image(req: Request):
 
 def image_auto(req: Request):
     site_list = list(sites.allow_a)
-    while site_list.count != 0:
+    while len(site_list) != 0:
         site = choice(site_list)
         url = site.auto(req)
-        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
+        l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
                 url,
@@ -302,9 +302,9 @@ def image_auto(req: Request):
             }
         )
     else:
-        l.debug(f'No fallback, return failed')
+        l.debug('No fallback, return failed')
         return Response(
-            GetUrlFailedResponseModel(),
+            GetUrlFailedResponseModel().model_dump_json(),
             status_code=503
         )
 
@@ -322,7 +322,7 @@ def image_horizontal(req: Request):
     while len(site_list) != 0:
         site = choice(site_list)
         url = site.horizontal(req)
-        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
+        l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
                 url,
@@ -343,9 +343,9 @@ def image_horizontal(req: Request):
             }
         )
     else:
-        l.debug(f'No fallback, return failed')
+        l.debug('No fallback, return failed')
         return Response(
-            GetUrlFailedResponseModel(),
+            GetUrlFailedResponseModel().model_dump_json(),
             status_code=503
         )
 
@@ -363,7 +363,7 @@ def image_vertical(req: Request):
     while site_list.count != 0:
         site = choice(site_list)
         url = site.vertical(req)
-        l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
+        l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
                 url,
@@ -384,9 +384,9 @@ def image_vertical(req: Request):
             }
         )
     else:
-        l.debug(f'No fallback, return failed')
+        l.debug('No fallback, return failed')
         return Response(
-            GetUrlFailedResponseModel(),
+            GetUrlFailedResponseModel().model_dump_json(),
             status_code=503
         )
 
