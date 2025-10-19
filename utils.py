@@ -57,7 +57,9 @@ def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
 
 
 def replace_code_tags(text: str) -> str:
-    '''\`\` -> &lt;code&gt;&lt;/code&gt;'''  # type: ignore
+    '''
+    markdown -> html
+    '''
     while "`" in text:
         text = text.replace("`", "<code>", 1).replace("`", "</code>", 1)
     return text

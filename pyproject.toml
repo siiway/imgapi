@@ -10,4 +10,5 @@ dependencies = [
 ]
 description = "A simple random background image API based on FastAPI and redirect"
 name = "imgapi"
+requires-python = ">3.13"
 version = "1.0.0"
