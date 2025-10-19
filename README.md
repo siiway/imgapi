@@ -1,10 +1,21 @@
-# imgapi
+# ImgAPI
 
-一个集合全网图片 api 的 api *~~(实际上就是随机选择一个跳转)~~*
+一个集合了全网背景图片 API 的随机跳转 API
 
 按原则来说，本站 API:
-- **不提供 R18 类图片**
+- **不提供 R18 图片**
 - **不提供动图**
+
+## TODOs
+
+- [x] sites 迁移
+- [x] 补全配置文档
+- [x] 设置节点名称
+- [x] 上个版本的 api 兼容
+- [x] UA 测试页面
+- [x] public 文件夹
+- [x] fallback 设置
+- [ ] *预加载图片地址* - pr welcome
 
 ## 整理
 
@@ -14,71 +25,106 @@
 
 ## API
 
-公共服务: [imgapi.siiway.top](https://imgapi.siiway.top/about)
+公共服务: `imgapi.siiway.top`
 
-> 建议自行部署，只需有 Python3 环境即可
+> 建议自行部署，只需有 Python3 环境 (建议 uv) 即可
 
-| 接口       | 信息          |
-| ---------- | ------------- |
-| `/`        | 跳转到本 repo |
-| `/image`   | 自动          |
-| `/img`     | -             |
-| `/image/s` | 自适应图片    |
-| `/img/s`   | -             |
-| `/image/h` | 横向图片      |
-| `/img/h`   | -             |
-| `/image/v` | 竖向图片      |
-| `/img/v`   | -             |
+| 接口       | 信息                               |
+| ---------- | ---------------------------------- |
+| `/`        | 跳转到设置的 URL 或者返回 API 信息 |
+| `/image`   | 自动                               |
+| `/image/h` | 横向图片                           |
+| `/image/v` | 竖向图片                           |
+| `/ua`      | UA 测试结果                        |
+
+> [!TIP]
+> 更详细的 API 返回信息见: **[Swagger](https://imgapi.siiway.top/docs)** / **[Redoc](https://imgapi.siiway.top/redoc)**
 
 > [!TIP]
 > 几种图片类型的解释: <br/>
-> 1. `a`: 自动 *(Auto)*, 由本项目服务器使用 User-Agent 判断设备类型，如无法判断则降级至 `s` - **推荐使用** <br/>
-> 2. `s`: 自适应 *(Self)*, 由第三方服务自行判断设备类型 <br/>
-> 3. `h`: 横向 *(水平, Horizontal)*, 适用于电脑/平板 <br/>
-> 4. `v`: 竖向 *(垂直, Vertical)*, 适用于手机
+> 1. `/image`: 由本项目服务器使用 User-Agent 判断设备类型，如无法判断则降级至由三方 API 处理 - **推荐使用** <br/>
+> 2. `/image/h`: 横向 *(水平, Horizontal)*, 适用于电脑/平板 <br/>
+> 3. `/image/v`: 竖向 *(垂直, Vertical)*, 适用于手机
 
-### 部署
+## 部署
+
+> [!IMPORTANT]
+> 要求 Python 版本: **>= 3.10**
 
 1. Clone 本仓库
 
-```shell
+```bash
 git clone https://github.com/siiway/imgapi.git
 ```
 
 2. 安装依赖
 
-```shell
-cd imgapi
-pip install -r requirements.txt
-```
-
-> **推荐使用 uv 管理依赖:**
-
-```shell
-cd imgapi
+```bash
 uv sync
+# 如果没有 uv:
+# pip install -r requirements.txt
 ```
+
+<!-- uv export > requirements.txt -->
 
 3. (可选) 配置服务
 
-创建 `config.json`，内容如下
+创建 `config.yaml`:
 
-```jsonc
-{
-    "host": "0.0.0.0", // 监听地址，`0.0.0.0` 代表所有 (如需监听 ipv6 则改为 `::`)
-    "port": 9333, // 监听端口
-    "debug": false // (二次开发建议启用) 启用 Flask 热重载
-}
+```yaml
+# 节点名称, 用于在多节点部署 (如 CF Tunnel) 的情况下区分响应请求的节点
+node: default
+# 服务监听地址 (仅在直接启动 main.py 时有效)
+host: '0.0.0.0'
+# 服务监听端口 (仅在直接启动 main.py 时有效)
+port: 9333
+# 服务 Worker 数 (仅在直接启动 main.py 时有效)
+workers: 2
+# 是否启用 /docs (自带文档页面)
+enable_docs: true
+# 控制根目录将重定向到的 url
+# 如为 null 则返回 json {"hello": "imgapi", "version": "xxx"}
+root_redirect: /docs
+# 当所有 site 都失败时重定向到的 url
+# 如为 null 则返回 503 Service Unavailable
+fallback:
+  # 横向图片 url
+  horizontal: null
+  # 竖向图片 url
+  vertical: null
+  # 其他图片 url
+  unknown: null
+# 日志相关配置
+log:
+  # 日志等级 (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  level: INFO
+  # 日志文件保存格式 (for Loguru)
+  # 设置为 None 以禁用
+  file: 'logs/{time:YYYY-MM-DD}.log'
+  # 单独设置日志文件中的日志等级
+  # 如设置为 null 则使用 level 设置
+  file_level: DEBUG
+  # 配置 Loguru 的 rotation (轮转周期) 设置
+  rotation: 1 days
+  # 配置 Loguru 的 retention (轮转保留) 设置
+  retention: 3 days
 ```
 
 4. 启动程序
 
-```shell
-python3 main.py
-# 或者 uv run main.py (不需要激活 venv)
+直接启动 (使用配置中的 host & port & workers, **推荐**):
+
+```bash
+uv run main.py
+# or python3 main.py
 ```
 
-> 建议 Python 版本: **3.11+**
+使用 cli 启动 (另外指定 host & port):
+
+```bash
+uv run fastapi run --host 0.0.0.0 --port 9333
+# or fastapi run --host 0.0.0.0 --port 9333
+```
 
 ## 声明
 

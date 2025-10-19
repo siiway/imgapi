@@ -3,30 +3,31 @@
 '''
 98情缘API
 主站 https://www.98qy.com/sjbz/
-
+API 作者貌似离人有点远了, 三个 method 都只返回横屏图片
 '''
 
-from flask import Blueprint, redirect
-
-allow_s = True
-allow_h = True
-allow_v = True
+from imgapi import ImageAPI, Request
 
 
-site = Blueprint('98qy', __name__)
+# def auto(req: Request):
+#     return 'https://www.98qy.com/sjbz/api.php?method=zsy'
 
 
-@site.route('/image')
-@site.route('/image/s')
-def image_a():
-    return redirect('https://www.98qy.com/sjbz/api.php?method=zsy')
+# def horizontal(req: Request):
+#     return 'https://www.98qy.com/sjbz/api.php?method=pc'
 
 
-@site.route('/image/h')
-def image_h():
-    return redirect('https://www.98qy.com/sjbz/api.php?method=pc')
+# def vertical(req: Request):
+#     return 'https://www.98qy.com/sjbz/api.php?method=mobile'
+
+def horizontal(re: Request):
+    # 抓包得上面三个都重定向到这
+    return 'https://www.98qy.com/sjbz/api2.php'
 
 
-@site.route('/image/v')
-def image_v():
-    return redirect('https://www.98qy.com/sjbz/api.php?method=mobile')
+api = ImageAPI(
+    __name__,
+    # auto=auto,
+    horizontal=horizontal,
+    # vertical=vertical
+)

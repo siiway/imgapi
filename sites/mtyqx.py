@@ -1,15 +1,16 @@
 # coding:utf-8
 
 '''
-夏沫博客 API
-Home: https://cdn.seovx.com/
+墨天逸 API
+Home: https://api.mtyqx.cn/
+API: https://api.mtyqx.cn/api/random.php
 '''
 
 from imgapi import ImageAPI, Request
 
 
 def horizontal(req: Request):
-    return 'https://cdn.seovx.com/d/?mom=302'
+    return 'https://api.mtyqx.cn/api/random.php'
 
 
 api = ImageAPI(

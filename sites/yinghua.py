@@ -5,17 +5,14 @@
 doc: https://www.dmoe.cc/
 '''
 
-from flask import Blueprint, redirect
-
-allow_s = False
-allow_h = True
-allow_v = False
+from imgapi import ImageAPI, Request
 
 
-site = Blueprint('yinghua', __name__)
+def horizontal(req: Request):
+    return 'https://www.dmoe.cc/random.php'
 
 
-@site.route('/image')
-@site.route('/image/h')
-def image_h():
-    return redirect('https://www.dmoe.cc/random.php')
+api= ImageAPI(
+    __name__,
+    horizontal=horizontal
+)

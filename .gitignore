@@ -1,2 +1,8 @@
+# Cache
 __pycache__/
-config.json
+
+# Config
+config.yaml
+
+# Log
+*.log

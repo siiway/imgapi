@@ -5,22 +5,19 @@
 doc: https://api.horosama.com/
 '''
 
-from flask import Blueprint, redirect
-
-allow_s = False
-allow_h = True
-allow_v = True
+from imgapi import ImageAPI, Request
 
 
-site = Blueprint('horosama', __name__)
+def horizontal(req: Request):
+    return 'https://api.horosama.com/random.php?type=pc'
 
 
-@site.route('/image')
-@site.route('/image/h')
-def image_h():
-    return redirect('https://api.horosama.com/random.php?type=pc')
+def vertical(req: Request):
+    return 'https://api.horosama.com/random.php?type=mobile'
 
 
-@site.route('/image/v')
-def image_v():
-    return redirect('https://api.horosama.com/random.php?type=mobile')
+api = ImageAPI(
+    __name__,
+    horizontal=horizontal,
+    vertical=vertical
+)

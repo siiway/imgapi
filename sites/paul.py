@@ -6,19 +6,18 @@ Doc: https://api.paugram.com/help/wallpaper
 API: https://api.paugram.com/wallpaper/
 '''
 
-from flask import Blueprint, redirect
+from imgapi import ImageAPI, Request
 from random import choice
 
-allow_s = False
-allow_h = True
-allow_v = False
 
-
-site = Blueprint('paul', __name__)
 src_list = ['sm', 'cp', 'sina', 'paul', 'gh', 'jsd']
 
 
-@site.route('/image')
-@site.route('/image/h')
-def image_h():
-    return redirect(f'https://api.paugram.com/wallpaper/?source={choice(src_list)}')
+def horizontal(req: Request):
+    return f'https://api.paugram.com/wallpaper/?type=horizontal&source={choice(src_list)}'
+
+
+api = ImageAPI(
+    __name__,
+    horizontal=horizontal
+)

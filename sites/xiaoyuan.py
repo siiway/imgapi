@@ -5,18 +5,16 @@
 powered by xiaoyuan
 '''
 
-from flask import Blueprint, redirect
-
-allow_s = True
-allow_h = True
-allow_v = False
+from imgapi import ImageAPI, Request
 
 
-site = Blueprint('xiaoyuan', __name__)
+def auto(req: Request):
+    return 'https://img.xiaoyuan151.com/neuro'
 
 
-@site.route('/image')
-@site.route('/image/h')
-@site.route('/image/s')
-def image_h():
-    return redirect('https://img.xiaoyuan151.com/neuro')
+api = ImageAPI(
+    __name__,
+    auto=auto,
+    horizontal=auto,
+    vertical=auto
+)

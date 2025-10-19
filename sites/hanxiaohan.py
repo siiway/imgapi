@@ -6,17 +6,11 @@ docs:
  - Bing: https://api.vvhan.com/article/bing.html
  - 风景: https://api.vvhan.com/article/views.html
  - 二次元: https://api.vvhan.com/article/acg.html
+Disabled (多地区超时)
 '''
 
-from flask import Blueprint, redirect
-from random import choice
+from imgapi import ImageAPI, Request
 
-allow_s = False
-allow_h = True
-allow_v = False
-
-
-site = Blueprint('hanxiaohan', __name__)
 
 apis = [
     'https://api.vvhan.com/api/bing',
@@ -25,7 +19,12 @@ apis = [
 ]
 
 
-@site.route('/image')
-@site.route('/image/h')
-def image_h():
-    return redirect(choice(apis))
+def horizontal(req: Request):
+    from random import choice
+    return choice(apis)
+
+
+# api = ImageAPI(
+#     __name__,
+#     horizontal=horizontal
+# )

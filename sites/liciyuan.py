@@ -7,15 +7,9 @@ Home: https://t.alcy.cc/
 Blog: https://www.alcy.cc/archives/sui-ji-er-ci-yuan-tu-pian-api
 '''
 
-from flask import Blueprint, redirect
+from imgapi import ImageAPI, Request
 from random import choice
 
-allow_s = True
-allow_h = True
-allow_v = True
-
-
-site = Blueprint('liciyuan', __name__)
 
 catgs_a = ['ycy', 'moez', 'ai', 'ysz']
 catgs_h = ['pc', 'moe', 'fj', 'bd', 'ys']
@@ -23,20 +17,24 @@ catgs_v = ['mp', 'moemp', 'ysmp', 'aimp']
 # `acg` 为动图 / `tx` 为头像方图，故不添加
 
 
-@site.route('/image')
-@site.route('/image/s')
-def image_a():
+def auto(req: Request):
     catg = choice(catgs_a)
-    return redirect(f'https://t.alcy.cc/{catg}')
+    return f'https://t.alcy.cc/{catg}/'
 
 
-@site.route('/image/h')
-def image_h():
+def horizontal(req: Request):
     catg = choice(catgs_h)
-    return redirect(f'https://t.alcy.cc/{catg}')
+    return f'https://t.alcy.cc/{catg}/'
 
 
-@site.route('/image/v')
-def image_v():
+def vertical(req: Request):
     catg = choice(catgs_v)
-    return redirect(f'https://t.alcy.cc/{catg}')
+    return f'https://t.alcy.cc/{catg}/'
+
+
+api = ImageAPI(
+    __name__,
+    auto=auto,
+    horizontal=horizontal,
+    vertical=vertical
+)
