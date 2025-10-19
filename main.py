@@ -191,8 +191,8 @@ if c.enable_docs:
             openapi_url=app.openapi_url or '/openapi.json',
             title=app.title,
             oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
-            swagger_js_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui-bundle.js',
-            swagger_css_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui.css',
+            swagger_js_url='https://s4.zstatic.net/ajax/libs/swagger-ui/5.27.1/swagger-ui-bundle.js',
+            swagger_css_url='https://s4.zstatic.net/ajax/libs/swagger-ui/5.27.1/swagger-ui.css',
             swagger_favicon_url='/favicon.ico'
         )
 
@@ -205,7 +205,7 @@ if c.enable_docs:
         return get_redoc_html(
             openapi_url=app.openapi_url,  # type: ignore
             title=f'{app.title} - ReDoc',
-            redoc_js_url='https://unpkg.com/redoc@2/bundles/redoc.standalone.js',
+            redoc_js_url='https://cdn.jsdmirror.com/npm/redoc@2/bundles/redoc.standalone.js',
             redoc_favicon_url='/favicon.ico'
         )
 
