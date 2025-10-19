@@ -55,9 +55,9 @@ class ImgAPIWrapped(ImageAPI):
 
 
 class ImgAPIInit:
-    allow_h: list[ImgAPIWrapped] = []
-    allow_v: list[ImgAPIWrapped] = []
-    allow_a: list[ImgAPIWrapped] = []
+    allow_h: set[ImgAPIWrapped] = set()
+    allow_v: set[ImgAPIWrapped] = set()
+    allow_a: set[ImgAPIWrapped] = set()
 
     def __init__(self):
         p_all = u.perf_counter()
@@ -73,11 +73,11 @@ class ImgAPIInit:
                     if isinstance(obj, ImageAPI):
                         obj.init() if obj.init else None
                         if obj.horizontal:
-                            self.allow_h.append(obj)  # type: ignore
+                            self.allow_h.add(obj)  # type: ignore
                         if obj.vertical:
-                            self.allow_v.append(obj)  # type: ignore
+                            self.allow_v.add(obj)  # type: ignore
                         if obj.auto:
-                            self.allow_a.append(obj)  # type: ignore
+                            self.allow_a.add(obj)  # type: ignore
                         l.debug(f'Init site {name} from sites/{n} took {p()}ms')
                         sites += 1
         l.info(f'Init {sites} sites finished in {p_all()}ms.')

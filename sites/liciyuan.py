@@ -19,12 +19,22 @@ catgs_v = ['mp', 'moemp', 'ysmp', 'aimp']
 
 def auto(req: Request):
     catg = choice(catgs_a)
-    return f'https://t.alcy.cc/{catg}'
+    return f'https://t.alcy.cc/{catg}/'
+
+
+def horizontal(req: Request):
+    catg = choice(catgs_h)
+    return f'https://t.alcy.cc/{catg}/'
+
+
+def vertical(req: Request):
+    catg = choice(catgs_v)
+    return f'https://t.alcy.cc/{catg}/'
 
 
 api = ImageAPI(
     __name__,
     auto=auto,
-    horizontal=auto,
-    vertical=auto
+    horizontal=horizontal,
+    vertical=vertical
 )

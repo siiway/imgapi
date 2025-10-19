@@ -6,6 +6,7 @@ docs:
  - Bing: https://api.vvhan.com/article/bing.html
  - 风景: https://api.vvhan.com/article/views.html
  - 二次元: https://api.vvhan.com/article/acg.html
+Disabled (多地区超时)
 '''
 
 from imgapi import ImageAPI, Request
@@ -23,7 +24,7 @@ def horizontal(req: Request):
     return choice(apis)
 
 
-api= ImageAPI(
-    __name__,
-    horizontal=horizontal
-)
+# api = ImageAPI(
+#     __name__,
+#     horizontal=horizontal
+# )

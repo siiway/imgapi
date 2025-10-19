@@ -7,6 +7,7 @@ from contextvars import ContextVar
 from mimetypes import guess_type
 from pathlib import Path
 from os.path import join as join_path
+from traceback import format_exc
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse, FileResponse
@@ -35,7 +36,7 @@ if new_init:
 
     # 定义日志格式，包含 reqid
     def log_format(record):
-        reqid = record['extra'].get('reqid', 'fallback-logid')  # type: ignore - 从 extra 或 ContextVar 获取 reqid
+        reqid = record['extra'].get('reqid', 'fallback-logid')
         return '<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level}</level> | <yellow>' + reqid + '</yellow> | <cyan>{name}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>\n'
 
     l.add(
@@ -48,8 +49,8 @@ if new_init:
 
     if c.log.file:
         l.add(
-            'logs/{time:YYYY-MM-DD}.log',
-            level=c.log.level,
+            c.log.file,
+            level=c.log.file_level or c.log.level,
             format=log_format,
             colorize=False,
             rotation=c.log.rotation,
@@ -90,6 +91,11 @@ if new_init:
 
     sites = ImgAPIInit()
 
+try:
+    sites  # type: ignore
+except:
+    sites = ImgAPIInit()
+
 app = FastAPI(
     title=f'ImgAPI - {c.node}',
     description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi | MIT License',
@@ -117,7 +123,7 @@ async def log_requests(request: Request, call_next):
             l.info(f'Outgoing response: {resp.status_code} ({p()}ms)')
             return resp
         except Exception as e:
-            l.error(f'Server error: {e} ({p()}ms)')
+            l.error(f'Server error: {e} ({p()}ms)\n{format_exc()}')
             resp = Response(f'Internal Server Error ({request_id}@{c.node})', 500)
         finally:
             resp.headers['X-ImgAPI-Version'] = VERSION
@@ -187,6 +193,7 @@ if c.enable_docs:
             oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
             swagger_js_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui-bundle.js',
             swagger_css_url='https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.1/swagger-ui.css',
+            swagger_favicon_url='/favicon.ico'
         )
 
     @app.get(app.swagger_ui_oauth2_redirect_url, include_in_schema=False)  # type: ignore
@@ -199,6 +206,7 @@ if c.enable_docs:
             openapi_url=app.openapi_url,  # type: ignore
             title=app.title + ' - ReDoc',
             redoc_js_url='https://unpkg.com/redoc@2/bundles/redoc.standalone.js',
+            redoc_favicon_url='/favicon.ico'
         )
 
 # endregion custom-docs
@@ -216,7 +224,7 @@ api_responses = {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
             'X-ImgAPI-Site-Id': {
-                'description': ce('图片 API 站点的 ID', 'ID of the site providing the image'),
+                'description': ce('图片 API 站点的 ID\n如为配置的回退 URL 则为 `<code>`fallback`</code>`', 'ID of the site providing the image\nMay be `<code>`fallback`</code>` if is configured fallback URL'),
                 'schema': {'type': 'string'}
             }
         }
@@ -233,11 +241,11 @@ api_responses_auto = {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
             'X-ImgAPI-Site-Id': {
-                'description': ce('图片 API 站点的 ID', 'ID of the site providing the image'),
+                'description': ce('图片 API 站点的 ID\n如为配置的回退 URL 则为 `fallback`', 'ID of the site providing the image\nMay be `fallback` if is configured fallback URL'),
                 'schema': {'type': 'string'}
             },
             'X-ImgAPI-UA-Result': {
-                'description': ce('User-Agent 判断结果 (horizontal, vertical 或 unknown)', 'User-Agents parse results (horizontal, vertical or unknown)'),
+                'description': ce('User-Agent 判断结果 (`horizontal`, `vertical` 或 `unknown`)', 'User-Agents parse results (`horizontal`, `vertical` or `unknown`)'),
                 'schema': {'type': 'string'}
             }
         }
@@ -269,7 +277,7 @@ def image(req: Request):
 
 
 def image_auto(req: Request):
-    site_list = sites.allow_a.copy()
+    site_list = list(sites.allow_a)
     while site_list.count != 0:
         site = choice(site_list)
         url = site.auto(req)
@@ -284,10 +292,21 @@ def image_auto(req: Request):
             )
         else:
             site_list.remove(site)
-    return Response(
-        GetUrlFailedResponseModel(),
-        status_code=503
-    )
+    if c.fallback.unknown:
+        l.warning(f'Fallback: {c.fallback.unknown}')
+        return RedirectResponse(
+            c.fallback.unknown,
+            status_code=302,
+            headers={
+                'X-ImgAPI-Site-Id': 'fallback'
+            }
+        )
+    else:
+        l.debug(f'No fallback, return failed')
+        return Response(
+            GetUrlFailedResponseModel(),
+            status_code=503
+        )
 
 
 @app.get(
@@ -299,8 +318,8 @@ def image_auto(req: Request):
     responses=api_responses  # type: ignore
 )
 def image_horizontal(req: Request):
-    site_list = sites.allow_h.copy()
-    while site_list.count != 0:
+    site_list = list(sites.allow_h)
+    while len(site_list) != 0:
         site = choice(site_list)
         url = site.horizontal(req)
         l.debug(f'Try site {site.id} -> {url}, vaild: {True if url else False}')
@@ -314,10 +333,21 @@ def image_horizontal(req: Request):
             )
         else:
             site_list.remove(site)
-    return Response(
-        GetUrlFailedResponseModel(),
-        status_code=503
-    )
+    if c.fallback.horizontal:
+        l.warning(f'Fallback: {c.fallback.horizontal}')
+        return RedirectResponse(
+            c.fallback.horizontal,
+            status_code=302,
+            headers={
+                'X-ImgAPI-Site-Id': 'fallback'
+            }
+        )
+    else:
+        l.debug(f'No fallback, return failed')
+        return Response(
+            GetUrlFailedResponseModel(),
+            status_code=503
+        )
 
 
 @app.get(
@@ -329,7 +359,7 @@ def image_horizontal(req: Request):
     responses=api_responses  # type: ignore
 )
 def image_vertical(req: Request):
-    site_list = sites.allow_v.copy()
+    site_list = list(sites.allow_v)
     while site_list.count != 0:
         site = choice(site_list)
         url = site.vertical(req)
@@ -344,10 +374,21 @@ def image_vertical(req: Request):
             )
         else:
             site_list.remove(site)
-    return Response(
-        GetUrlFailedResponseModel(),
-        status_code=503
-    )
+    if c.fallback.vertical:
+        l.warning(f'Fallback: {c.fallback.vertical}')
+        return RedirectResponse(
+            c.fallback.vertical,
+            status_code=302,
+            headers={
+                'X-ImgAPI-Site-Id': 'fallback'
+            }
+        )
+    else:
+        l.debug(f'No fallback, return failed')
+        return Response(
+            GetUrlFailedResponseModel(),
+            status_code=503
+        )
 
 
 class UATestResponse(BaseModel):
@@ -359,12 +400,13 @@ class UATestResponse(BaseModel):
 
 @app.get(
     '/ua',
+    response_model=UATestResponse,
     description=ce('测试 User-Agent 判断结果', 'Test User-Agent Process Result')
 )
-def ua_test(req: Request) -> UATestResponse:
+def ua_test(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
-    l.debug(f'User-Agent: {ua_str}, exists: {bool(ua_str)}')
     result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
+    l.debug(f'User-Agent: {ua_str}, result: {result}')
     error = None
     if ua_str:
         ua = u.parse_ua(ua_str)
@@ -410,7 +452,10 @@ def ua_test(req: Request) -> UATestResponse:
 # region fallback
 
 
-@app.get('/{path:path}', include_in_schema=False)
+@app.get(
+    '/{path:path}',
+    include_in_schema=False
+)
 async def fallback(path: str, req: Request):
     if path:
         file_path = u.get_path(join_path('public', path))
@@ -431,14 +476,18 @@ async def fallback(path: str, req: Request):
             l.debug(f'Static file not found: {file_path}')
 
     match path:
-        case 'img' | 'img/s' | 'image/s':
+        case 'img' | 'img/s' | 'image/s' | 'img/a' | 'image/a' | 'img/' | 'img/s/' | 'image/s/' | 'img/a/' | 'image/a/':
             return image(req)
-        case 'img/h':
+        case 'image/h/' | 'img/h' | 'img/h/':
             return image_horizontal(req)
-        case 'img/v':
+        case 'image/v/' | 'img/v' | 'img/v/':
             return image_vertical(req)
-        case 'about':
+        case 'about' | 'about/':
             return ua_test(req)
+        case 'favicon.ico':
+            return await fallback('favicon.png', req)
+        case 'favicon.png':
+            return await fallback('favicon.jpg', req)
         case _:
             l.debug(f'Path not found: {path}')
             return Response(
@@ -469,7 +518,7 @@ if c.root_redirect:
     @app.get(
         '/',
         status_code=302,
-        description=ce(f'重定向到 {c.root_redirect}', f'Redirect to {c.root_redirect}'),
+        description=ce(f'重定向到 `{c.root_redirect}`', f'Redirect to `{c.root_redirect}`'),
         response_class=RedirectResponse
     )
     def root_redirect():

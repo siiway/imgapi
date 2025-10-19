@@ -21,10 +21,20 @@ class _LoggingConfigModel(BaseModel):
     - CRITICAL
     '''
 
-    file: bool = True
+    file: str | None = 'logs/{time:YYYY-MM-DD}.log'
     '''
-    是否保存日志文件
-    - 存储在 logs/YYYY-MM-DD.log
+    日志文件保存格式 (for Loguru)
+    - 设置为 None 以禁用
+    '''
+
+    file_level: t.Literal['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'] | None = 'INFO'
+    '''
+    单独设置日志文件中的日志等级, 如设置为 None 则使用 level 设置
+    - DEBUG
+    - INFO
+    - WARNING
+    - ERROR
+    - CRITICAL
     '''
 
     rotation: str | int = '1 days'
@@ -37,9 +47,31 @@ class _LoggingConfigModel(BaseModel):
     配置 Loguru 的 retention (轮转保留) 设置
     '''
 
+class _FallbackConfigModel(BaseModel):
+    horizontal: str | None = None
+    '''
+    横向图片 url
+    '''
+    vertical: str | None = None
+    '''
+    竖向图片 url
+    '''
+    unknown: str | None = None
+    '''
+    其他图片 url
+    '''
 
 class ConfigModel(BaseModel):
     log: _LoggingConfigModel = _LoggingConfigModel()
+    '''
+    日志相关配置
+    '''
+
+    fallback: _FallbackConfigModel = _FallbackConfigModel()
+    '''
+    当所有 site 都失败时重定向到的 url
+    - 如为 None 则返回 503 Service Unavailable
+    '''
 
     node: str = 'default'
     '''
@@ -71,13 +103,6 @@ class ConfigModel(BaseModel):
     控制根目录将重定向到的 url
     - 如为 None 则返回 json {"hello": "imgapi", "version": "xxx"}
     '''
-
-    fallback_url: str | None = None
-    '''
-    当所有 site 都失败时重定向到的 url
-    - 如为 None 则返回 503 Service Unavailable
-    '''
-
 
 try:
     with open(get_path('config.yaml'), 'r', encoding='utf-8') as f:

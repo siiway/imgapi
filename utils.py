@@ -56,8 +56,15 @@ def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
     return full_path
 
 
+def replace_code_tags(text: str) -> str:
+    '''\`\` -> &lt;code&gt;&lt;/code&gt;'''  # type: ignore
+    while "`" in text:
+        text = text.replace("`", "<code>", 1).replace("`", "</code>", 1)
+    return text
+
+
 def cnen(cn: str, en: str):
-    return f'{cn}<br/><i>{en}</i>'
+    return f'{replace_code_tags(cn)}<br/><i>{replace_code_tags(en)}</i>'
 
 
 def ua(ua_str: str) -> t.Literal['vertical', 'horizontal', 'unknown']:

@@ -6,13 +6,15 @@
 - **不提供 R18 图片**
 - **不提供动图**
 
-## TODO
+## TODOs
 
 - [x] sites 迁移
 - [x] 补全配置文档
 - [x] 设置节点名称
 - [x] 上个版本的 api 兼容
 - [x] UA 测试页面
+- [x] public 文件夹
+- [x] fallback 设置
 - [ ] *预加载图片地址* - pr welcome
 
 ## 整理
@@ -36,6 +38,9 @@
 | `/ua`      | UA 测试结果                        |
 
 > [!TIP]
+> 更详细的 API 返回信息见: **[Swagger](https://imgapi.siiway.top/docs)** / **[Redoc](https://imgapi.siiway.top/redoc)**
+
+> [!TIP]
 > 几种图片类型的解释: <br/>
 > 1. `/image`: 由本项目服务器使用 User-Agent 判断设备类型，如无法判断则降级至由三方 API 处理 - **推荐使用** <br/>
 > 2. `/image/h`: 横向 *(水平, Horizontal)*, 适用于电脑/平板 <br/>
@@ -44,7 +49,7 @@
 ## 部署
 
 > [!IMPORTANT]
-> 最低要求 Python 版本: **>= 3.10**
+> 要求 Python 版本: **>= 3.10**
 
 1. Clone 本仓库
 
@@ -82,13 +87,23 @@ enable_docs: true
 root_redirect: /docs
 # 当所有 site 都失败时重定向到的 url
 # 如为 null 则返回 503 Service Unavailable
-fallback_url: null
+fallback:
+  # 横向图片 url
+  horizontal: null
+  # 竖向图片 url
+  vertical: null
+  # 其他图片 url
+  unknown: null
+# 日志相关配置
 log:
   # 日志等级 (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   level: INFO
-  # 是否保存日志文件
-  # 存储在 logs/YYYY-MM-DD.log
-  file: true
+  # 日志文件保存格式 (for Loguru)
+  # 设置为 None 以禁用
+  file: 'logs/{time:YYYY-MM-DD}.log'
+  # 单独设置日志文件中的日志等级
+  # 如设置为 null 则使用 level 设置
+  file_level: DEBUG
   # 配置 Loguru 的 rotation (轮转周期) 设置
   rotation: 1 days
   # 配置 Loguru 的 retention (轮转保留) 设置
