@@ -449,6 +449,41 @@ def ua_test(req: Request):
 
 # endregion api
 
+# region root
+
+
+class RootResponseModel(BaseModel):
+    hello: str = 'imgapi'
+    version: str = VERSION
+    node: str = c.node
+    repo: str = 'https://github.com/siiway/imgapi'
+
+
+if c.root_redirect:
+    l.debug('Root redirect -> True')
+
+    @app.get(
+        '/',
+        status_code=302,
+        description=ce(f'重定向到 `{c.root_redirect}`', f'Redirect to `{c.root_redirect}`'),
+        response_class=RedirectResponse
+    )
+    def root_redirect():
+        return RedirectResponse(c.root_redirect or '', status_code=302)
+else:
+    l.debug('Root redirect -> False')
+
+    @app.get(
+        '/',
+        status_code=200,
+        description=ce('返回 ImgAPI 版本号和信息', 'Return ImgAPI Version and information'),
+        response_model=RootResponseModel,
+    )
+    def root():
+        return RootResponseModel()
+
+# endregion root
+
 # region fallback
 
 
@@ -501,41 +536,6 @@ async def fallback(path: str, req: Request):
             )
 
 # endregion fallback
-
-# region root
-
-
-class RootResponseModel(BaseModel):
-    hello: str = 'imgapi'
-    version: str = VERSION
-    node: str = c.node
-    repo: str = 'https://github.com/siiway/imgapi'
-
-
-if c.root_redirect:
-    l.debug('Root redirect -> True')
-
-    @app.get(
-        '/',
-        status_code=302,
-        description=ce(f'重定向到 `{c.root_redirect}`', f'Redirect to `{c.root_redirect}`'),
-        response_class=RedirectResponse
-    )
-    def root_redirect():
-        return RedirectResponse(c.root_redirect or '', status_code=302)
-else:
-    l.debug('Root redirect -> False')
-
-    @app.get(
-        '/',
-        status_code=200,
-        description=ce('返回 ImgAPI 版本号和信息', 'Return ImgAPI Version and information'),
-        response_model=RootResponseModel,
-    )
-    def root():
-        return RootResponseModel()
-
-# endregion root
 
 if __name__ == '__main__':
     l.info(f'Starting server: {f"[{c.host}]" if ":" in c.host else c.host}:{c.port} with {c.workers} workers')
