@@ -6,3 +6,6 @@ config.yaml
 
 # Log
 *.log
+
+# Local
+*.local.*

@@ -9,7 +9,7 @@ from imgapi import ImageAPI, Request
 
 
 def auto(req: Request):
-    return 'https://img.xiaoyuan151.com/neuro'
+    return 'https://img.xiaoyuan151.net/neuro'
 
 
 api = ImageAPI(
