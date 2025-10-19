@@ -65,7 +65,7 @@ class ImgAPIInit:
         sites = 0
         for n in dirlst:
             name, ext = os.path.splitext(n)
-            if ext == '.py' and name != 'example':
+            if ext == '.py' and 'example' not in name:
                 p = u.perf_counter()
                 module = importlib.import_module(f'sites.{name}')
                 for attr in dir(module):
