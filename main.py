@@ -203,7 +203,7 @@ if c.enable_docs:
     @app.get('/redoc', include_in_schema=False)
     async def redoc_html():
         return get_redoc_html(
-            openapi_url=app.openapi_url,  # type: ignore
+            openapi_url=app.openapi_url or '/openapi.json',
             title=f'{app.title} - ReDoc',
             redoc_js_url='https://cdn.jsdmirror.com/npm/redoc@2/bundles/redoc.standalone.js',
             redoc_favicon_url='/favicon.ico'
@@ -224,7 +224,7 @@ api_responses = {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
             'X-ImgAPI-Site-Id': {
-                'description': ce('图片 API 站点的 ID\n如为配置的回退 URL 则为 `<code>`fallback`</code>`', 'ID of the site providing the image\nMay be `<code>`fallback`</code>` if is configured fallback URL'),
+                'description': ce('图片 API 站点的 ID<br/>如为配置的回退 URL 则为 `<code>`fallback`</code>`', 'ID of the site providing the image<br/>May be `<code>`fallback`</code>` if is configured fallback URL'),
                 'schema': {'type': 'string'}
             }
         }
@@ -241,7 +241,7 @@ api_responses_auto = {
         'description': ce('成功重定向到一个图片 URL', 'Successful redirect to an image URL'),
         'headers': {
             'X-ImgAPI-Site-Id': {
-                'description': ce('图片 API 站点的 ID\n如为配置的回退 URL 则为 `fallback`', 'ID of the site providing the image\nMay be `fallback` if is configured fallback URL'),
+                'description': ce('图片 API 站点的 ID<br/>如为配置的回退 URL 则为 `fallback`', 'ID of the site providing the image<br/>May be `fallback` if is configured fallback URL'),
                 'schema': {'type': 'string'}
             },
             'X-ImgAPI-UA-Result': {
