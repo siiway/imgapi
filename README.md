@@ -17,11 +17,11 @@
 - [x] fallback 设置
 - [ ] *预加载图片地址* - pr welcome
 
-## ~~整理~~
+## 整理
 
-~~请见 [Here](./sites.md)~~
+请见 [Here](./sites.md)
 
-~~介绍了我们 API 库里收集的所有 API~~
+介绍了我们 API 库里收集的所有 API
 
 ## API
 
