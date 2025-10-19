@@ -93,7 +93,7 @@ if new_init:
 
 try:
     sites  # type: ignore
-except:
+except Exception:
     sites = ImgAPIInit()
 
 app = FastAPI(
