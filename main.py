@@ -1,8 +1,8 @@
-import logging
+import loggin:
 from random import choice
 from sys import stderr
 import typing as t
-from uuid import uuid4 as uuid
+from uuid import uuid4 as uuid, UUID
 from contextvars import ContextVar
 from mimetypes import guess_type
 from pathlib import Path
@@ -396,6 +396,10 @@ class UATestResponse(BaseModel):
     parsed: u.UAResult | None
     parse_error: str | None = None
     result: t.Literal['vertical', 'horizontal', 'unknown']
+    node: str = c.node
+    version: str = VERSION
+    reqid: UUID
+    ip: str | None = '0.0.0.0'
 
 
 @app.get(
@@ -444,7 +448,9 @@ def ua_test(req: Request):
         user_agent=ua_str,
         parsed=ua_parsed,
         parse_error=error,
-        result=result
+        result=result,
+        reqid=UUID(reqid.get()),
+        ip=req.client.host if req.client else None
     )
 
 # endregion api
