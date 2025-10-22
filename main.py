@@ -1,4 +1,4 @@
-import loggin:
+import logging
 from random import choice
 from sys import stderr
 import typing as t
@@ -22,7 +22,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.10.19'
+VERSION = '2025.10.23'
 
 # region init
 new_init = u.InitOnceChecker().new_init
