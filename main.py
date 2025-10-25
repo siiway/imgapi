@@ -84,7 +84,7 @@ if new_init:
 
     l.info(f'Startup Config: {c}')
     l.info(f'Node: {c.node}')
-    l.info(f'{'='*25} Application Startup {'='*25}')
+    l.info(f'{"="*25} Application Startup {"="*25}')
     l.info(f'ImgAPI v{VERSION} by SiiWay Team')
     l.info('Under MIT License')
     l.info('GitHub: https://github.com/siiway/imgapi')
