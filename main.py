@@ -22,7 +22,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.10.23'
+VERSION = '2025.10.30'
 
 # region init
 new_init = u.InitOnceChecker().new_init
@@ -106,7 +106,7 @@ app = FastAPI(
 
 
 @app.middleware('http')
-async def log_requests(request: Request, call_next):
+async def log_requests(request: Request, call_next: t.Callable):
     request_id = str(uuid())
     token = reqid.set(request_id)
     with l.contextualize(reqid=request_id):
@@ -399,7 +399,6 @@ class UATestResponse(BaseModel):
     node: str = c.node
     version: str = VERSION
     reqid: UUID
-    ip: str | None = '0.0.0.0'
 
 
 @app.get(
@@ -449,8 +448,7 @@ def ua_test(req: Request):
         parsed=ua_parsed,
         parse_error=error,
         result=result,
-        reqid=UUID(reqid.get()),
-        ip=req.client.host if req.client else None
+        reqid=UUID(reqid.get())
     )
 
 # endregion api
