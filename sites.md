@@ -281,3 +281,15 @@ API:
 
 - 横向: https://api.imlazy.ink/img
 - 竖向: https://api.imlazy.ink/img-phone
+
+## 2x :tree: :tree: 的随机图 API
+
+id: `eopfapi-2b2x-cn`
+
+Blog Post: https://blog.2b2x.cn/posts/acg-randompic-api/
+
+API:
+
+- 自动: https://eopfapi.2b2x.cn/pic?img=ua
+- 横向: https://eopfapi.2b2x.cn/pic?img=h
+- 竖向: https://eopfapi.2b2x.cn/pic?img=v
