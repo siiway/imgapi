@@ -1,5 +1,8 @@
 {
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 5000,
-    "python.REPL.enableREPLSmartSend": false
+    "python.REPL.enableREPLSmartSend": false,
+    "files.associations": {
+        "*.py.disabled": "python"
+    },
 }

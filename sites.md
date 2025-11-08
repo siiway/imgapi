@@ -282,7 +282,7 @@ API:
 - 横向: https://api.imlazy.ink/img
 - 竖向: https://api.imlazy.ink/img-phone
 
-## 2x :tree: :tree: 的随机图 API
+## 2x🌲🌲 的随机图 API
 
 id: `eopfapi-2b2x-cn`
 

@@ -9,7 +9,8 @@ docs:
 Disabled (多地区超时)
 '''
 
-from imgapi import ImageAPI, Request
+from imgapi import ImageAPI
+from random import choice
 
 
 apis = [
@@ -19,12 +20,7 @@ apis = [
 ]
 
 
-def horizontal(req: Request):
-    from random import choice
-    return choice(apis)
-
-
-# api = ImageAPI(
-#     __name__,
-#     horizontal=horizontal
-# )
+api = ImageAPI(
+    __name__,
+    horizontal=lambda r: choice(apis)
+)

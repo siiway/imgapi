@@ -7,19 +7,11 @@ Horizonta API: https://api.imlazy.ink/img
 Vertical API: https://api.imlazy.ink/img-phone
 '''
 
-from imgapi import ImageAPI, Request
-
-
-def horizontal(req: Request):
-    return 'https://api.imlazy.ink/img'
-
-
-def vertical(req: Request):
-    return 'https://api.imlazy.ink/img-phone'
+from imgapi import ImageAPI
 
 
 api = ImageAPI(
     __name__,
-    horizontal=horizontal,
-    vertical=vertical
+    horizontal=lambda: 'https://api.imlazy.ink/img',
+    vertical=lambda: 'https://api.imlazy.ink/img-phone'
 )
