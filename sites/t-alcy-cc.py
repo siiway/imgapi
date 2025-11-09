@@ -17,7 +17,7 @@ catgs_v = ['mp', 'moemp', 'ysmp', 'aimp']
 
 api = ImageAPI(
     __name__,
-    auto=lambda r: f'https://t.alcy.cc/{choice(catgs_a)}/',
-    horizontal=lambda r: f'https://t.alcy.cc/{choice(catgs_h)}/',
-    vertical=lambda r: f'https://t.alcy.cc/{choice(catgs_v)}/'
+    auto=lambda _: f'https://t.alcy.cc/{choice(catgs_a)}/',
+    horizontal=lambda _: f'https://t.alcy.cc/{choice(catgs_h)}/',
+    vertical=lambda _: f'https://t.alcy.cc/{choice(catgs_v)}/'
 )

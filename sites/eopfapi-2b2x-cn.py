@@ -12,7 +12,7 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda req: 'https://eopfapi.2b2x.cn/pic?img=h',
-    vertical=lambda req: 'https://eopfapi.2b2x.cn/pic?img=v',
-    auto=lambda req: 'https://eopfapi.2b2x.cn/pic?img=ua'
+    horizontal=lambda _: 'https://eopfapi.2b2x.cn/pic?img=h',
+    vertical=lambda _: 'https://eopfapi.2b2x.cn/pic?img=v',
+    auto=lambda _: 'https://eopfapi.2b2x.cn/pic?img=ua'
 )

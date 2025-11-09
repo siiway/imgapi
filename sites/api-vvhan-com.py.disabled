@@ -22,5 +22,5 @@ apis = [
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda r: choice(apis)
+    horizontal=lambda _: choice(apis)
 )

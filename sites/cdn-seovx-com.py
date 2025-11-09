@@ -9,5 +9,5 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda r: 'https://cdn.seovx.com/d/?mom=302'
+    horizontal=lambda _: 'https://cdn.seovx.com/d/?mom=302'
 )

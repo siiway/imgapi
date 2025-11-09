@@ -20,7 +20,7 @@ from imgapi import ImageAPI, Request
 # def vertical(req: Request):
 #     return 'https://www.98qy.com/sjbz/api.php?method=mobile'
 
-def horizontal(re: Request):
+async def horizontal(re: Request):
     # 抓包得上面三个都重定向到这
     return 'https://www.98qy.com/sjbz/api2.php'
 

@@ -9,5 +9,5 @@ from imgapi import ImageAPI
 
 api= ImageAPI(
     __name__,
-    horizontal=lambda r: 'https://www.dmoe.cc/random.php'
+    horizontal=lambda _: 'https://www.dmoe.cc/random.php'
 )

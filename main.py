@@ -8,6 +8,7 @@ from mimetypes import guess_type
 from pathlib import Path
 from os.path import join as join_path
 from traceback import format_exc
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse, FileResponse
@@ -22,7 +23,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.10.30'
+VERSION = '2025.11.9'
 
 # region init
 new_init = u.InitOnceChecker().new_init
@@ -96,10 +97,17 @@ try:
 except Exception:
     sites = ImgAPIInit()
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await sites.load_all()
+    yield
+
 app = FastAPI(
     title=f'ImgAPI - {c.node}',
     description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi | MIT License',
     version=VERSION,
+    lifespan=lifespan,
     docs_url=None,
     redoc_url=None
 )
@@ -261,26 +269,26 @@ api_responses_auto = {
     status_code=302,
     responses=api_responses_auto  # type: ignore
 )
-def image(req: Request):
+async def image(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
     result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
     l.debug(f'User-Agent: {ua_str}, result: {result}')
     match result:
         case 'horizontal':
-            resp = image_horizontal(req)
+            resp = await image_horizontal(req)
         case 'vertical':
-            resp = image_vertical(req)
+            resp = await image_vertical(req)
         case 'unknown' | _:
-            resp = image_auto(req)
+            resp = await image_auto(req)
     resp.headers['X-ImgAPI-UA-Result'] = result
     return resp
 
 
-def image_auto(req: Request):
+async def image_auto(req: Request):
     site_list = list(sites.allow_a)
     while len(site_list) != 0:
         site = choice(site_list)
-        url = site.auto(req)
+        url = await u.call_image_func(site.auto, req)
         l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
@@ -317,11 +325,11 @@ def image_auto(req: Request):
     status_code=302,
     responses=api_responses  # type: ignore
 )
-def image_horizontal(req: Request):
+async def image_horizontal(req: Request):
     site_list = list(sites.allow_h)
     while len(site_list) != 0:
         site = choice(site_list)
-        url = site.horizontal(req)
+        url = await u.call_image_func(site.horizontal, req)
         l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
@@ -358,11 +366,11 @@ def image_horizontal(req: Request):
     status_code=302,
     responses=api_responses  # type: ignore
 )
-def image_vertical(req: Request):
+async def image_vertical(req: Request):
     site_list = list(sites.allow_v)
     while site_list.count != 0:
         site = choice(site_list)
-        url = site.vertical(req)
+        url = await u.call_image_func(site.vertical, req)
         l.debug(f'Try site {site.id} -> {url}')
         if url:
             return RedirectResponse(
@@ -406,7 +414,7 @@ class UATestResponse(BaseModel):
     response_model=UATestResponse,
     description=ce('测试 User-Agent 判断结果', 'Test User-Agent Process Result')
 )
-def ua_test(req: Request):
+async def ua_test(req: Request):
     ua_str: str | None = req.headers.get('User-Agent', None)
     result = u.ua(ua_str=ua_str) if ua_str else 'unknown'
     l.debug(f'User-Agent: {ua_str}, result: {result}')
@@ -516,13 +524,13 @@ async def fallback(path: str, req: Request):
 
     match path:
         case 'img' | 'img/s' | 'image/s' | 'img/a' | 'image/a' | 'img/' | 'img/s/' | 'image/s/' | 'img/a/' | 'image/a/':
-            return image(req)
+            return await image(req)
         case 'image/h/' | 'img/h' | 'img/h/':
-            return image_horizontal(req)
+            return await image_horizontal(req)
         case 'image/v/' | 'img/v' | 'img/v/':
-            return image_vertical(req)
+            return await image_vertical(req)
         case 'about' | 'about/':
-            return ua_test(req)
+            return await ua_test(req)
         case 'favicon.ico':
             return await fallback('favicon.png', req)
         case 'favicon.png':

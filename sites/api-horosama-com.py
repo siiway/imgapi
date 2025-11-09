@@ -10,6 +10,6 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda r: 'https://api.horosama.com/random.php?type=pc',
-    vertical=lambda r: 'https://api.horosama.com/random.php?type=mobile'
+    horizontal=lambda _: 'https://api.horosama.com/random.php?type=pc',
+    vertical=lambda _: 'https://api.horosama.com/random.php?type=mobile'
 )

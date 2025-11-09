@@ -6,9 +6,12 @@ powered by xiaoyuan
 '''
 
 from imgapi import ImageAPI, Request
+# from httpx import get
+
+# def fetch():
 
 
-def auto(req: Request):
+async def auto(req: Request):
     return 'https://img.xiaoyuan151.net/neuro'
 
 

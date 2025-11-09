@@ -2,10 +2,11 @@ from pathlib import Path
 import time
 import os
 import typing as t
+from asyncio import iscoroutinefunction
 
 from user_agents import parse as parse_ua
-from user_agents.parsers import UserAgent
 from pydantic import BaseModel
+from fastapi import Request
 
 
 class InitOnceChecker:
@@ -111,3 +112,22 @@ class UAResult(BaseModel):
     is_pc: bool
     is_tablet: bool
     is_touch_capable: bool
+
+
+async def call_image_func(func: t.Callable[[Request], t.Any] | None, req: Request) -> t.Any | None:
+    """统一调用 sync / async 图片函数"""
+    if func is None:
+        return None
+    if iscoroutinefunction(func):
+        return await func(req)
+    return func(req)
+
+
+async def call_init_func(func: t.Callable[[], t.Any] | None) -> None:
+    """统一调用 sync / async init 函数"""
+    if func is None:
+        return
+    if iscoroutinefunction(func):
+        await func()
+    else:
+        func()
