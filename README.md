@@ -15,6 +15,7 @@
 - [x] UA 测试页面
 - [x] public 文件夹
 - [x] fallback 设置
+- [ ] *Site Healthcheck* - pr welcome
 - [ ] *预加载图片地址* - pr welcome
 
 ## 整理

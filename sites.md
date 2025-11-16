@@ -293,3 +293,18 @@ API:
 - 自动: https://eopfapi.2b2x.cn/pic?img=ua
 - 横向: https://eopfapi.2b2x.cn/pic?img=h
 - 竖向: https://eopfapi.2b2x.cn/pic?img=v
+
+## baigei的随机图api
+
+id: `baigei-cc`
+
+Blog Post: https://baigei.cc/index.php/archives/28/
+
+API:
+
+- 自动 (芙宁娜): https://furina.baigei.cc/index.php
+- 横向 (芙宁娜): https://furina.baigei.cc/pc.php
+- 竖向 (芙宁娜): https://furina.baigei.cc/phone.php
+- 自动 (昔涟): https://philia093.baigei.cc/index.php
+- 横向 (昔涟): https://philia093.baigei.cc/pc.php
+- 竖向 (昔涟): https://philia093.baigei.cc/phone.php

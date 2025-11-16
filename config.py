@@ -1,7 +1,7 @@
 import typing as t
 
 from yaml import safe_load
-from pydantic import BaseModel, PositiveInt
+from pydantic import BaseModel, PositiveInt, field_validator
 
 from utils import get_path
 
@@ -46,6 +46,18 @@ class _LoggingConfigModel(BaseModel):
     '''
     配置 Loguru 的 retention (轮转保留) 设置
     '''
+
+    @field_validator('level', 'file_level', mode='before')
+    def normalize_level(cls, v):
+        if v is None:
+            return v
+        if not isinstance(v, str):
+            raise ValueError(f'Invaild log level: {v}')
+        upper = v.strip().upper()
+        valid = {'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'}
+        if upper not in valid:
+            raise ValueError(f'Invaild log level: {v}')
+        return upper
 
 class _FallbackConfigModel(BaseModel):
     horizontal: str | None = None
