@@ -263,7 +263,7 @@ API: https://img.paulzzh.com/touhou/random
 
 ## xiaoyuan的牛肉随机图API
 
-id: `img-paulzzh-com`
+id: `img-xiaoyuan151-com`
 
 文档: `{Null}`
 
@@ -281,6 +281,9 @@ API:
 
 - 横向: https://api.imlazy.ink/img
 - 竖向: https://api.imlazy.ink/img-phone
+
+> [!TIP]
+> 也可使用 `s7.imlazy.ink`
 
 ## 2x🌲🌲 的随机图 API
 

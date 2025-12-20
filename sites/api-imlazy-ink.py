@@ -12,6 +12,6 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://api.imlazy.ink/img',
-    vertical=lambda _: 'https://api.imlazy.ink/img-phone'
+    horizontal=lambda _: 'https://s7.imlazy.ink/img',
+    vertical=lambda _: 'https://s7.imlazy.ink/img-phone'
 )
