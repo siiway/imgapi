@@ -13,3 +13,22 @@ description = "A simple random background image API based on FastAPI and redirec
 name = "imgapi"
 requires-python = ">3.13"
 version = "1.0.0"
+
+# better for both EU & CN users...?
+# feel free to disable if meet any problem about it
+# other mirrors available below
+[[tool.uv.index]]
+name = "siiway-mirror"
+url = "https://pypi-mirror.siiway.top/pypi/simple/"
+default = true
+
+# WARN: not available for EU users
+# [[tool.uv.index]]
+# name = "tuna-mirror"
+# url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+# default = true
+
+# [[tool.uv.index]]
+# name = "ustc-mirror"
+# url = "https://mirrors.ustc.edu.cn/pypi/web/simple/"
+# default = true

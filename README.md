@@ -26,7 +26,15 @@
 
 ## API
 
-公共服务: `imgapi.siiway.top`
+中国大陆区域:
+
+- `imgapi.siiway.top`
+- `i.wss.moe`
+
+海外区域:
+
+- `imgapi-origin.siiway.top`
+- `io.wss.moe`
 
 > 建议自行部署，只需有 Python3 环境 (建议 uv) 即可
 
@@ -135,4 +143,4 @@ uv run fastapi run --host 0.0.0.0 --port 9333
 
 *部分 API 来源：https://blog.jixiaob.cn/?post=93*
 
-(c) 2025 SiiWay Team. Under MIT License.
+(c) 2026 SiiWay Team. Under MIT License.
