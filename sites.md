@@ -9,11 +9,11 @@
 
 id: `t-alcy-cc`
 
-主站: https://t.alcy.cc/
+主站: <https://t.alcy.cc/>
 
-食用方法 (作者博客): https://www.alcy.cc/archives/sui-ji-er-ci-yuan-tu-pian-api
+食用方法 (作者博客): <https://www.alcy.cc/archives/sui-ji-er-ci-yuan-tu-pian-api>
 
-API 发布页: https://t.mwm.moe/
+API 发布页: <https://t.mwm.moe/>
 
 有两种调用方法: **图片**，**json**
 
@@ -46,9 +46,9 @@ https://t.alcy.cc/<类别>?json
 
 id: `www-98qy-com`
 
-文档: https://www.98qy.com/sjbz/
+文档: <https://www.98qy.com/sjbz/>
 
-Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图片** 或 **Json**
+Get 方式请求固定地址: <https://www.98qy.com/sjbz/api.php> , 返回 **图片** 或 **Json**
 
 > 请求参数详见 [文档](https://www.98qy.com/sjbz/)
 
@@ -58,34 +58,34 @@ Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图�
 
 随机涩图 _(pixiv)_ API
 
-v2: https://api.lolicon.app/setu/v2 (GET / POST)
+v2: <https://api.lolicon.app/setu/v2> (GET / POST)
 
 返回格式仅有 **Json** _(包含图片链接)_，但有大量自定义选项
 
-详见文档: https://api.lolicon.app/#/setu
+详见文档: <https://api.lolicon.app/#/setu>
 
 ## 岁月小筑动漫壁纸
 
-地址: https://cloud.qqshabi.cn/api/images/api.php
+地址: <https://cloud.qqshabi.cn/api/images/api.php>
 
 不需要参数，直接返回图片 _(横向?)_
 
-文档: https://cloud.qqshabi.cn/apidetail/33.html
+文档: <https://cloud.qqshabi.cn/apidetail/33.html>
 
-> 原版 API: https://img.xjh.me/random_img.php , 注意: 返回的是带百度统计的网页，不是图片
+> 原版 API: <https://img.xjh.me/random_img.php> , 注意: 返回的是带百度统计的网页，不是图片
 
 ## 樱花随机二次元图片 API
 
 id: `www-dmoe-cc`
 
-接口地址: https://www.dmoe.cc/random.php
+接口地址: <https://www.dmoe.cc/random.php>
 
-文档: https://www.dmoe.cc/
+文档: <https://www.dmoe.cc/>
 
 有两种调用方式:
 
-- 图片: https://www.dmoe.cc/random.php _(ps: 直接访问会下载)_
-- Json: https://www.dmoe.cc/random.php?return=json
+- 图片: <https://www.dmoe.cc/random.php> _(ps: 直接访问会下载)_
+- Json: <https://www.dmoe.cc/random.php?return=json>
 
 Json 返回:
 
@@ -105,14 +105,14 @@ Json 返回:
 id: `api-vvhan-com`
 
 - Bing:
-  - 接口: https://api.vvhan.com/api/bing
-  - 文档: https://api.vvhan.com/article/bing.html
+  - 接口: <https://api.vvhan.com/api/bing>
+  - 文档: <https://api.vvhan.com/article/bing.html>
 - 风景:
-  - 接口: https://api.vvhan.com/api/wallpaper/views
-  - 文档: https://api.vvhan.com/article/views.html
+  - 接口: <https://api.vvhan.com/api/wallpaper/views>
+  - 文档: <https://api.vvhan.com/article/views.html>
 - 二次元:
-  - 接口: https://api.vvhan.com/api/wallpaper/acg
-  - 文档: https://api.vvhan.com/article/acg.html
+  - 接口: <https://api.vvhan.com/api/wallpaper/acg>
+  - 文档: <https://api.vvhan.com/article/acg.html>
 
 支持两种格式 (图片 / json)，默认为返回图片，在接口后加参 `?type=json` 返回 json
 
@@ -144,15 +144,15 @@ id: `api-vvhan-com`
 
 一个国外的高质量开放照片集 _(三次元)_ 平台，有丰富的 API，支持搜索
 
-官网: https://unsplash.com/developers
+官网: <https://unsplash.com/developers>
 
 > 需要注册才可使用
 
 ## 零七生活 API
 
-文档: https://api.oick.cn/doc/random
+文档: <https://api.oick.cn/doc/random>
 
-接口地址: https://api.oick.cn/api/random (GET)
+接口地址: <https://api.oick.cn/api/random> (GET)
 
 参数:
 
@@ -163,9 +163,9 @@ id: `api-vvhan-com`
 
 id: `api-horosama-com`
 
-文档: https://api.horosama.com/
+文档: <https://api.horosama.com/>
 
-接口: https://api.horosama.com/random.php
+接口: <https://api.horosama.com/random.php>
 
 常用有两个参数 _(粗体为默认)_:
 
@@ -188,21 +188,21 @@ json 返回示例:
 
 id: `cdn-seovx-com`
 
-文档: https://cdn.seovx.com/
+文档: <https://cdn.seovx.com/>
 
 有三个 302 接口 (all GET)：
 
-- 美图: https://cdn.seovx.com/?mom=302
-- 二次元： https://cdn.seovx.com/d/?mom=302 √
-- 古风： https://cdn.seovx.com/ha/?mom=302
+- 美图: <https://cdn.seovx.com/?mom=302>
+- 二次元： <https://cdn.seovx.com/d/?mom=302> √
+- 古风： <https://cdn.seovx.com/ha/?mom=302>
 
 ## 搏天 API
 
 id: `api-btstu-cn`
 
-文档: https://api.btstu.cn/doc/sjbz.php
+文档: <https://api.btstu.cn/doc/sjbz.php>
 
-API: https://api.btstu.cn/sjbz/api.php
+API: <https://api.btstu.cn/sjbz/api.php>
 
 请求参数:
 
@@ -225,9 +225,9 @@ json 返回示例:
 
 id: `api-paugram-com`
 
-文档: https://api.paugram.com/help/wallpaper
+文档: <https://api.paugram.com/help/wallpaper>
 
-API: https://api.paugram.com/wallpaper/
+API: <https://api.paugram.com/wallpaper/>
 
 请求参数:
 
@@ -240,9 +240,9 @@ API: https://api.paugram.com/wallpaper/
 
 id: `api-mtyqx-cn`
 
-文档: https://api.mtyqx.cn/
+文档: <https://api.mtyqx.cn/>
 
-API: https://api.mtyqx.cn/api/random.php
+API: <https://api.mtyqx.cn/api/random.php>
 
 ## Paulzzh API
 
@@ -250,9 +250,9 @@ id: `img-paulzzh-com`
 
 东方 Project 随机图片 API
 
-文档: https://img.paulzzh.com/
+文档: <https://img.paulzzh.com/>
 
-API: https://img.paulzzh.com/touhou/random
+API: <https://img.paulzzh.com/touhou/random>
 
 请求参数:
 
@@ -267,7 +267,7 @@ id: `img-xiaoyuan151-com`
 
 文档: `{Null}`
 
-API: https://img.xiaoyuan151.com/neuro
+API: <https://img.xiaoyuan151.com/neuro>
 
 > 自动判断 UA
 
@@ -275,12 +275,12 @@ API: https://img.xiaoyuan151.com/neuro
 
 id: `api-imlazy-ink`
 
-文档: https://api.imlazy.ink/#/img
+文档: <https://api.imlazy.ink/#/img>
 
 API:
 
-- 横向: https://api.imlazy.ink/img
-- 竖向: https://api.imlazy.ink/img-phone
+- 横向: <https://api.imlazy.ink/img>
+- 竖向: <https://api.imlazy.ink/img-phone>
 
 > [!TIP]
 > 也可使用 `s7.imlazy.ink`
@@ -289,76 +289,76 @@ API:
 
 id: `eopfapi-2b2x-cn`
 
-Blog Post: https://blog.2b2x.cn/posts/acg-randompic-api/
+Blog Post: <https://blog.2b2x.cn/posts/acg-randompic-api/>
 
 API:
 
-- 自动: https://eopfapi.2b2x.cn/pic?img=ua
-- 横向: https://eopfapi.2b2x.cn/pic?img=h
-- 竖向: https://eopfapi.2b2x.cn/pic?img=v
+- 自动: <https://eopfapi.2b2x.cn/pic?img=ua>
+- 横向: <https://eopfapi.2b2x.cn/pic?img=h>
+- 竖向: <https://eopfapi.2b2x.cn/pic?img=v>
 
 ## baigei的随机图api
 
 id: `baigei-cc`
 
-Blog Post: https://baigei.cc/index.php/archives/28/
+Blog Post: <https://baigei.cc/index.php/archives/28/>
 
 API:
 
-- 自动 (芙宁娜): https://furina.baigei.cc/index.php
-- 横向 (芙宁娜): https://furina.baigei.cc/pc.php
-- 竖向 (芙宁娜): https://furina.baigei.cc/phone.php
-- 自动 (昔涟): https://philia093.baigei.cc/index.php
-- 横向 (昔涟): https://philia093.baigei.cc/pc.php
-- 竖向 (昔涟): https://philia093.baigei.cc/phone.php
+- 自动 (芙宁娜): <https://furina.baigei.cc/index.php>
+- 横向 (芙宁娜): <https://furina.baigei.cc/pc.php>
+- 竖向 (芙宁娜): <https://furina.baigei.cc/phone.php>
+- 自动 (昔涟): <https://philia093.baigei.cc/index.php>
+- 横向 (昔涟): <https://philia093.baigei.cc/pc.php>
+- 竖向 (昔涟): <https://philia093.baigei.cc/phone.php>
 
 ## 远方博客
 
 id: `blog-ltyuanfang-cn`
 
-Blog Post: https://blog.ltyuanfang.cn/241.html
+Blog Post: <https://blog.ltyuanfang.cn/241.html>
 
-API: https://tu.ltyuanfang.cn/api/fengjing.php
+API: <https://tu.ltyuanfang.cn/api/fengjing.php>
 
 ## 夜轻 Blog
 
 id: `blog-yeqing-net`
 
-文档: https://blog.yeqing.net/acg-api/
+文档: <https://blog.yeqing.net/acg-api/>
 
 API:
 
-- 自动: https://api.yppp.net/api.php
-- 横向: https://api.yppp.net/pc.php
-- 竖向: https://api.yppp.net/pe.php
+- 自动: <https://api.yppp.net/api.php>
+- 横向: <https://api.yppp.net/pc.php>
+- 竖向: <https://api.yppp.net/pe.php>
 
 ## YM-API 与末API
 
 id: `img-api-yumo-cc`
 
-文档: https://img-api.yumo.cc/
+文档: <https://img-api.yumo.cc/>
 
 API:
 
-- Muse Dash: https://img-api.yumo.cc/api/muse-dash-bg/
-- 和泉纱雾: https://img-api.yumo.cc/api/hqsw-bg/
-- 心跳文学社: https://img-api.yumo.cc/api/ddlc-bg/
+- Muse Dash: <https://img-api.yumo.cc/api/muse-dash-bg/>
+- 和泉纱雾: <https://img-api.yumo.cc/api/hqsw-bg/>
+- 心跳文学社: <https://img-api.yumo.cc/api/ddlc-bg/>
 
 ## 图样跑酷
 
 id: `img-run`
 
-主页: https://img.run/
+主页: <https://img.run/>
 
-API: https://bing.img.run/rand.php
+API: <https://bing.img.run/rand.php>
 
 ## 明月浩空网
 
 id: `myhkw-cn`
 
-主页: https://myhkw.cn/
+主页: <https://myhkw.cn/>
 
 API:
 
-- Bing 每日壁纸: https://myhkw.cn/open/img/bing
-- 动态莫哈维昼夜图片: https://myhkw.cn/open/img/mojave
+- Bing 每日壁纸: <https://myhkw.cn/open/img/bing>
+- 动态莫哈维昼夜图片: <https://myhkw.cn/open/img/mojave>
