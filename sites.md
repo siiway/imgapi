@@ -3,7 +3,7 @@
 本页收集各种图片 API 站点
 
 > [!TIP]
-> 本项目收集的每个 API 都在 `sites/` 目录下作为一个独立的文件 (文件名即为下面 `id`)，由主程序遍历导入，并创建路由 *(文件名去 `.py`)*
+> 本项目收集的每个 API 都在 `sites/` 目录下作为一个独立的文件 (文件名即为下面 `id`)，由主程序遍历导入，并创建路由 _(文件名去 `.py`)_
 
 ## 栗次元 API
 
@@ -35,10 +35,10 @@ https://t.alcy.cc/<类别>?json
 
 ```jsonc
 {
-    "code": 200, // http status code
-    "url": "https:\/\/tc.alcy.cc\/i\/2024\/04\/21\/662416447bef8.webp", // 图片 url
-    "width": 1200, // 宽
-    "height": 675 // 高
+  "code": 200, // http status code
+  "url": "https:\/\/tc.alcy.cc\/i\/2024\/04\/21\/662416447bef8.webp", // 图片 url
+  "width": 1200, // 宽
+  "height": 675, // 高
 }
 ```
 
@@ -56,11 +56,11 @@ Get 方式请求固定地址: https://www.98qy.com/sjbz/api.php , 返回 **图�
 
 - ~~Maybe~~ **R18**
 
-随机涩图 *(pixiv)* API
+随机涩图 _(pixiv)_ API
 
 v2: https://api.lolicon.app/setu/v2 (GET / POST)
 
-返回格式仅有 **Json** *(包含图片链接)*，但有大量自定义选项
+返回格式仅有 **Json** _(包含图片链接)_，但有大量自定义选项
 
 详见文档: https://api.lolicon.app/#/setu
 
@@ -68,7 +68,7 @@ v2: https://api.lolicon.app/setu/v2 (GET / POST)
 
 地址: https://cloud.qqshabi.cn/api/images/api.php
 
-不需要参数，直接返回图片 *(横向?)*
+不需要参数，直接返回图片 _(横向?)_
 
 文档: https://cloud.qqshabi.cn/apidetail/33.html
 
@@ -84,21 +84,21 @@ id: `www-dmoe-cc`
 
 有两种调用方式:
 
-- 图片: https://www.dmoe.cc/random.php *(ps: 直接访问会下载)*
+- 图片: https://www.dmoe.cc/random.php _(ps: 直接访问会下载)_
 - Json: https://www.dmoe.cc/random.php?return=json
 
 Json 返回:
 
 ```jsonc
 {
-    "code": "200", // http status code
-    "imgurl": "https:\/\/ws1.sinaimg.cn\/large\/0072Vf1pgy1foxkfy08umj31kw0w0nng.jpg", // 图片 url
-    "width": "2048", // 宽
-    "height": "1152" // 高
+  "code": "200", // http status code
+  "imgurl": "https:\/\/ws1.sinaimg.cn\/large\/0072Vf1pgy1foxkfy08umj31kw0w0nng.jpg", // 图片 url
+  "width": "2048", // 宽
+  "height": "1152", // 高
 }
 ```
 
-> *仅横图?*
+> _仅横图?_
 
 ## 韩小韩 API (Bing, 风景, 二次元)
 
@@ -120,13 +120,13 @@ id: `api-vvhan-com`
 
 ```jsonc
 {
-    "success": true, // 是否成功
-    "data": {
-        "id": 1644,
-        "date": 20240823,
-        "title": "帕侬蓝寺，武里南府，泰国 (© Banjongseal324/Getty Images)", // 标题
-        "url": "https://cn.bing.com/th?id=OHR.PrasatPhanom_ZH-CN0445884858_UHD.jpg&w=4096" // 图片地址
-    }
+  "success": true, // 是否成功
+  "data": {
+    "id": 1644,
+    "date": 20240823,
+    "title": "帕侬蓝寺，武里南府，泰国 (© Banjongseal324/Getty Images)", // 标题
+    "url": "https://cn.bing.com/th?id=OHR.PrasatPhanom_ZH-CN0445884858_UHD.jpg&w=4096", // 图片地址
+  },
 }
 ```
 
@@ -134,15 +134,15 @@ id: `api-vvhan-com`
 
 ```jsonc
 {
-    "success": true, // 是否成功
-    "type": "风景", // 类型
-    "url": "https://api-storage.4ce.cn/v1/a1cd42b2bd007599ae70bc580061a2d8.webp" // 图片地址
+  "success": true, // 是否成功
+  "type": "风景", // 类型
+  "url": "https://api-storage.4ce.cn/v1/a1cd42b2bd007599ae70bc580061a2d8.webp", // 图片地址
 }
 ```
 
 ## Unsplash
 
-一个国外的高质量开放照片集 *(三次元)* 平台，有丰富的 API，支持搜索
+一个国外的高质量开放照片集 _(三次元)_ 平台，有丰富的 API，支持搜索
 
 官网: https://unsplash.com/developers
 
@@ -167,7 +167,7 @@ id: `api-horosama-com`
 
 接口: https://api.horosama.com/random.php
 
-常用有两个参数 *(粗体为默认)*:
+常用有两个参数 _(粗体为默认)_:
 
 - `type`: 图片类型 (**`pc`-横**, `mobile`-竖, `profile`-头像)
 - `format`: 返回格式 (**`image`**, `json`)
@@ -176,11 +176,11 @@ json 返回示例:
 
 ```jsonc
 {
-    "code": "200", // 状态码
-    "url": "https:\/\/www.horosama.com\/api\/image_all\/anime\/1080p\/pc\/efA6f53Bc7A635089D125a90f4d2081F.jpg",
-    // 图片地址
-    "width": "1920", // 图片宽度
-    "height": "1080" // 图片高度
+  "code": "200", // 状态码
+  "url": "https:\/\/www.horosama.com\/api\/image_all\/anime\/1080p\/pc\/efA6f53Bc7A635089D125a90f4d2081F.jpg",
+  // 图片地址
+  "width": "1920", // 图片宽度
+  "height": "1080", // 图片高度
 }
 ```
 
@@ -214,10 +214,10 @@ json 返回示例:
 
 ```jsonc
 {
-    "code": "200", // 状态码
-    "imgurl": "https:\/\/tva4.sinaimg.cn\/large\/9bd9b167gy1g2qkr95hylj21hc0u01kx.jpg", // 图片地址
-    "width": "1920", // 图片宽度
-    "height": "1080" // 图片高度
+  "code": "200", // 状态码
+  "imgurl": "https:\/\/tva4.sinaimg.cn\/large\/9bd9b167gy1g2qkr95hylj21hc0u01kx.jpg", // 图片地址
+  "width": "1920", // 图片宽度
+  "height": "1080", // 图片高度
 }
 ```
 
@@ -231,8 +231,8 @@ API: https://api.paugram.com/wallpaper/
 
 请求参数:
 
-- `source`: 图片源 (**`sm`**, `cp`, `sina`, `paul`, `gh`, `jsd`) ***存疑***
-- `category`: **[施工中]** 分类 (`us`, `jp`, `cn`, `1`, `2`, `3`) ***存疑***
+- `source`: 图片源 (**`sm`**, `cp`, `sina`, `paul`, `gh`, `jsd`) **_存疑_**
+- `category`: **[施工中]** 分类 (`us`, `jp`, `cn`, `1`, `2`, `3`) **_存疑_**
 
 示例: `https://api.paugram.com/wallpaper/?source=sm`
 
@@ -259,7 +259,7 @@ API: https://img.paulzzh.com/touhou/random
 - `type`: 返回类型 (**`302`**, `json`)
 - `site`: 源站点 (**`konachan`**, `yandere`, `all`)
 - `size`: 图片尺寸 (**`pc`**, `wap`, `all`)
-- `tag`: 标签 *(beta)* - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
+- `tag`: 标签 _(beta)_ - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
 
 ## xiaoyuan的牛肉随机图API
 
@@ -311,3 +311,54 @@ API:
 - 自动 (昔涟): https://philia093.baigei.cc/index.php
 - 横向 (昔涟): https://philia093.baigei.cc/pc.php
 - 竖向 (昔涟): https://philia093.baigei.cc/phone.php
+
+## 远方博客
+
+id: `blog-ltyuanfang-cn`
+
+Blog Post: https://blog.ltyuanfang.cn/241.html
+
+API: https://tu.ltyuanfang.cn/api/fengjing.php
+
+## 夜轻 Blog
+
+id: `blog-yeqing-net`
+
+文档: https://blog.yeqing.net/acg-api/
+
+API:
+
+- 自动: https://api.yppp.net/api.php
+- 横向: https://api.yppp.net/pc.php
+- 竖向: https://api.yppp.net/pe.php
+
+## YM-API 与末API
+
+id: `img-api-yumo-cc`
+
+文档: https://img-api.yumo.cc/
+
+API:
+
+- Muse Dash: https://img-api.yumo.cc/api/muse-dash-bg/
+- 和泉纱雾: https://img-api.yumo.cc/api/hqsw-bg/
+- 心跳文学社: https://img-api.yumo.cc/api/ddlc-bg/
+
+## 图样跑酷
+
+id: `img-run`
+
+主页: https://img.run/
+
+API: https://bing.img.run/rand.php
+
+## 明月浩空网
+
+id: `myhkw-cn`
+
+主页: https://myhkw.cn/
+
+API:
+
+- Bing 每日壁纸: https://myhkw.cn/open/img/bing
+- 动态莫哈维昼夜图片: https://myhkw.cn/open/img/mojave
