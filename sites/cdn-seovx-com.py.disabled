@@ -3,11 +3,13 @@
 '''
 夏沫博客 API
 Home: https://cdn.seovx.com/
+Disabled: 证书过期 (26-2-17)
 '''
 
 from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://cdn.seovx.com/d/?mom=302'
+    horizontal=lambda _: 'https://cdn.seovx.com/d/?mom=302',
+    cn=True
 )

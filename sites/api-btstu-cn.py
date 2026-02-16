@@ -19,5 +19,6 @@ api = ImageAPI(
     __name__,
     auto=lambda _: f'https://api.btstu.cn/sjbz/api.php?lx={random.choice(lx)}&method=zsy&format=images',
     horizontal=lambda _: f'https://api.btstu.cn/sjbz/api.php?lx={random.choice(lx)}&method=pc&format=images',
-    vertical=lambda _: f'https://api.btstu.cn/sjbz/api.php?lx={random.choice(lx)}&method=mobile&format=images'
+    vertical=lambda _: f'https://api.btstu.cn/sjbz/api.php?lx={random.choice(lx)}&method=mobile&format=images',
+    outseas=True
 )

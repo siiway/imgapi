@@ -10,5 +10,6 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://api.mtyqx.cn/api/random.php'
+    horizontal=lambda _: 'https://api.mtyqx.cn/api/random.php',
+    cn=True
 )

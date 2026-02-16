@@ -19,5 +19,7 @@ api = ImageAPI(
     __name__,
     auto=lambda _: f'https://t.alcy.cc/{choice(catgs_a)}/',
     horizontal=lambda _: f'https://t.alcy.cc/{choice(catgs_h)}/',
-    vertical=lambda _: f'https://t.alcy.cc/{choice(catgs_v)}/'
+    vertical=lambda _: f'https://t.alcy.cc/{choice(catgs_v)}/',
+    cn=True,
+    outseas=True
 )

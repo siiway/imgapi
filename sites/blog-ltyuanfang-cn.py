@@ -10,4 +10,5 @@ from imgapi import ImageAPI
 api = ImageAPI(
     __name__,
     horizontal=lambda _: "https://tu.ltyuanfang.cn/api/fengjing.php",
+    cn=True
 )

@@ -3,6 +3,7 @@
 '''
 牛肉随机图
 powered by xiaoyuan
+Disabled: 文档搁哪来着? (26-2-17)
 '''
 
 from imgapi import ImageAPI, Request

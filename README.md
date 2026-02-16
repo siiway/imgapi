@@ -45,6 +45,7 @@
 | `/image/h` | 横向图片                           |
 | `/image/v` | 竖向图片                           |
 | `/ua`      | UA 测试结果                        |
+| `/docs`    | (默认) API 文档                    |
 
 > [!TIP]
 > 更详细的 API 返回信息见: **[Swagger](https://imgapi.siiway.top/docs)** / **[Redoc](https://imgapi.siiway.top/redoc)**
@@ -76,7 +77,10 @@ uv sync
 
 <!-- uv export > requirements.txt -->
 
-3. (可选) 配置服务
+3. 配置服务
+
+> [!TIP]
+> 配置项详细说明见 [`config.py`](./config.py)
 
 创建 `config.yaml`:
 
@@ -88,12 +92,14 @@ host: '0.0.0.0'
 # 服务监听端口 (仅在直接启动 main.py 时有效)
 port: 9333
 # 服务 Worker 数 (仅在直接启动 main.py 时有效)
-workers: 2
+workers: 1
 # 是否启用 /docs (自带文档页面)
 enable_docs: true
 # 控制根目录将重定向到的 url
 # 如为 null 则返回 json {"hello": "imgapi", "version": "xxx"}
 root_redirect: /docs
+# 服务区域设置 (cn / outseas / null)
+region: cn
 # 当所有 site 都失败时重定向到的 url
 # 如为 null 则返回 503 Service Unavailable
 fallback:
@@ -117,6 +123,8 @@ log:
   rotation: 1 days
   # 配置 Loguru 的 retention (轮转保留) 设置
   retention: 3 days
+  # 配置从指定 Header 读取客户端 ip
+  ip_header: null
 ```
 
 4. 启动程序
@@ -139,8 +147,10 @@ uv run fastapi run --host 0.0.0.0 --port 9333
 
 本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无**任何**关联.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new) / [Contact](https://wyf9.top/t/c)
+如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new) / [Contact](https://wss.moe/c)
 
-*部分 API 来源：https://blog.jixiaob.cn/?post=93*
+*部分 API 来源集合:*
+- *https://blog.jixiaob.cn/?post=93*
+- *https://img-api.yumo.cc/*
 
-(c) 2026 SiiWay Team. Under MIT License.
+(c) 2026 SiiWay Team. Licensed under [MIT License](./LICENSE).

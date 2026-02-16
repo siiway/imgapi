@@ -12,8 +12,9 @@ from random import choice
 
 src_list = ['sm', 'cp', 'sina', 'paul', 'gh', 'jsd']
 
-
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: f'https://api.paugram.com/wallpaper/?type=horizontal&source={choice(src_list)}'
+    horizontal=lambda _: f'https://api.paugram.com/wallpaper/?type=horizontal&source={choice(src_list)}',
+    cn=True,
+    outseas=True
 )

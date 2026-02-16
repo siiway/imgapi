@@ -24,5 +24,7 @@ api = ImageAPI(
     id=__name__,
     horizontal=lambda _: f'https://{roll()}.baigei.cc/pc.php',
     vertical=lambda _: f'https://{roll()}.baigei.cc/phone.php',
-    auto=lambda _: f'https://{roll()}.baigei.cc/index.php'
+    auto=lambda _: f'https://{roll()}.baigei.cc/index.php',
+    cn=True,
+    outseas=True
 )

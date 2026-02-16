@@ -100,46 +100,6 @@ Json 返回:
 
 > _仅横图?_
 
-## 韩小韩 API (Bing, 风景, 二次元)
-
-id: `api-vvhan-com`
-
-- Bing:
-  - 接口: <https://api.vvhan.com/api/bing>
-  - 文档: <https://api.vvhan.com/article/bing.html>
-- 风景:
-  - 接口: <https://api.vvhan.com/api/wallpaper/views>
-  - 文档: <https://api.vvhan.com/article/views.html>
-- 二次元:
-  - 接口: <https://api.vvhan.com/api/wallpaper/acg>
-  - 文档: <https://api.vvhan.com/article/acg.html>
-
-支持两种格式 (图片 / json)，默认为返回图片，在接口后加参 `?type=json` 返回 json
-
-1. Bing json 返回:
-
-```jsonc
-{
-  "success": true, // 是否成功
-  "data": {
-    "id": 1644,
-    "date": 20240823,
-    "title": "帕侬蓝寺，武里南府，泰国 (© Banjongseal324/Getty Images)", // 标题
-    "url": "https://cn.bing.com/th?id=OHR.PrasatPhanom_ZH-CN0445884858_UHD.jpg&w=4096", // 图片地址
-  },
-}
-```
-
-2. 风景 / 二次元 json 返回:
-
-```jsonc
-{
-  "success": true, // 是否成功
-  "type": "风景", // 类型
-  "url": "https://api-storage.4ce.cn/v1/a1cd42b2bd007599ae70bc580061a2d8.webp", // 图片地址
-}
-```
-
 ## Unsplash
 
 一个国外的高质量开放照片集 _(三次元)_ 平台，有丰富的 API，支持搜索
@@ -289,13 +249,13 @@ API:
 
 id: `eopfapi-2b2x-cn`
 
-Blog Post: <https://blog.2b2x.cn/posts/acg-randompic-api/>
+Blog Post: <https://2x.nz/posts/acg-randompic-api/>
 
 API:
 
-- 自动: <https://eopfapi.2b2x.cn/pic?img=ua>
-- 横向: <https://eopfapi.2b2x.cn/pic?img=h>
-- 竖向: <https://eopfapi.2b2x.cn/pic?img=v>
+- 自动: <https://eopfapi.acofork.com/pic?img=ua>
+- 横向: <https://eopfapi.acofork.com/pic?img=h>
+- 竖向: <https://eopfapi.acofork.com/pic?img=v>
 
 ## baigei的随机图api
 

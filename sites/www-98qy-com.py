@@ -29,5 +29,7 @@ api = ImageAPI(
     __name__,
     # auto=auto,
     horizontal=horizontal,
-    # vertical=vertical
+    # vertical=vertical,
+    cn=True,
+    outseas=True
 )

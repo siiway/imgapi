@@ -12,5 +12,7 @@ from imgapi import ImageAPI
 api = ImageAPI(
     __name__,
     horizontal=lambda _: 'https://img.paulzzh.com/touhou/random?site=all&size=pc',
-    # vertical=lambda _: 'https://img.paulzzh.com/touhou/random?site=all&size=wap'
+    # vertical=lambda _: 'https://img.paulzzh.com/touhou/random?site=all&size=wap',
+    cn=True,
+    outseas=True
 )

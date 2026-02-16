@@ -3,6 +3,7 @@
 '''
 樱花随机二次元图片 API
 doc: https://www.dmoe.cc/
+Disabled: 测试中一半皆超时 (26-2-17)
 '''
 
 from imgapi import ImageAPI

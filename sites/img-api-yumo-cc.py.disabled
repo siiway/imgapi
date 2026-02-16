@@ -1,6 +1,7 @@
 """
 YM-API 与末API
 Home & Docs: https://img-api.yumo.cc
+Disabled: 概率 502 (26-2-17)
 """
 
 from random import choice
