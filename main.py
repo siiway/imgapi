@@ -23,7 +23,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2025.12.21'
+VERSION = '2026.2.17.1'
 
 # region init
 new_init = u.InitOnceChecker().new_init
@@ -99,7 +99,7 @@ except Exception:
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app):
     await sites.load_all()
     yield
 
@@ -114,20 +114,23 @@ app = FastAPI(
 
 
 @app.middleware('http')
-async def log_requests(request: Request, call_next: t.Callable):
+async def log_requests(req: Request, call_next: t.Callable):
     request_id = str(uuid())
     token = reqid.set(request_id)
     with l.contextualize(reqid=request_id):
-        if request.client:
-            ip = f'[{request.client.host}]' if ':' in request.client.host else request.client.host
-            port = request.client.port
-        else:
-            ip = 'unknown-ip'
-            port = 0
-        l.info(f'Incoming request: {ip}:{port} - {request.method} {request.url.path}')
+        ip = 'unknown-ip'
+        port = 0
+        if c.log.ip_header:
+            header = req.headers.get(c.log.ip_header, 'unknown-ip')
+            ip = f'[{header}]' if ':' in header else header
+        elif req.client:
+            ip = f'[{req.client.host}]' if ':' in req.client.host else req.client.host
+            port = req.client.port
+
+        l.info(f'Incoming request: {ip}:{port} - {req.method} {req.url.path}')
         try:
             p = u.perf_counter()
-            resp: Response = await call_next(request)
+            resp: Response = await call_next(req)
             l.info(f'Outgoing response: {resp.status_code} ({p()}ms)')
             return resp
         except Exception as e:
@@ -135,6 +138,7 @@ async def log_requests(request: Request, call_next: t.Callable):
             resp = Response(f'Internal Server Error ({request_id}@{c.node})', 500)
         finally:
             resp.headers['X-ImgAPI-Version'] = VERSION
+            resp.headers['X-ImgAPI-Region'] = c.region or 'none'
             resp.headers['X-ImgAPI-Node'] = c.node
             resp.headers['X-ImgAPI-Request-Id'] = request_id
             reqid.reset(token)
@@ -166,6 +170,12 @@ def custom_openapi():
                 operation['responses'][status_code]['headers'].setdefault(
                     'X-ImgAPI-Version', {
                         'description': ce('ImgAPI 版本', 'ImgAPI version'),
+                        'schema': {'type': 'string'}
+                    }
+                )
+                operation['responses'][status_code]['headers'].setdefault(
+                    'X-ImgAPI-Region', {
+                        'description': ce('ImgAPI 区域', 'ImgAPI region'),
                         'schema': {'type': 'string'}
                     }
                 )
@@ -261,6 +271,64 @@ api_responses_auto = {
 }
 
 
+async def try_site(mode: t.Literal['auto', 'horizontal', 'vertical'], req: Request) -> Response:
+    if mode == 'auto':
+        if c.region == 'cn':
+            s = sites.allow_a_cn
+        elif c.region == 'outseas':
+            s = sites.allow_a_outseas
+        else:
+            s = sites.allow_a
+    elif mode == 'horizontal':
+        if c.region == 'cn':
+            s = sites.allow_h_cn
+        elif c.region == 'outseas':
+            s = sites.allow_h_outseas
+        else:
+            s = sites.allow_h
+    else:
+        if c.region == 'cn':
+            s = sites.allow_v_cn
+        elif c.region == 'outseas':
+            s = sites.allow_v_outseas
+        else:
+            s = sites.allow_v
+    lst = list(s)
+
+    while len(lst) != 0:
+        site = choice(lst)
+        url = await u.call_image_func(getattr(site, mode), req)
+        l.debug(f'Try site {site.id} -> {url}')
+        if url:
+            l.info(f'Site: {site.id} -> {url}')
+            return RedirectResponse(
+                url,
+                status_code=302,
+                headers={
+                    'X-ImgAPI-Site-Id': site.id
+                }
+            )
+        else:
+            lst.remove(site)
+
+    fallback: str | None = getattr(c.fallback, 'unknown' if mode == 'auto' else mode, None)
+    if fallback:
+        l.warning(f'Fallback: {c.fallback.horizontal}')
+        return RedirectResponse(
+            fallback,
+            status_code=302,
+            headers={
+                'X-ImgAPI-Site-Id': 'fallback'
+            }
+        )
+    else:
+        l.warning('No fallback, return failed')
+        return Response(
+            GetUrlFailedResponseModel().model_dump_json(),
+            status_code=503
+        )
+
+
 @app.get(
     '/image',
     response_class=RedirectResponse,
@@ -285,36 +353,7 @@ async def image(req: Request):
 
 
 async def image_auto(req: Request):
-    site_list = list(sites.allow_a)
-    while len(site_list) != 0:
-        site = choice(site_list)
-        url = await u.call_image_func(site.auto, req)
-        l.debug(f'Try site {site.id} -> {url}')
-        if url:
-            return RedirectResponse(
-                url,
-                status_code=302,
-                headers={
-                    'X-ImgAPI-Site-Id': site.id
-                }
-            )
-        else:
-            site_list.remove(site)
-    if c.fallback.unknown:
-        l.warning(f'Fallback: {c.fallback.unknown}')
-        return RedirectResponse(
-            c.fallback.unknown,
-            status_code=302,
-            headers={
-                'X-ImgAPI-Site-Id': 'fallback'
-            }
-        )
-    else:
-        l.debug('No fallback, return failed')
-        return Response(
-            GetUrlFailedResponseModel().model_dump_json(),
-            status_code=503
-        )
+    return await try_site('auto', req)
 
 
 @app.get(
@@ -326,36 +365,7 @@ async def image_auto(req: Request):
     responses=api_responses  # type: ignore
 )
 async def image_horizontal(req: Request):
-    site_list = list(sites.allow_h)
-    while len(site_list) != 0:
-        site = choice(site_list)
-        url = await u.call_image_func(site.horizontal, req)
-        l.debug(f'Try site {site.id} -> {url}')
-        if url:
-            return RedirectResponse(
-                url,
-                status_code=302,
-                headers={
-                    'X-ImgAPI-Site-Id': site.id
-                }
-            )
-        else:
-            site_list.remove(site)
-    if c.fallback.horizontal:
-        l.warning(f'Fallback: {c.fallback.horizontal}')
-        return RedirectResponse(
-            c.fallback.horizontal,
-            status_code=302,
-            headers={
-                'X-ImgAPI-Site-Id': 'fallback'
-            }
-        )
-    else:
-        l.debug('No fallback, return failed')
-        return Response(
-            GetUrlFailedResponseModel().model_dump_json(),
-            status_code=503
-        )
+    return await try_site('horizontal', req)
 
 
 @app.get(
@@ -367,36 +377,7 @@ async def image_horizontal(req: Request):
     responses=api_responses  # type: ignore
 )
 async def image_vertical(req: Request):
-    site_list = list(sites.allow_v)
-    while site_list.count != 0:
-        site = choice(site_list)
-        url = await u.call_image_func(site.vertical, req)
-        l.debug(f'Try site {site.id} -> {url}')
-        if url:
-            return RedirectResponse(
-                url,
-                status_code=302,
-                headers={
-                    'X-ImgAPI-Site-Id': site.id
-                }
-            )
-        else:
-            site_list.remove(site)
-    if c.fallback.vertical:
-        l.warning(f'Fallback: {c.fallback.vertical}')
-        return RedirectResponse(
-            c.fallback.vertical,
-            status_code=302,
-            headers={
-                'X-ImgAPI-Site-Id': 'fallback'
-            }
-        )
-    else:
-        l.debug('No fallback, return failed')
-        return Response(
-            GetUrlFailedResponseModel().model_dump_json(),
-            status_code=503
-        )
+    return await try_site('vertical', req)
 
 
 class UATestResponse(BaseModel):
@@ -512,11 +493,6 @@ async def fallback(path: str, req: Request):
             l.info(f'Serving static file: {file_path}')
             return FileResponse(
                 path=file_path,
-                headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': c.node,
-                    'X-ImgAPI-Request-Id': reqid.get()
-                },
                 media_type=mime_type or 'application/octet-stream'
             )
         else:
@@ -539,12 +515,7 @@ async def fallback(path: str, req: Request):
             l.debug(f'Path not found: {path}')
             return Response(
                 'Not Found',
-                status_code=404,
-                headers={
-                    'X-ImgAPI-Version': VERSION,
-                    'X-ImgAPI-Node': c.node,
-                    'X-ImgAPI-Request-Id': reqid.get()
-                }
+                status_code=404
             )
 
 # endregion fallback

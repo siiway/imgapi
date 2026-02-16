@@ -27,7 +27,7 @@ class _LoggingConfigModel(BaseModel):
     - 设置为 None 以禁用
     '''
 
-    file_level: t.Literal['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'] | None = 'INFO'
+    file_level: t.Literal['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL', None] = 'INFO'
     '''
     单独设置日志文件中的日志等级, 如设置为 None 则使用 level 设置
     - DEBUG
@@ -45,6 +45,11 @@ class _LoggingConfigModel(BaseModel):
     retention: str | int = '3 days'
     '''
     配置 Loguru 的 retention (轮转保留) 设置
+    '''
+
+    ip_header: str | None = None
+    '''
+    配置从指定 Header 读取客户端 ip (常用于 cdn / 反代 后)
     '''
 
     @field_validator('level', 'file_level', mode='before')
@@ -114,6 +119,15 @@ class ConfigModel(BaseModel):
     '''
     控制根目录将重定向到的 url
     - 如为 None 则返回 json {"hello": "imgapi", "version": "xxx"}
+    '''
+
+    region: t.Literal['cn', 'outseas', None] = 'cn'
+    '''
+    服务区域设置
+    - cn: 大陆
+    - outseas: 海外
+    - ~~geoip: 使用 geoip 数据库判断~~ TODO https://grok.com/share/c2hhcmQtNA_f0ed67f0-6de3-4525-9b5f-ecda2b0172cc
+    - None: 不区分区域 (不推荐)
     '''
 
 try:

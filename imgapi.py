@@ -1,7 +1,6 @@
 import typing as t
 import importlib
 import os
-import asyncio
 
 from fastapi import Request
 from loguru import logger as l
@@ -26,6 +25,10 @@ class ImageAPI:
     '''处理自适应图片请求的函数'''
     init: _InitFunc | None
     '''在初始化时执行的函数'''
+    cn: bool
+    '''是否适用于中国大陆用户'''
+    outseas: bool
+    '''是否适用于港澳台 / 海外用户'''
 
     def __init__(
         self,
@@ -33,7 +36,9 @@ class ImageAPI:
         horizontal: _ImgFunc | None = None,
         vertical: _ImgFunc | None = None,
         auto: _ImgFunc | None = None,
-        init: _InitFunc | None = None
+        init: _InitFunc | None = None,
+        cn: bool = False,
+        outseas: bool = False
     ):
         '''
         声明一个图片 API
@@ -43,12 +48,16 @@ class ImageAPI:
         :param vertical: 处理竖向图片请求的函数
         :param auto: 处理自适应图片请求的函数
         :param init: 在初始化时执行的函数
+        :param cn: 是否适用于中国大陆用户
+        :param outseas: 是否适用于港澳台 / 海外用户
         '''
         self.id = id.split('.')[-1]
         self.horizontal = horizontal
         self.vertical = vertical
         self.auto = auto
         self.init = init
+        self.cn = cn
+        self.outseas = outseas
 
 
 class ImgAPIWrapped(ImageAPI):
@@ -62,6 +71,12 @@ class ImgAPIInit:
     allow_h: set[ImgAPIWrapped] = set()
     allow_v: set[ImgAPIWrapped] = set()
     allow_a: set[ImgAPIWrapped] = set()
+    allow_h_cn: set[ImgAPIWrapped] = set()
+    allow_v_cn: set[ImgAPIWrapped] = set()
+    allow_a_cn: set[ImgAPIWrapped] = set()
+    allow_h_outseas: set[ImgAPIWrapped] = set()
+    allow_v_outseas: set[ImgAPIWrapped] = set()
+    allow_a_outseas: set[ImgAPIWrapped] = set()
 
     async def load_all(self) -> None:
         p_all = u.perf_counter()
@@ -82,17 +97,29 @@ class ImgAPIInit:
                 await u.call_init_func(obj.init)
 
                 if obj.horizontal:
+                    if obj.cn:
+                        self.allow_h_cn.add(obj)  # type: ignore
+                    if obj.outseas:
+                        self.allow_h_outseas.add(obj) # type: ignore
                     self.allow_h.add(obj)  # type: ignore
                 if obj.vertical:
+                    if obj.cn:
+                        self.allow_v_cn.add(obj)  # type: ignore
+                    if obj.outseas:
+                        self.allow_v_outseas.add(obj) # type: ignore
                     self.allow_v.add(obj)  # type: ignore
                 if obj.auto:
+                    if obj.cn:
+                        self.allow_a_cn.add(obj)  # type: ignore
+                    if obj.outseas:
+                        self.allow_a_outseas.add(obj) # type: ignore
                     self.allow_a.add(obj)  # type: ignore
 
                 l.debug(f'Init site {name} from sites/{n} took {p()}ms')
                 sites += 1
 
         l.info(f'Init {sites} sites finished in {p_all()}ms.')
-        l.info(f'Loaded: {len(self.allow_h)} Horizontal, {len(self.allow_v)} Vertical, {len(self.allow_a)} Auto.')
-        l.debug(f'allow_h sites: {[i.id for i in self.allow_h]}')
-        l.debug(f'allow_v sites: {[i.id for i in self.allow_v]}')
-        l.debug(f'allow_a sites: {[i.id for i in self.allow_a]}')
+        l.info(f'Loaded: {len(self.allow_h_cn)} / {len(self.allow_h_outseas)} Horizontal, {len(self.allow_v_cn)} / {len(self.allow_v_outseas)} Vertical, {len(self.allow_a_cn)} / {len(self.allow_a_outseas)} Auto (cn / outseas).')
+        l.debug(f'allow_h sites: {[i.id for i in self.allow_h_cn]} (cn) / {[i.id for i in self.allow_h_outseas]} (outseas)')
+        l.debug(f'allow_v sites: {[i.id for i in self.allow_v_cn]} (cn) / {[i.id for i in self.allow_v_outseas]} (outseas)')
+        l.debug(f'allow_a sites: {[i.id for i in self.allow_a_cn]} (cn) / {[i.id for i in self.allow_a_outseas]} (outseas)')
