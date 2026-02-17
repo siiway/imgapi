@@ -15,6 +15,7 @@
 - [x] UA 测试页面
 - [x] public 文件夹
 - [x] fallback 设置
+- [X] 区域划分 (大陆 / 海外)
 - [ ] *Site Healthcheck* - pr welcome
 - [ ] *预加载图片地址* - pr welcome
 
@@ -145,9 +146,9 @@ uv run fastapi run --host 0.0.0.0 --port 9333
 
 ## 声明
 
-本项目仅提供了随机的 302 跳转 api，并未 存储/代理 任何图片资源，其版权归原作者所有，与本项目无**任何**关联.
+本项目仅提供了随机的 302 跳转 api，并未 存储 / 代理 任何图片资源，其版权归原作者所有，与本项目无**任何**关联.
 
-如对此项目有建议/问题，可 [Issue](https://github.com/siiway/imgapi/issue/new) / [Contact](https://wss.moe/c)
+如对此项目有 建议 / 问题 / API 增改，可 [Issue](https://github.com/siiway/imgapi/issue/new) / [Contact](https://wss.moe/c)
 
 *部分 API 来源集合:*
 - *https://blog.jixiaob.cn/?post=93*

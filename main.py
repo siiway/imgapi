@@ -87,7 +87,7 @@ if new_init:
     l.info(f'Node: {c.node} (region: {c.region})')
     l.info(f'{"="*25} Application Startup {"="*25}')
     l.info(f'ImgAPI v{VERSION} by SiiWay Team')
-    l.info('Under MIT License')
+    l.info('Licensed under MIT License')
     l.info('GitHub: https://github.com/siiway/imgapi')
 
     sites = ImgAPIInit()
@@ -104,7 +104,7 @@ async def lifespan(app):
     yield
 
 app = FastAPI(
-    title=f'ImgAPI - {c.node}',
+    title=f'ImgAPI - {c.node} - v{VERSION}',
     description='一个简单的随机背景图 API, 基于 FastAPI | A simple random background image API based on FastAPI | https://github.com/siiway/imgapi | MIT License',
     version=VERSION,
     lifespan=lifespan,
@@ -141,6 +141,7 @@ async def log_requests(req: Request, call_next: t.Callable):
             resp.headers['X-ImgAPI-Region'] = c.region or 'none'
             resp.headers['X-ImgAPI-Node'] = c.node
             resp.headers['X-ImgAPI-Request-Id'] = request_id
+            resp.headers['X-Robots-Tag'] = 'none'
             reqid.reset(token)
             return resp
 
@@ -386,6 +387,7 @@ class UATestResponse(BaseModel):
     parse_error: str | None = None
     result: t.Literal['vertical', 'horizontal', 'unknown']
     node: str = c.node
+    region: t.Literal['cn', 'outseas', None] = c.region
     version: str = VERSION
     reqid: UUID
 
@@ -496,7 +498,7 @@ async def fallback(path: str, req: Request):
                 media_type=mime_type or 'application/octet-stream'
             )
         else:
-            l.debug(f'Static file not found: {file_path}')
+            l.warning(f'Static file not found: {file_path}')
 
     match path:
         case 'img' | 'img/s' | 'image/s' | 'img/a' | 'image/a' | 'img/' | 'img/s/' | 'image/s/' | 'img/a/' | 'image/a/':
@@ -505,14 +507,14 @@ async def fallback(path: str, req: Request):
             return await image_horizontal(req)
         case 'image/v/' | 'img/v' | 'img/v/':
             return await image_vertical(req)
-        case 'about' | 'about/':
+        case 'ua/' | 'about' | 'about/' | 'test' | 'test/':
             return await ua_test(req)
         case 'favicon.ico':
             return await fallback('favicon.png', req)
         case 'favicon.png':
             return await fallback('favicon.jpg', req)
         case _:
-            l.debug(f'Path not found: {path}')
+            l.warning(f'Path not found: {path}')
             return Response(
                 'Not Found',
                 status_code=404
