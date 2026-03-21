@@ -1,5 +1,5 @@
 [project]
-authors = [{ name = "wyf9", email = "wyf9@wyf9.top" }]
+authors = [{ name = "wyf9", email = "wyf9@siiway.org" }]
 dependencies = [
   "fastapi[standard]>=0.118.0",
   "httpx>=0.28.1",
@@ -22,13 +22,13 @@ name = "siiway-mirror"
 url = "https://pypi-mirror.siiway.top/pypi/simple/"
 default = true
 
+# [[tool.uv.index]]
+# name = "ustc-mirror"
+# url = "https://mirrors.ustc.edu.cn/pypi/web/simple/"
+# default = true
+
 # WARN: not available for EU users
 # [[tool.uv.index]]
 # name = "tuna-mirror"
 # url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
-# default = true
-
-# [[tool.uv.index]]
-# name = "ustc-mirror"
-# url = "https://mirrors.ustc.edu.cn/pypi/web/simple/"
 # default = true

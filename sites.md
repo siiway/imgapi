@@ -247,15 +247,17 @@ API:
 
 ## 2x🌲🌲 的随机图 API
 
-id: `eopfapi-2b2x-cn`
+id: `c-p-2x-nz`
 
-Blog Post: <https://2x.nz/posts/acg-randompic-api/>
+~~Blog Post: <https://2x.nz/posts/acg-randompic-api/>~~
+
+Source Repo: https://github.com/afoim/choice_randompic
 
 API:
 
-- 自动: <https://eopfapi.acofork.com/pic?img=ua>
-- 横向: <https://eopfapi.acofork.com/pic?img=h>
-- 竖向: <https://eopfapi.acofork.com/pic?img=v>
+- 横向: <https://c-p.2x.nz/h>
+- 竖向: <https://c-p.2x.nz/v>
+- 图源: <https://2x.nz/gallery/>
 
 ## baigei的随机图api
 
