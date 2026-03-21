@@ -12,12 +12,13 @@ from imgapi import ImageAPI
 n = False
 
 def roll():
-    global n
-    if n:
-        n = False
-        return 'philia093'
-    else:
-        n = True
+    # global n
+    # if n:
+    #     n = False
+    #     return 'philia093'
+    # else:
+    #     n = True
+    # philia093 api is down - 2026-03-18
         return 'furina'
 
 api = ImageAPI(

@@ -2,7 +2,7 @@ from pathlib import Path
 import time
 import os
 import typing as t
-from asyncio import iscoroutinefunction
+from inspect import iscoroutinefunction
 
 from user_agents import parse as parse_ua
 from pydantic import BaseModel
@@ -114,8 +114,10 @@ class UAResult(BaseModel):
     is_touch_capable: bool
 
 
-async def call_image_func(func: t.Callable[[Request], t.Any] | None, req: Request) -> t.Any | None:
-    """统一调用 sync / async 图片函数"""
+async def call_image_func(func: t.Callable[[Request], t.Any] | str | None, req: Request) -> t.Any | None:
+    """统一调用 sync / async 图片函数 / 返回 url"""
+    if isinstance(func, str):
+        return func
     if func is None:
         return None
     if iscoroutinefunction(func):

@@ -10,8 +10,8 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://api.horosama.com/random.php?type=pc',
-    vertical=lambda _: 'https://api.horosama.com/random.php?type=mobile',
+    horizontal='https://api.horosama.com/random.php?type=pc',
+    vertical='https://api.horosama.com/random.php?type=mobile',
     cn=True,
     outseas=True
 )

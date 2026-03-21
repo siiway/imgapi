@@ -23,7 +23,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = '2026.2.17.1'
+VERSION = '2026.3.22.1'
 
 # region init
 new_init = u.InitOnceChecker().new_init

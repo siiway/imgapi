@@ -17,12 +17,12 @@ class ImageAPI:
     '''
     id: str
     '''唯一 id'''
-    horizontal: _ImgFunc | None
-    '''处理横向图片请求的函数'''
-    vertical: _ImgFunc | None
-    '''处理竖向图片请求的函数'''
-    auto: _ImgFunc | None
-    '''处理自适应图片请求的函数'''
+    horizontal: _ImgFunc | str | None
+    '''处理横向图片请求的函数 / url'''
+    vertical: _ImgFunc | str | None
+    '''处理竖向图片请求的函数 / url'''
+    auto: _ImgFunc | str | None
+    '''处理自适应图片请求的函数 / url'''
     init: _InitFunc | None
     '''在初始化时执行的函数'''
     cn: bool
@@ -33,9 +33,9 @@ class ImageAPI:
     def __init__(
         self,
         id: str,
-        horizontal: _ImgFunc | None = None,
-        vertical: _ImgFunc | None = None,
-        auto: _ImgFunc | None = None,
+        horizontal: _ImgFunc | str | None = None,
+        vertical: _ImgFunc | str | None = None,
+        auto: _ImgFunc | str | None = None,
         init: _InitFunc | None = None,
         cn: bool = False,
         outseas: bool = False
@@ -44,9 +44,9 @@ class ImageAPI:
         声明一个图片 API
 
         :param id: 唯一 id, 直接传入 __name__ 以使用文件名
-        :param horizontal: 处理横向图片请求的函数
-        :param vertical: 处理竖向图片请求的函数
-        :param auto: 处理自适应图片请求的函数
+        :param horizontal: 处理横向图片请求的函数 / url
+        :param vertical: 处理竖向图片请求的函数 / url
+        :param auto: 处理自适应图片请求的函数 / url
         :param init: 在初始化时执行的函数
         :param cn: 是否适用于中国大陆用户
         :param outseas: 是否适用于港澳台 / 海外用户
