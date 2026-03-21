@@ -10,6 +10,6 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://cdn.seovx.com/d/?mom=302',
+    horizontal='https://cdn.seovx.com/d/?mom=302',
     cn=True
 )

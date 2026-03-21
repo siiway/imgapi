@@ -10,5 +10,5 @@ from imgapi import ImageAPI
 
 api= ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://www.dmoe.cc/random.php'
+    horizontal='https://www.dmoe.cc/random.php'
 )

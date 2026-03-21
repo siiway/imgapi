@@ -9,6 +9,6 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: "https://bing.img.run/rand.php",
+    horizontal="https://bing.img.run/rand.php",
     cn=True
 )

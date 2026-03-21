@@ -9,7 +9,7 @@ from imgapi import ImageAPI
 
 api = ImageAPI(
     __name__,
-    horizontal=lambda _: 'https://c-p.2x.nz/h',
-    vertical=lambda _: 'https://c-p.2x.nz/v',
+    horizontal='https://c-p.2x.nz/h',
+    vertical='https://c-p.2x.nz/v',
     outseas=True
 )
