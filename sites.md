@@ -324,3 +324,78 @@ API:
 
 - Bing 每日壁纸: <https://myhkw.cn/open/img/bing>
 - 动态莫哈维昼夜图片: <https://myhkw.cn/open/img/mojave>
+
+## Lorem Picsum
+
+id: `picsum-photos`
+
+主页: <https://picsum.photos/>
+
+随机摄影图片 (三次元)，指定尺寸直接返回图片
+
+API:
+
+- 横向: <https://picsum.photos/1920/1080>
+- 竖向: <https://picsum.photos/1080/1920>
+
+## LoliAPI
+
+id: `www-loliapi-com`
+
+主页: <https://www.loliapi.com/>
+
+随机二次元壁纸，302 跳转到图片
+
+API:
+
+- 自动 (随机): <https://www.loliapi.com/bg>
+- 横向: <https://www.loliapi.com/acg/pc>
+- 竖向: <https://www.loliapi.com/acg/pe>
+
+## imgapi.cn
+
+id: `imgapi-cn`
+
+主页: <https://imgapi.cn/>
+
+真人 / 动漫 / 风景 随机图片，302 跳转到图片
+
+API: <https://imgapi.cn/api.php>
+
+请求参数:
+
+- `zd`: 尺寸 (`zsy`-默认, `pc`-横, `mobile`-竖)
+- `fl`: 分类 (`suiji`-随机, `meizi`-真人, `dongman`-动漫, `fengjing`-风景)
+
+## lolimi API
+
+id: `api-lolimi-cn-lamei` / `api-lolimi-cn-boy`
+
+主页: <https://api.lolimi.cn/>
+
+直接返回一张随机图片 (SFW)
+
+API:
+
+- 超甜辣妹壁纸: <https://api.lolimi.cn/API/xjj/lt.php>
+- 帅哥图片: <https://api.lolimi.cn/API/boy/api.php>
+
+## furry.ist
+
+id: `api-furry-ist`
+
+主页: <https://api.furry.ist/>
+
+直接返回一张随机兽装 / 福瑞图片 (SFW)
+
+API: <https://api.furry.ist/furry-img/>
+
+## 拾玖のblog
+
+id: `src-fur19-cn`
+
+主页: <https://blog.fur19.cn/>
+
+直接返回一张随机福瑞图片 (SFW)
+
+API: <https://src.fur19.cn/api/furry>
