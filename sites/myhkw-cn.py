@@ -13,7 +13,5 @@ from imgapi import ImageAPI
 entry = ["bing", "mojave"]
 
 api = ImageAPI(
-    __name__,
-    horizontal=lambda _: f"https://myhkw.cn/open/img/{choice(entry)}",
-    cn=True
+    __name__, horizontal=lambda _: f"https://myhkw.cn/open/img/{choice(entry)}", cn=True
 )

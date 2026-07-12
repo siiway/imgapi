@@ -17,11 +17,11 @@ class InitOnceChecker:
             cls._instance = super().__new__(cls)
             # l.debug("Creating new ImgAPIInit instance")
         # else:
-            # l.debug("Reusing existing ImgAPIInit instance")
+        # l.debug("Reusing existing ImgAPIInit instance")
         return cls._instance
 
     def __init__(self):
-        if hasattr(self, 'initialized') and self.initialized:
+        if hasattr(self, "initialized") and self.initialized:
             # l.debug("ImgAPIInit already initialized, skipping")
             self.new_init = False
             return
@@ -30,22 +30,22 @@ class InitOnceChecker:
 
 
 def perf_counter():
-    '''
+    """
     获取一个性能计数器, 执行返回函数来结束计时, 并返回保留两位小数的毫秒值
-    '''
+    """
     start = time.perf_counter()
-    return lambda: round((time.perf_counter() - start)*1000, 2)
+    return lambda: round((time.perf_counter() - start) * 1000, 2)
 
 
 def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
-    '''
+    """
     相对路径 (基于主程序目录) -> 绝对路径
 
     :param path: 相对路径
     :param create_dirs: 是否自动创建目录（如果不存在）
     :param is_dir: 目标是否为目录
     :return: 绝对路径
-    '''
+    """
 
     full_path = str(Path(__file__).parent.joinpath(path))
     if create_dirs:
@@ -58,29 +58,29 @@ def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
 
 
 def replace_code_tags(text: str) -> str:
-    '''
+    """
     markdown -> html
-    '''
+    """
     while "`" in text:
         text = text.replace("`", "<code>", 1).replace("`", "</code>", 1)
     return text
 
 
 def cnen(cn: str, en: str):
-    return f'{replace_code_tags(cn)}<br/><i>{replace_code_tags(en)}</i>'
+    return f"{replace_code_tags(cn)}<br/><i>{replace_code_tags(en)}</i>"
 
 
-def ua(ua_str: str) -> t.Literal['vertical', 'horizontal', 'unknown']:
+def ua(ua_str: str) -> t.Literal["vertical", "horizontal", "unknown"]:
     ua_result = parse_ua(ua_str)
     if ua_result.is_mobile:
         # Mobile -> Vertical
-        return 'vertical'
+        return "vertical"
     elif ua_result.is_pc or ua_result.is_tablet:
         # PC / Tablet -> Horizontal
-        return 'horizontal'
+        return "horizontal"
     else:
         # Unknown -> Auto
-        return 'unknown'
+        return "unknown"
 
 
 class _UAResult_Browser(BaseModel):
@@ -114,7 +114,9 @@ class UAResult(BaseModel):
     is_touch_capable: bool
 
 
-async def call_image_func(func: t.Callable[[Request], t.Any] | str | None, req: Request) -> t.Any | None:
+async def call_image_func(
+    func: t.Callable[[Request], t.Any] | str | None, req: Request
+) -> t.Any | None:
     """统一调用 sync / async 图片函数 / 返回 url"""
     if isinstance(func, str):
         return func

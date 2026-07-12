@@ -1,12 +1,12 @@
 # coding:utf-8
 
-'''
+"""
 98情缘API
 主站 https://www.98qy.com/sjbz/
 API 作者貌似离人有点远了, 三个 method 都只返回横屏图片
-'''
+"""
 
-from imgapi import ImageAPI, Request
+from imgapi import ImageAPI
 
 
 # def auto(req: Request):
@@ -21,7 +21,7 @@ from imgapi import ImageAPI, Request
 #     return 'https://www.98qy.com/sjbz/api.php?method=mobile'
 
 # 抓包得上面三个都重定向到这
-horizontal = 'https://www.98qy.com/sjbz/api2.php'
+horizontal = "https://www.98qy.com/sjbz/api2.php"
 
 
 api = ImageAPI(
@@ -30,5 +30,5 @@ api = ImageAPI(
     horizontal=horizontal,
     # vertical=vertical,
     cn=True,
-    outseas=True
+    outseas=True,
 )

@@ -8,7 +8,5 @@ Home: https://blog.ltyuanfang.cn/
 from imgapi import ImageAPI
 
 api = ImageAPI(
-    __name__,
-    horizontal="https://tu.ltyuanfang.cn/api/fengjing.php",
-    cn=True
+    __name__, horizontal="https://tu.ltyuanfang.cn/api/fengjing.php", cn=True
 )

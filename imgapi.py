@@ -12,23 +12,24 @@ _InitFunc = t.Union[t.Callable[[], None], t.Callable[[], t.Awaitable[None]]]
 
 
 class ImageAPI:
-    '''
+    """
     图片 API 基类
-    '''
+    """
+
     id: str
-    '''唯一 id'''
+    """唯一 id"""
     horizontal: _ImgFunc | str | None
-    '''处理横向图片请求的函数 / url'''
+    """处理横向图片请求的函数 / url"""
     vertical: _ImgFunc | str | None
-    '''处理竖向图片请求的函数 / url'''
+    """处理竖向图片请求的函数 / url"""
     auto: _ImgFunc | str | None
-    '''处理自适应图片请求的函数 / url'''
+    """处理自适应图片请求的函数 / url"""
     init: _InitFunc | None
-    '''在初始化时执行的函数'''
+    """在初始化时执行的函数"""
     cn: bool
-    '''是否适用于中国大陆用户'''
+    """是否适用于中国大陆用户"""
     outseas: bool
-    '''是否适用于港澳台 / 海外用户'''
+    """是否适用于港澳台 / 海外用户"""
 
     def __init__(
         self,
@@ -38,9 +39,9 @@ class ImageAPI:
         auto: _ImgFunc | str | None = None,
         init: _InitFunc | None = None,
         cn: bool = False,
-        outseas: bool = False
+        outseas: bool = False,
     ):
-        '''
+        """
         声明一个图片 API
 
         :param id: 唯一 id, 直接传入 __name__ 以使用文件名
@@ -50,8 +51,8 @@ class ImageAPI:
         :param init: 在初始化时执行的函数
         :param cn: 是否适用于中国大陆用户
         :param outseas: 是否适用于港澳台 / 海外用户
-        '''
-        self.id = id.split('.')[-1]
+        """
+        self.id = id.split(".")[-1]
         self.horizontal = horizontal
         self.vertical = vertical
         self.auto = auto
@@ -80,15 +81,15 @@ class ImgAPIInit:
 
     async def load_all(self) -> None:
         p_all = u.perf_counter()
-        dirlst = os.listdir('sites/')
+        dirlst = os.listdir("sites/")
         sites = 0
         for n in dirlst:
             name, ext = os.path.splitext(n)
-            if ext != '.py' or 'example' in name:
+            if ext != ".py" or "example" in name:
                 continue
 
             p = u.perf_counter()
-            module = importlib.import_module(f'sites.{name}')
+            module = importlib.import_module(f"sites.{name}")
             for attr in dir(module):
                 obj = getattr(module, attr)
                 if not isinstance(obj, ImageAPI):
@@ -98,28 +99,36 @@ class ImgAPIInit:
 
                 if obj.horizontal:
                     if obj.cn:
-                        self.allow_h_cn.add(obj)  # type: ignore
+                        self.allow_h_cn.add(obj)
                     if obj.outseas:
-                        self.allow_h_outseas.add(obj) # type: ignore
-                    self.allow_h.add(obj)  # type: ignore
+                        self.allow_h_outseas.add(obj)
+                    self.allow_h.add(obj)
                 if obj.vertical:
                     if obj.cn:
-                        self.allow_v_cn.add(obj)  # type: ignore
+                        self.allow_v_cn.add(obj)
                     if obj.outseas:
-                        self.allow_v_outseas.add(obj) # type: ignore
-                    self.allow_v.add(obj)  # type: ignore
+                        self.allow_v_outseas.add(obj)
+                    self.allow_v.add(obj)
                 if obj.auto:
                     if obj.cn:
-                        self.allow_a_cn.add(obj)  # type: ignore
+                        self.allow_a_cn.add(obj)
                     if obj.outseas:
-                        self.allow_a_outseas.add(obj) # type: ignore
-                    self.allow_a.add(obj)  # type: ignore
+                        self.allow_a_outseas.add(obj)
+                    self.allow_a.add(obj)
 
-                l.debug(f'Init site {name} from sites/{n} took {p()}ms')
+                l.debug(f"Init site {name} from sites/{n} took {p()}ms")
                 sites += 1
 
-        l.info(f'Init {sites} sites finished in {p_all()}ms.')
-        l.info(f'Loaded: {len(self.allow_h_cn)} / {len(self.allow_h_outseas)} Horizontal, {len(self.allow_v_cn)} / {len(self.allow_v_outseas)} Vertical, {len(self.allow_a_cn)} / {len(self.allow_a_outseas)} Auto (cn / outseas).')
-        l.debug(f'allow_h sites: {[i.id for i in self.allow_h_cn]} (cn) / {[i.id for i in self.allow_h_outseas]} (outseas)')
-        l.debug(f'allow_v sites: {[i.id for i in self.allow_v_cn]} (cn) / {[i.id for i in self.allow_v_outseas]} (outseas)')
-        l.debug(f'allow_a sites: {[i.id for i in self.allow_a_cn]} (cn) / {[i.id for i in self.allow_a_outseas]} (outseas)')
+        l.info(f"Init {sites} sites finished in {p_all()}ms.")
+        l.info(
+            f"Loaded: {len(self.allow_h_cn)} / {len(self.allow_h_outseas)} Horizontal, {len(self.allow_v_cn)} / {len(self.allow_v_outseas)} Vertical, {len(self.allow_a_cn)} / {len(self.allow_a_outseas)} Auto (cn / outseas)."
+        )
+        l.debug(
+            f"allow_h sites: {[i.id for i in self.allow_h_cn]} (cn) / {[i.id for i in self.allow_h_outseas]} (outseas)"
+        )
+        l.debug(
+            f"allow_v sites: {[i.id for i in self.allow_v_cn]} (cn) / {[i.id for i in self.allow_v_outseas]} (outseas)"
+        )
+        l.debug(
+            f"allow_a sites: {[i.id for i in self.allow_a_cn]} (cn) / {[i.id for i in self.allow_a_outseas]} (outseas)"
+        )

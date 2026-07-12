@@ -7,8 +7,4 @@ Bing 随机壁纸 (非每日刷新)
 
 from imgapi import ImageAPI
 
-api = ImageAPI(
-    __name__,
-    horizontal="https://bing.img.run/rand.php",
-    cn=True
-)
+api = ImageAPI(__name__, horizontal="https://bing.img.run/rand.php", cn=True)

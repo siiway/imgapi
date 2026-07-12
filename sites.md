@@ -221,15 +221,33 @@ API: <https://img.paulzzh.com/touhou/random>
 - `size`: 图片尺寸 (**`pc`**, `wap`, `all`)
 - `tag`: 标签 _(beta)_ - 见 [Here](https://img.paulzzh.com/touhou/random_tags)
 
-## xiaoyuan的牛肉随机图API
+## EvilNeur Gallery
 
-id: `img-xiaoyuan151-com`
+id: `gallery-evilneur-org`
 
-文档: `{Null}`
+主站: <https://gallery.evilneur.org/>
 
-API: <https://img.xiaoyuan151.com/neuro>
+API:
 
-> 自动判断 UA
+- 图片: <https://gallery.evilneur.org/random>
+- Json: <https://gallery.evilneur.org/api/random?format=json>
+
+> 302 重定向到图片，适用于 `cn` / `outseas`
+
+Json 返回示例:
+
+```jsonc
+{
+  "image": {
+    "id": "1780939660059-6fc494d2-137091166-p20-neuro-log-1.jpg",
+    "name": "137091166_p20-Neuro Log 1.jpg",
+    "size": 1313594,
+    "uploadedAt": "2026-06-08T17:27:40.059Z",
+    "contentType": "image/jpeg",
+    "url": "https://images.evilneur.org/images/1780939660059-6fc494d2-137091166-p20-neuro-log-1.jpg"
+  }
+}
+```
 
 ## Imlazy API
 

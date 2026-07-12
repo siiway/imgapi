@@ -11,5 +11,5 @@ api = ImageAPI(
     auto="https://api.yppp.net/api.php",
     horizontal="https://api.yppp.net/pc.php",
     vertical="https://api.yppp.net/pe.php",
-    cn=True
+    cn=True,
 )
