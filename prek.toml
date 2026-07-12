@@ -23,5 +23,5 @@ repo = "local"
 id = "ty-check"
 name = "ty check"
 language = "system"
-entry = "ty check . --fix"
+entry = "ty check ."
 pass_filenames = false
