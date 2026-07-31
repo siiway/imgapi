@@ -81,7 +81,7 @@ class ImgAPIInit:
 
     async def load_all(self) -> None:
         p_all = u.perf_counter()
-        dirlst = os.listdir("sites/")
+        dirlst = os.listdir(os.path.join(os.path.dirname(__file__), "sites"))
         sites = 0
         for n in dirlst:
             name, ext = os.path.splitext(n)

@@ -6,7 +6,6 @@ from uuid import uuid4 as uuid, UUID
 from contextvars import ContextVar
 from mimetypes import guess_type
 from pathlib import Path
-from os.path import join as join_path
 from traceback import format_exc
 from contextlib import asynccontextmanager
 
@@ -27,7 +26,7 @@ import utils as u
 from utils import cnen as ce
 from imgapi import ImgAPIInit
 
-VERSION = "2026.7.12.1"
+VERSION = "2026.8.1.1"
 
 # region init
 new_init = u.InitOnceChecker().new_init
@@ -96,7 +95,7 @@ if new_init:
 
 try:
     sites
-except Exception:
+except NameError:
     sites = ImgAPIInit()
 
 
@@ -135,7 +134,6 @@ async def log_requests(req: Request, call_next: t.Callable):
             p = u.perf_counter()
             resp: Response = await call_next(req)
             l.info(f"Outgoing response: {resp.status_code} ({p()}ms)")
-            return resp
         except Exception as e:
             l.error(f"Server error: {e} ({p()}ms)\n{format_exc()}")
             resp = Response(f"Internal Server Error ({request_id}@{c.node})", 500)
@@ -331,11 +329,10 @@ async def try_site(
         else:
             lst.remove(site)
 
-    fallback: str | None = getattr(
-        c.fallback, "unknown" if mode == "auto" else mode, None
-    )
+    fallback_key = "unknown" if mode == "auto" else mode
+    fallback: str | None = getattr(c.fallback, fallback_key, None)
     if fallback:
-        l.warning(f"Fallback: {c.fallback.horizontal}")
+        l.warning(f"Fallback ({fallback_key}): {fallback}")
         return RedirectResponse(
             fallback, status_code=302, headers={"X-ImgAPI-Site-Id": "fallback"}
         )
@@ -506,13 +503,19 @@ else:
 @app.get("/{path:path}", include_in_schema=False)
 async def fallback(path: str, req: Request):
     if path:
-        file_path = u.get_path(join_path("public", path))
-        file = Path(file_path)
+        public_root = u.get_path("public")
+        file_path = (Path(public_root) / path).resolve()
+        try:
+            file_path.relative_to(Path(public_root).resolve())
+        except ValueError:
+            l.warning(f"Path traversal attempt: {path}")
+            return Response("Not Found", status_code=404)
+        file = file_path
         if file.is_file():
             mime_type, _ = guess_type(file)
             l.info(f"Serving static file: {file_path}")
             return FileResponse(
-                path=file_path, media_type=mime_type or "application/octet-stream"
+                path=str(file_path), media_type=mime_type or "application/octet-stream"
             )
         else:
             l.warning(f"Static file not found: {file_path}")

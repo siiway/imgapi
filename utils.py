@@ -37,7 +37,7 @@ def perf_counter():
     return lambda: round((time.perf_counter() - start) * 1000, 2)
 
 
-def get_path(path: str, create_dirs: bool = True, is_dir: bool = False) -> str:
+def get_path(path: str, create_dirs: bool = False, is_dir: bool = False) -> str:
     """
     相对路径 (基于主程序目录) -> 绝对路径
 

@@ -59,11 +59,11 @@ class _LoggingConfigModel(BaseModel):
         if v is None:
             return v
         if not isinstance(v, str):
-            raise ValueError(f"Invaild log level: {v}")
+            raise ValueError(f"Invalid log level: {v}")
         upper = v.strip().upper()
         valid = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}
         if upper not in valid:
-            raise ValueError(f"Invaild log level: {v}")
+            raise ValueError(f"Invalid log level: {v}")
         return upper
 
 
