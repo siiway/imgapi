@@ -130,18 +130,9 @@ log:
 
 4. 启动程序
 
-直接启动 (使用配置中的 host & port & workers, **推荐**):
-
 ```bash
 uv run main.py
 # or python3 main.py
-```
-
-使用 cli 启动 (另外指定 host & port):
-
-```bash
-uv run fastapi run --host 0.0.0.0 --port 9333
-# or fastapi run --host 0.0.0.0 --port 9333
 ```
 
 ## 声明

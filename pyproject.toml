@@ -1,7 +1,7 @@
 [project]
 authors = [{ name = "wyf9", email = "wyf9@siiway.org" }]
 dependencies = [
-  "fastapi[standard]>=0.118.0",
+  "fastapi>=0.143.0",
   "httpx>=0.28.1",
   "loguru>=0.7.3",
   "pydantic>=2.11.9",
